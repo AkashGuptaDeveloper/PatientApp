@@ -9,28 +9,32 @@ import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
+
 //------------------------------------START-----------------------------------//
 class HomeScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagHomeScreen.toString();
   @override
   HomeScreenState createState() => new HomeScreenState();
 }
+
 //-----------------------------------SplashScreenState------------------------//
 class HomeScreenState extends State<HomeScreen> {
   // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
-  GlobalKey<ScaffoldState>();
+      GlobalKey<ScaffoldState>();
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
     super.initState();
     _checkInternetConnectivity();
   }
+
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
   }
+
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class HomeScreenState extends State<HomeScreen> {
       key: _SnackBarscaffoldKey,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor:GlobalAppColor.AppBarColorCode,
+        backgroundColor: GlobalAppColor.AppBarColorCode,
         title: Text(
           GlobalFlag.Welcome.toString(),
           textAlign: TextAlign.center,
@@ -57,72 +61,104 @@ class HomeScreenState extends State<HomeScreen> {
             shrinkWrap: true,
             children: <Widget>[
               new Container(
-                padding: EdgeInsets.only(left:16.0,top:16.0,right: 16.0),
-                child: Text(GlobalFlag.QuickAction,style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontFamily: GlobalFlag.FontCode,
-                  fontWeight: FontWeight.w600,
-                ),),
+                padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
+                child: Text(
+                  GlobalFlag.QuickAction,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontFamily: GlobalFlag.FontCode,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
                 child: QuickAction(),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0),
-                child:Divider(color: GlobalAppColor.AppBarColorCode,thickness: 0.5,),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                child: Divider(
+                  color: GlobalAppColor.AppBarColorCode,
+                  thickness: 0.5,
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,top:5.0,right: 16.0),
-                child: Text(GlobalFlag.AboutUs,style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontFamily: GlobalFlag.FontCode,
-                  fontWeight: FontWeight.w600,
-                ),),
+                padding: EdgeInsets.only(left: 16.0, top: 5.0, right: 16.0),
+                child: Text(
+                  GlobalFlag.AboutUs,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontFamily: GlobalFlag.FontCode,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0,top:5.0),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
                 child: AboutUs(),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0),
-                child:Divider(color:Colors.grey[600],thickness: 0.5,),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                child: Divider(
+                  color: Colors.grey[600],
+                  thickness: 0.5,
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0,top:5.0,),
-                child: Text(GlobalFlag.Support,style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontFamily: GlobalFlag.FontCode,
-                  fontWeight: FontWeight.w600,
-                ),),
+                padding: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  top: 5.0,
+                ),
+                child: Text(
+                  GlobalFlag.Support,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontFamily: GlobalFlag.FontCode,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0,top:5.0),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
                 child: Support(),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0),
-                child:Divider(color:Colors.grey[600],thickness: 0.5,),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                child: Divider(
+                  color: Colors.grey[600],
+                  thickness: 0.5,
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0,top:5.0,),
-                child: Text(GlobalFlag.WhatsNews,style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontFamily: GlobalFlag.FontCode,
-                  fontWeight: FontWeight.w600,
-                ),),
+                padding: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  top: 5.0,
+                ),
+                child: Text(
+                  GlobalFlag.WhatsNews,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontFamily: GlobalFlag.FontCode,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0,top:5.0),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
                 child: WhatsNews(),
               ),
               new Container(
-                padding: EdgeInsets.only(left:16.0,right: 16.0),
-                child:Divider(color:Colors.grey[600],thickness: 0.5,),
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                child: Divider(
+                  color: Colors.grey[600],
+                  thickness: 0.5,
+                ),
               ),
               SizedBox(
                 height: 15.0,
@@ -134,6 +170,7 @@ class HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
     );
   }
+
 //------------------------------QuickAction-----------------------------------//
   // ignore: non_constant_identifier_names
   Widget QuickAction() {
@@ -141,162 +178,167 @@ class HomeScreenState extends State<HomeScreen> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(child:GestureDetector(
-            onTap: (){
-              setState(() {
-                Navigator.of(context)
-                    .push(new MaterialPageRoute(builder: (_) => new BookAppointment()));
-              });
-            },
-            child:  new Card(
-              elevation: 10,
-              color: GlobalAppColor.AppBarColorCode,
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.calendarAlt,
-                        size: 35,
-                        color: GlobalAppColor.WhiteColorCode,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (_) => new BookAppointment()));
+                });
+              },
+              child: new Card(
+                elevation: 10,
+                color: GlobalAppColor.AppBarColorCode,
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.BookAppt,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w600,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.calendarAlt,
+                          size: 35,
+                          color: GlobalAppColor.WhiteColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.BookAppt,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+                //Put your child widget here.
+              ),
+            ),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 10,
+              color: GlobalAppColor.AppBarColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.handshake,
+                          size: 35,
+                          color: GlobalAppColor.WhiteColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.OnlineConsultant,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               //Put your child widget here.
             ),
-          ),),
-
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.AppBarColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.handshake,
-                        size: 35,
-                        color: GlobalAppColor.WhiteColorCode,
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 10,
+              color: GlobalAppColor.AppBarColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.OnlineConsultant,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w600,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.history,
+                          color: GlobalAppColor.WhiteColorCode,
+                          size: 35,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.AppBarColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.history,
-                        color: GlobalAppColor.WhiteColorCode,
-                        size:35,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.ApptHistory,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w600,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.ApptHistory,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),)
+          )
         ],
       ),
     );
   }
+
 //------------------------------AboutUs---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget AboutUs() {
@@ -304,205 +346,211 @@ class HomeScreenState extends State<HomeScreen> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.bookMedical,
-                        size: 30,
-                        color:Colors.grey[600],
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.AnujPall,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.plus,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.clinicMedical,
-                        size: 30,
-                        color:Colors.grey[600],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.LaSkinnovita,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.AnujPall,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
-
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.commentMedical,
-                        size: 30,
-                        color:Colors.grey[600],
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.serious,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.clinicMedical,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.fileMedical,
-                        size: 30,
-                        color:Colors.grey[600],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Testimonials,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.LaSkinnovita,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.commentMedical,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.serious,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //Put your child widget here.
+            ),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.fileMedical,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Testimonials,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //Put your child widget here.
+            ),
+          ),
         ],
       ),
     );
   }
+
 //------------------------------Support---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget Support() {
@@ -510,247 +558,262 @@ class HomeScreenState extends State<HomeScreen> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                padding: new EdgeInsets.symmetric(horizontal:6.0, vertical: 0.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .topLeft, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.shippingFast,
-                        size: 30,
-                        color:Colors.grey[600],
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.RequestMedicalDelivery,
-
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:9,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .topLeft, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.shippingFast,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                padding: new EdgeInsets.symmetric(horizontal:8.0, vertical:0.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.rupeeSign,
-                        size: 30,
-                        color:Colors.grey[600],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.PayCustomer,
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 9,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.RequestMedicalDelivery,
+                          softWrap: true,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 9,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                padding: new EdgeInsets.symmetric(horizontal:5.0, vertical: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.mobileAlt,
-                        size: 30,
-                        color:Colors.grey[600],
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.ContactUs,
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:9,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.rupeeSign,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                padding: new EdgeInsets.symmetric(horizontal:5.0, vertical: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.peopleArrows,
-                        size: 30,
-                        color:Colors.grey[600],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Resource,
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:9,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.PayCustomer,
+                          softWrap: true,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 9,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                padding: new EdgeInsets.symmetric(horizontal:5.0, vertical: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.comment,
-                        size: 30,
-                        color:Colors.grey[600],
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Feedback,
-                       maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.mobileAlt,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.ContactUs,
+                          softWrap: true,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 9,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.peopleArrows,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Resource,
+                          softWrap: true,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 9,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //Put your child widget here.
+            ),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.comment,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Feedback,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //Put your child widget here.
+            ),
+          ),
         ],
       ),
     );
   }
+
 //------------------------------WhatsNews---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget WhatsNews() {
@@ -758,202 +821,211 @@ class HomeScreenState extends State<HomeScreen> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.blog,
-                        size: 30,
-                        color:Colors.grey[600],
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Blog,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.blog,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.facebook,
-                        size: 30,
-                        color:Colors.grey[600],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Facebok,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Blog,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.instagram,
-                        size: 30,
-                        color:Colors.grey[600],
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Instagram,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.facebook,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            //Put your child widget here.
-          ),),
-          Expanded(child: new Card(
-            elevation: 10,
-            color: GlobalAppColor.WhiteColorCode,
-            child: GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.youtube,
-                        size: 30,
-                        color:Colors.grey[600],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Text(
-                        GlobalFlag.Youtube,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize:10,
-                          fontFamily: GlobalFlag.FontCode,
-                          fontWeight: FontWeight.w500,
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Facebok,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height:5,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              //Put your child widget here.
             ),
-            //Put your child widget here.
-          ),),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.instagram,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Instagram,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //Put your child widget here.
+            ),
+          ),
+          Expanded(
+            child: new Card(
+              elevation: 1,
+              color: GlobalAppColor.WhiteColorCode,
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.youtube,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Youtube,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //Put your child widget here.
+            ),
+          ),
         ],
       ),
     );
   }
+
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -961,6 +1033,7 @@ class HomeScreenState extends State<HomeScreen> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
+
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());

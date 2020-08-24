@@ -77,7 +77,7 @@ class SplashScreenState extends State<SplashScreen> {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [GlobalAppColor.WhiteColorCode, GlobalAppColor.AppBarColorCode])
+                colors: [GlobalAppColor.WhiteColorCode, GlobalAppColor.WhiteColorCode])
         ),
         child: Center(
           child: new Container(
