@@ -42,10 +42,18 @@ class GlobalFlag {
   static String Instagram = "Instagram";
   static String Youtube = "Youtube";
   static String BookAppointment = "Book Appointment";
+  static String HistoryAppointment = "Appointment History";
   static String AppointmentDate = "Appointment Date";
   static String AppointmentTime = "Appointment Time";
+  static String Consultant = "Consultant";
+  static String Details = "Details";
+  static String EnterDetails = "Enter Details";
+  static String Service = "Service";
   static String AppointmentService = "Service";
   static String SelectDate = "Select Date";
   static String SelectTime = "Select Time";
   static String EnterService = "Enter Service";
+  static String Submit = "Submit";
+  static String Continue = "Continue";
+  static String Prescription = "Prescription";
 }

@@ -3,7 +3,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:laskinnovita/ApptHistory/ApptHistory.dart';
 import 'package:laskinnovita/BookAppointment/BookAppointment.dart';
 import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
@@ -12,16 +11,16 @@ import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 //------------------------------------START-----------------------------------//
-class HomeScreen extends StatefulWidget {
-  static String tag = GlobalNavigationRoute.TagHomeScreen.toString();
+class ApptHistory extends StatefulWidget {
+  static String tag = GlobalNavigationRoute.TagApptHistory.toString();
   @override
-  HomeScreenState createState() => new HomeScreenState();
+  ApptHistoryState createState() => new ApptHistoryState();
 }
 //-----------------------------------SplashScreenState------------------------//
-class HomeScreenState extends State<HomeScreen> {
+class ApptHistoryState extends State<ApptHistory> {
   // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
-      GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState>();
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -39,10 +38,12 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _SnackBarscaffoldKey,
       appBar: new AppBar(
-        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(
+            color: Colors.white
+        ),
         backgroundColor: GlobalAppColor.AppBarColorCode,
         title: Text(
-          GlobalFlag.Welcome.toString(),
+          GlobalFlag.HistoryAppointment.toString(),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18.0,
@@ -53,115 +54,233 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
       ),
-      body: new Container(
-        child: new Form(
-          child: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-                child: Text(
-                  GlobalFlag.QuickAction,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
+      body: Container(
+        child: new Stack(
+          children: <Widget>[
+            new Padding(
+              padding: new EdgeInsets.only(top: 0.0),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    height: 5.0,
                   ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: QuickAction(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: GlobalAppColor.AppBarColorCode,
-                  thickness: 0.5,
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, top: 5.0, right: 16.0),
-                child: Text(
-                  GlobalFlag.AboutUs,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
+                  new Card(
+                    color: GlobalAppColor.AppBarColorCode,
+                    margin: new EdgeInsets.only(
+                        left: 10.0,
+                        right: 12.0,
+                        top: 8.0,
+                        bottom: 3.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                        BorderRadius.circular(15.0)),
+                    elevation: 5.0,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 0.0, top: 0.0),
+                      child: new Column(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        verticalDirection:
+                        VerticalDirection.down,
+                        children: <Widget>[
+                          SizedBox(height: 8.0),
+//-----------------------------------------Title-----------------------------//
+                          new Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0, right: 10),
+                            child: new Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  new Text(
+                                    "Service Name".toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.bold,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                  new Text(
+                                    "Consultant"
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 10.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                          Divider(
+                              height: 12,
+                              thickness: 0.1,
+                              color: Colors.white),
+//----------------------------------------description-------------------------//
+                          new Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0, right: 10),
+                            child: new Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  new Text(
+                                    "Patient Name".toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.bold,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                  new Text(
+                                    "Ankur Jain"
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                          Divider(
+                              height: 12,
+                              thickness: 0.1,
+                              color: Colors.white),
+//----------------------------------------description-------------------------//
+                          new Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0, right: 10),
+                            child: new Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  new Text(
+                                    "Date".toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.bold,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                  new Text(
+                                    "12-09-2020"
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                          Divider(
+                              height: 12,
+                              thickness: 0.1,
+                              color: Colors.white),
+//----------------------------------------description-------------------------//
+                          new Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0, right: 10),
+                            child: new Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  new Text(
+                                    "Time".toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.bold,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                  new Text(
+                                    "12:20 PM"
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontFamily:
+                                      GlobalFlag
+                                          .FontCode
+                                          .toString(),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+//----------------------------------------Type/Color Percentage-Mode----------//
+                          Divider(
+                              height: 12,
+                              thickness: 0.1,
+                              color: Colors.white),
+//----------------------------------------------------------------------------//
+                          SizedBox(height: 8.0),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
-                child: AboutUs(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: Colors.grey[600],
-                  thickness: 0.5,
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: 5.0,
-                ),
-                child: Text(
-                  GlobalFlag.Support,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
-                child: Support(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: Colors.grey[600],
-                  thickness: 0.5,
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: 5.0,
-                ),
-                child: Text(
-                  GlobalFlag.WhatsNews,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
-                child: WhatsNews(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: Colors.grey[600],
-                  thickness: 0.5,
-                ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-            ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: GlobalAppColor.AppBarColorCode,
+        child:Container(
+          height:50,
+          child: FlatButton.icon(
+            onPressed: () {
+              setState(() {});
+              /*_sendToServer();*/
+            },
+            icon: Icon(FontAwesomeIcons.plus,color: Colors.white,size: 15.0,), //`Icon` to display
+            label: Text(GlobalFlag.Prescription.toString(),style: TextStyle(fontFamily: GlobalFlag.FontCode.toString(),fontSize: 15.0, color: Colors.white,fontWeight: FontWeight.bold,)),
           ),
         ),
       ),
@@ -289,12 +408,6 @@ class HomeScreenState extends State<HomeScreen> {
             child: new Container(
               color: GlobalAppColor.AppBarColorCode,
               child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (_) => new ApptHistory()));
-                  });
-                },
                 child: Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -564,7 +677,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 child: Container(
                   padding:
-                      new EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
+                  new EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -613,7 +726,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 child: Container(
                   padding:
-                      new EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
+                  new EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -662,7 +775,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 child: Container(
                   padding:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -711,7 +824,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 child: Container(
                   padding:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -760,7 +873,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 child: Container(
                   padding:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
