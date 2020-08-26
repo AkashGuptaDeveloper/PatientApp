@@ -1,9 +1,6 @@
-import 'dart:async';
-import 'dart:developer';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
@@ -16,18 +13,19 @@ class ConsultantScreen2 extends StatefulWidget {
 }
 //-----------------------------------SplashScreenState------------------------//
 class ConsultantScreen2State extends State<ConsultantScreen2> {
+  // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
   GlobalKey<ScaffoldState>();
 //-------------------------------Consultant-----------------------------------//
+  // ignore: non_constant_identifier_names
   List<Consultant> _Consultant = Consultant.getCompanies();
   List<DropdownMenuItem<Consultant>> _dropdownMenuItemsConsultant;
   Consultant _selectedConsultant;
   // ignore: non_constant_identifier_names
   TextEditingController DetailsController = new TextEditingController();
   // ignore: non_constant_identifier_names
-  GlobalKey<FormState> _LoginFormkey = new GlobalKey();
-  // ignore: non_constant_identifier_names
   final FocusNode myFocusNodeDetails = FocusNode();
+  // ignore: unnecessary_statements, non_constant_identifier_names
   var Details;
 //-----------------------------------initState--------------------------------//
   @override

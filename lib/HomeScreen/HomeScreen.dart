@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,6 @@ import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
-import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
-import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 //------------------------------------START-----------------------------------//
 class HomeScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagHomeScreen.toString();
@@ -33,10 +32,80 @@ class HomeScreenState extends State<HomeScreen> {
   void dispose() {
     super.dispose();
   }
+  //-------------------------------------------------_onBackPressed------------//
+  // ignore: non_constant_identifier_names
+  Future<bool> _BackPressed(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text(
+          GlobalFlag.Areyousure,
+          style: TextStyle(
+            fontSize: 13.0,
+            color: GlobalAppColor.BLackColorCode,
+            fontWeight: FontWeight.bold,
+            fontFamily: GlobalFlag.FontCode.toString(),
+          ),
+        ),
+        content: new Text(
+          GlobalFlag.exitanApp,
+          style: TextStyle(
+            fontSize: 13.0,
+            color: GlobalAppColor.BLackColorCode,
+            fontWeight: FontWeight.bold,
+            fontFamily: GlobalFlag.FontCode.toString(),
+          ),
+        ),
+        actions: <Widget>[
+          new GestureDetector(
+            onTap: () => Navigator.of(context).pop(false),
+            child: roundedButton(
+              GlobalFlag.No,
+              const Color(0xFF63C0Cf),
+              const Color(0xFFFFFFFF),
+            ),
+          ),
+          new GestureDetector(
+            onTap: () => exit(0),
+            child: roundedButton(GlobalFlag.Yes, const Color(0xFF63C0Cf),
+                const Color(0xFFFFFFFF)),
+          ),
+        ],
+      ),
+    ) ??
+        false;
+  }
+//---------------------------------------roundedButton------------------------//
+  // ignore: non_constant_identifier_names
+  Widget roundedButton(String buttonLabel, Color bgColor, Color textColor) {
+    var loginBtn = new Container(
+      padding: EdgeInsets.all(5.0),
+      alignment: FractionalOffset.center,
+      decoration: new BoxDecoration(
+        color: bgColor,
+        borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: const Color(0xFFFFFFFF),
+            offset: Offset(1.0, 6.0),
+            blurRadius: 0.001,
+          ),
+        ],
+      ),
+      child: Text(
+        buttonLabel,
+        style: new TextStyle(
+            color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
+      ),
+    );
+    return loginBtn;
+  }
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () => _BackPressed(context),
+    child: Scaffold(
       key: _SnackBarscaffoldKey,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
@@ -166,7 +235,7 @@ class HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.white,
-    );
+    ),);
   }
 //------------------------------QuickAction-----------------------------------//
   // ignore: non_constant_identifier_names

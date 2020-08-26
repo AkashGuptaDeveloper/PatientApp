@@ -1,13 +1,18 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
+import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
+import 'package:laskinnovita/Model/CheckAvilityModel.dart';
+import 'package:laskinnovita/Model/TimeAvilityModel.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 //------------------------------------START-----------------------------------//
 class BookAppointment extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagBookAppointment.toString();
@@ -16,39 +21,72 @@ class BookAppointment extends StatefulWidget {
 }
 //-----------------------------------SplashScreenState------------------------//
 class BookAppointmentState extends State<BookAppointment> {
+  // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
   GlobalKey<ScaffoldState>();
   // ignore: non_constant_identifier_names
-  var _SelectedDate = "Date Not Set";
-  var _SelectedTime = "Time Not Set";
   var GetSelectedDate = "";
+  // ignore: non_constant_identifier_names
   var GetSelectedTime = "";
 // ignore: non_constant_identifier_names
   TextEditingController ServiceController = new TextEditingController();
   final FocusNode myFocusService = FocusNode();
+  // ignore: non_constant_identifier_names
   GlobalKey<FormState> _Formkey = new GlobalKey();
   // ignore: non_constant_identifier_names
   bool _validate = false;
+  // ignore: non_constant_identifier_names
+  String errMessage = GlobalFlag.ErrorSendData.toString();
+  var status;
 //-------------------------------Service---------------------------------------//
+  // ignore: non_constant_identifier_names
   List<Service> _Service = Service.getCompanies();
   List<DropdownMenuItem<Service>> _dropdownMenuItemsService;
   Service _selectedService;
 //-------------------------------Consultant-----------------------------------//
+  // ignore: non_constant_identifier_names
   List<Consultant> _Consultant = Consultant.getCompanies();
   List<DropdownMenuItem<Consultant>> _dropdownMenuItemsConsultant;
   Consultant _selectedConsultant;
   // ignore: non_constant_identifier_names
   TextEditingController DetailsController = new TextEditingController();
   // ignore: non_constant_identifier_names
-  GlobalKey<FormState> _LoginFormkey = new GlobalKey();
-  // ignore: non_constant_identifier_names
   final FocusNode myFocusNodeDetails = FocusNode();
+  // ignore: non_constant_identifier_names
   var Details;
+  // ignore: non_constant_identifier_names
+  List<Availability> _Availability = [];
+  // ignore: non_constant_identifier_names
+  List<TimeAvailabilityList> _TimeAvailability = [];
+  // ignore: non_constant_identifier_names
+  var Avilable;
+  // ignore: non_constant_identifier_names
+  bool TimeShow = false;
+  // ignore: non_constant_identifier_names
+  var TimeAbilableResult;
+  // ignore: non_constant_identifier_names
+  var DateAbilableResult;
+  // ignore: non_constant_identifier_names
+  var SelectDate;
+  // ignore: non_constant_identifier_names
+  var SelectTime;
+  // ignore: non_constant_identifier_names
+  ProgressDialog pr;
+  // ignore: non_constant_identifier_names
+  var ReciveJsonSTATUSMSG;
+//------------------------------------API-------------------------------------//
+  // ignore: non_constant_identifier_names
+  String AvailabilityUrl_ServiceUrl = GlobalServiceURL.AvailabilityUrl.toString();
+  // ignore: non_constant_identifier_names
+  String TimeAvailabilityUrl_ServiceUrl = GlobalServiceURL.TimeAvailabilityUrl.toString();
+  // ignore: non_constant_identifier_names
+  String BookingUrl_ServiceUrl = GlobalServiceURL.BookingUrl.toString();
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
     super.initState();
     _checkInternetConnectivity();
+    FetchDateFromServer();
 //-------------------------------------Service--------------------------------//
     _dropdownMenuItemsService = buildDropdownMenuItemsService(_Service);
     _selectedService = _dropdownMenuItemsService[0].value;
@@ -122,363 +160,141 @@ class BookAppointmentState extends State<BookAppointment> {
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context);
+    pr.style(
+      message: GlobalFlag.PleaseWait.toString(),
+    );
 //---------------------------------------DateList-----------------------------//
+  // ignore: non_constant_identifier_names
   Widget DateList = new Container(
       margin: EdgeInsets.all(5),
       height:60.0,
-      child: new ListView(
+      child: new ListView.separated(
+        itemCount:
+        _Availability == null ? 0 : _Availability.length,
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Today, 24 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.lightGreen,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Monday, 28 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Today, 24 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Today, 24 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Today, 24 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Today, 24 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:150.0,
-            child: Column(
-              children: [
-                Container(
-                  margin:EdgeInsets.only(top:15),
-                  child: new Text("Today, 24 Aug",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),),
-                ),
-                Container(
-                  margin:EdgeInsets.only(top:5),
-                  child: new Text("3 Slot Avilable",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),),
-                ),
-              ],
-            ),
-          ),
-        ],
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+          if (_Availability[index].availablity == 1){
+            Avilable= "Slot Available";
+          }else{
+            Avilable= "Slot Not Available";
+          }
+          DateAbilableResult = _Availability[index].availablity;
+           return GestureDetector(
+             onTap: (){
+               SelectDate = _Availability[index].date;
+               FetchTimeFromServer(SelectDate);
+             },
+             child:  Container(
+               decoration: BoxDecoration(
+                   color:GlobalAppColor.ListCardColorCode,
+                   border: Border.all(color: Colors.blueAccent,width: 1),
+                   borderRadius: BorderRadius.all(Radius.circular(10))
+               ),
+               width:150.0,
+               child: Column(
+                 children: [
+                   Container(
+                     margin:EdgeInsets.only(top:15),
+                     child: new Text(_Availability[index].date,style: TextStyle(
+                       color: Colors.black,
+                       fontSize: 14,
+                       fontFamily: GlobalFlag.FontCode,
+                       fontWeight: FontWeight.w600,
+                     ),),
+                   ),
+                   Container(
+                     margin:EdgeInsets.only(top:5),
+                     child: new Text(Avilable.toString(),style: TextStyle(
+                       color: DateAbilableResult == 0
+                           ? Colors.red
+                           : Colors.green,
+                       fontSize: 10,
+                       fontWeight: FontWeight.normal,
+                     ),),
+                   ),
+                 ],
+               ),
+             ),
+           );
+          },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width:5,
+          );
+        },
+
       )
   );
 //---------------------------------------TimeList-----------------------------//
-  Widget TimeList = new Container(
+  // ignore: non_constant_identifier_names
+  Widget TimeList = Visibility(
+    visible: TimeShow,
+    child: new Container(
       margin: EdgeInsets.all(5),
       height:50.0,
-      child: new ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
+      child: new ListView.separated(
+          shrinkWrap: true,
+          itemCount:
+          _TimeAvailability == null ? 0 : _TimeAvailability.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            if (_TimeAvailability[index].available == "1"){
+              Avilable= "Slot Available";
+            }else{
+              Avilable= "Slot Not Available";
+            }
+            TimeAbilableResult = _TimeAvailability[index].available;
+            return  GestureDetector(
+              onTap: (){
+                setState(() {
+                  // ignore: unnecessary_statements
+                  _TimeAvailability[index].time;
+                  SelectTime=_TimeAvailability[index].time;
+                });
+              },
               child: Container(
-                child: new Text("08:30 AM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
+                decoration: BoxDecoration(
+                    color: TimeAbilableResult ==
+                        "0".toString()
+                        ? Colors.red
+                        : Colors.green,
+                    border: Border.all(color: Colors.blueAccent,width: 1),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                width:100.0,
+                child:Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        margin:EdgeInsets.only(top:10),
+                        child: new Text(_TimeAvailability[index].time,style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),),
+                      ),
+                      Container(
+                        child: new Text(Avilable,style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.normal,
+                        ),),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("09:00 AM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("09:30 AM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("10:00 AM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("10:30 AM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("11:00 AM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("12:30 PM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-          Container(width:5,),
-          Container(
-            decoration: BoxDecoration(
-                color:GlobalAppColor.ListCardColorCode,
-                border: Border.all(color: Colors.blueAccent,width: 1)
-            ),
-            width:80.0,
-            child:Center(
-              child: Container(
-                child: new Text("01:00 PM",style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
-              ),
-            ),
-          ),
-        ],
+            );
+          },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width:5,
+          );
+        },
       )
-  );
+  ),);
 //----------------------------------------------------------------------------//
     return Scaffold(
       key: _SnackBarscaffoldKey,
@@ -499,163 +315,169 @@ class BookAppointmentState extends State<BookAppointment> {
         ),
         centerTitle: true,
       ),
-      body:new ListView(
-        children: <Widget>[
+      body:new Form(
+        key: _Formkey,
+        autovalidate: _validate,
+        child: new ListView(
+          children: <Widget>[
 //----------------------------AppointmentDate--------------------------------//
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: Text(
-              GlobalFlag.AppointmentDate.toString(),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: GlobalFlag.FontCode,
-                fontWeight: FontWeight.w600,),
+            Container(
+              padding: EdgeInsets.only(left: 10,right: 10,top:10),
+              child: Text(
+                GlobalFlag.AppointmentDate.toString(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: GlobalFlag.FontCode,
+                  fontWeight: FontWeight.w600,),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
+            SizedBox(
+              height: 10.0,
+            ),
 //--------------------------------DateList------------------------------------//
-          DateList,
+            DateList,
 //----------------------------AppointmentTIme--------------------------------//
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: Text(
-              GlobalFlag.AppointmentTime.toString(),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: GlobalFlag.FontCode,
-                fontWeight: FontWeight.w600,),
+            Visibility(
+              visible: TimeShow,
+              child: Container(
+                padding: EdgeInsets.only(left: 10,right: 10,top:10),
+                child: Text(
+                  GlobalFlag.AppointmentTime.toString(),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontFamily: GlobalFlag.FontCode,
+                    fontWeight: FontWeight.w600,),
+                ),
+              ),),
+            SizedBox(
+              height: 10.0,
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
 //--------------------------------TimeList------------------------------------//
-          TimeList,
+            TimeList,
 //----------------------------Service-----------------------------------------//
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: Text(
-              GlobalFlag.Service.toString(),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: GlobalFlag.FontCode,
-                fontWeight: FontWeight.w600,),
+            Container(
+              padding: EdgeInsets.only(left: 10,right: 10,top:10),
+              child: Text(
+                GlobalFlag.Service.toString(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: GlobalFlag.FontCode,
+                  fontWeight: FontWeight.w600,),
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: new Container(
-              decoration: new BoxDecoration(
-                  borderRadius:
-                  BorderRadius.all(Radius.circular(0.0)),
-                  border: new Border.all(
-                      color: GlobalAppColor.AppBarColorCode, width: 1.0)),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  value: _selectedService,
-                  items: _dropdownMenuItemsService,
-                  onChanged: onChangeDropdownItemService,
+            Container(
+              padding: EdgeInsets.only(left: 10,right: 10,top:10),
+              child: new Container(
+                decoration: new BoxDecoration(
+                    borderRadius:
+                    BorderRadius.all(Radius.circular(0.0)),
+                    border: new Border.all(
+                        color: GlobalAppColor.AppBarColorCode, width: 1.0)),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    value: _selectedService,
+                    items: _dropdownMenuItemsService,
+                    onChanged: onChangeDropdownItemService,
+                  ),
                 ),
               ),
             ),
-          ),
 //----------------------------Consultant--------------------------------------//
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: Text(
-              GlobalFlag.Consultant.toString(),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: GlobalFlag.FontCode,
-                fontWeight: FontWeight.w600,),
+            Container(
+              padding: EdgeInsets.only(left: 10,right: 10,top:10),
+              child: Text(
+                GlobalFlag.Consultant.toString(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: GlobalFlag.FontCode,
+                  fontWeight: FontWeight.w600,),
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: new Container(
-              decoration: new BoxDecoration(
-                  borderRadius:
-                  BorderRadius.all(Radius.circular(0.0)),
-                  border: new Border.all(
-                      color: GlobalAppColor.AppBarColorCode, width: 1.0)),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  value: _selectedConsultant,
-                  items: _dropdownMenuItemsConsultant,
-                  onChanged: onChangeDropdownItemConsultant,
+            Container(
+              padding: EdgeInsets.only(left: 10,right: 10,top:10),
+              child: new Container(
+                decoration: new BoxDecoration(
+                    borderRadius:
+                    BorderRadius.all(Radius.circular(0.0)),
+                    border: new Border.all(
+                        color: GlobalAppColor.AppBarColorCode, width: 1.0)),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    value: _selectedConsultant,
+                    items: _dropdownMenuItemsConsultant,
+                    onChanged: onChangeDropdownItemConsultant,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-//----------------------------Consultant--------------------------------------//
-          Container(
-            padding: EdgeInsets.only(left: 10,right: 10,top:10),
-            child: Text(
-              GlobalFlag.Details.toString(),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: GlobalFlag.FontCode,
-                fontWeight: FontWeight.w600,),
+            SizedBox(
+              height: 10.0,
             ),
-          ),
-          new Container(
-            padding: EdgeInsets.only(left:10, right: 10,top:10),
-            child: new TextFormField(
-              style: TextStyle(color: GlobalAppColor.AppBarColorCode),
-              focusNode: myFocusNodeDetails,
-              controller: DetailsController,
-              /*validator: validateUserMobile,*/
-              textInputAction: TextInputAction.done,
-              onSaved: (String val) {
-                Details = val;
-              },
-              decoration: new InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1, color: Colors.red),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1, color: Colors.orange),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(
-                      width: 1, color: GlobalAppColor.AppBarColorCode),
-                ),
-                border: OutlineInputBorder(
+//----------------------------Consultant--------------------------------------//
+            Container(
+              padding: EdgeInsets.only(left: 10,right: 10,top:10),
+              child: Text(
+                GlobalFlag.Details.toString(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: GlobalFlag.FontCode,
+                  fontWeight: FontWeight.w600,),
+              ),
+            ),
+            new Container(
+              padding: EdgeInsets.only(left:10, right: 10,top:10),
+              child: new TextFormField(
+                style: TextStyle(color: GlobalAppColor.AppBarColorCode),
+                focusNode: myFocusNodeDetails,
+                controller: DetailsController,
+                validator: validateDetails,
+                textInputAction: TextInputAction.done,
+                onSaved: (String val) {
+                  Details = val;
+                },
+                decoration: new InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(width: 1, color: Colors.red),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(width: 1, color: Colors.orange),
+                  ),
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(4)),
                     borderSide: BorderSide(
-                      width: 1,
-                    )),
-                errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide:
-                    BorderSide(width: 1, color: Colors.black)),
-                focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1, color: Colors.grey)),
-                errorStyle: TextStyle(fontSize: 10.0, color: Colors.grey),
-                hintText: GlobalFlag.EnterDetails.toString(),
-                hintStyle: TextStyle(
-                  fontSize: 14.0,
-                  fontFamily: GlobalFlag.FontCode.toString(),
-                  color: GlobalAppColor.BLackColorCode,
+                        width: 1, color: GlobalAppColor.AppBarColorCode),
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                        width: 1,
+                      )),
+                  errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                      BorderSide(width: 1, color: Colors.black)),
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.grey)),
+                  errorStyle: TextStyle(fontSize: 10.0, color: Colors.black),
+                  hintText: GlobalFlag.EnterDetails.toString(),
+                  hintStyle: TextStyle(
+                    fontSize: 14.0,
+                    fontFamily: GlobalFlag.FontCode.toString(),
+                    color: GlobalAppColor.BLackColorCode,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
@@ -665,7 +487,7 @@ class BookAppointmentState extends State<BookAppointment> {
           child: FlatButton.icon(
             onPressed: () {
               setState(() {});
-              /*_sendToServer();*/
+              _sendToServer();
             },
             icon: Icon(FontAwesomeIcons.paperPlane,color: Colors.white,size: 15.0,), //`Icon` to display
             label: Text(GlobalFlag.Submit.toString(),style: TextStyle(fontFamily: GlobalFlag.FontCode.toString(),fontSize: 15.0, color: Colors.white,fontWeight: FontWeight.bold,)),
@@ -739,6 +561,270 @@ class BookAppointmentState extends State<BookAppointment> {
         ),
       ],
     );
+  }
+//------------------------------FetchDateFromServer--------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> FetchDateFromServer() async {
+    try {
+      http.post(AvailabilityUrl_ServiceUrl.toString(), body: {
+        // ignore: non_constant_identifier_names
+      }).then((resultListOfBatchs) {
+        setStatus(resultListOfBatchs.statusCode == 200
+            ? resultListOfBatchs.body
+            : errMessage);
+        // ignore: non_constant_identifier_names
+        /*print(GlobalFlag.Printjsonresp.toString() +
+            "${resultListOfBatchs.body.toString()}");*/
+        // ignore: non_constant_identifier_names
+        var ReciveBatchList = json.decode(resultListOfBatchs.body);
+        // ignore: non_constant_identifier_names
+        var DateavailabilityList = ReciveBatchList["availability"];
+        setState(() {
+          for (Map i in DateavailabilityList) {
+            _Availability.add(Availability.fromJson(i));
+          }
+        });
+        // ignore: non_constant_identifier_names
+      }).catchError((error) {
+        setStatus(error);
+      });
+    } catch (e) {
+      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+      /*JsonReciveStatusFalseAlert();*/
+    }
+  }
+//------------------------------FetchTimeFromServer--------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> FetchTimeFromServer(SelectDate) async {
+    _TimeAvailability.clear();
+    setState(() {
+      // ignore: non_constant_identifier_names, unnecessary_statements
+      SelectDate;
+    });
+    try {
+      http.post(TimeAvailabilityUrl_ServiceUrl.toString(), body: {
+        "date": SelectDate.toString(),
+        // ignore: non_constant_identifier_names
+      }).then((resultListOfBatchs) {
+        setStatus(resultListOfBatchs.statusCode == 200
+            ? resultListOfBatchs.body
+            : errMessage);
+        // ignore: non_constant_identifier_names
+       /* print(GlobalFlag.Printjsonresp.toString() +
+            "${resultListOfBatchs.body.toString()}");*/
+        // ignore: non_constant_identifier_names
+        var ReciveBatchList = json.decode(resultListOfBatchs.body);
+        // ignore: non_constant_identifier_names
+        var TimeavailabilityList = ReciveBatchList["availability"];
+       setState(() {
+          for (Map i in TimeavailabilityList) {
+            _TimeAvailability.add(TimeAvailabilityList.fromJson(i));
+            TimeShow = true;
+          }
+        });
+        // ignore: non_constant_identifier_names
+      }).catchError((error) {
+        setStatus(error);
+      });
+    } catch (e) {
+      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+    }
+  }
+//------------------------------------------setStatus-------------------------//
+  setStatus(String message) {
+    setState(() {
+      status = message;
+    });
+  }
+//----------------------------------------_sendToServer-----------------------//
+  // ignore: non_constant_identifier_names
+  _sendToServer() async {
+    if (_Formkey.currentState.validate()) {
+      _Formkey.currentState.save();
+      setState(() {
+        if(SelectDate == null){
+          SelectDateSnackBar(GlobalFlag.PleaseSelectDate);
+        }
+        else{
+          if(SelectTime == null){
+            SelectTimeSnackBar(GlobalFlag.PleaseSelectTime);
+          }
+          else{
+            SendDataService();
+          }
+         }
+      });
+    } else {
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
+//----------------------------SelectDaysSnackBar------------------------------//
+  // ignore: non_constant_identifier_names
+  void SelectDateSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _SnackBarscaffoldKey.currentState?.removeCurrentSnackBar();
+    _SnackBarscaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            color: const Color(0xFFFFFFFF),
+            fontSize: 12.0,
+            fontFamily: GlobalFlag.FontCode),
+      ),
+      backgroundColor: GlobalAppColor.BLackColorCode,
+    ));
+  }
+//----------------------------SelectDaysSnackBar------------------------------//
+  // ignore: non_constant_identifier_names
+  void SelectTimeSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _SnackBarscaffoldKey.currentState?.removeCurrentSnackBar();
+    _SnackBarscaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            color: const Color(0xFFFFFFFF),
+            fontSize: 12.0,
+            fontFamily: GlobalFlag.FontCode),
+      ),
+      backgroundColor: GlobalAppColor.BLackColorCode,
+    ));
+  }
+//----------------------------SelectDaysSnackBar------------------------------//
+  // ignore: non_constant_identifier_names
+  void selecteServiceSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _SnackBarscaffoldKey.currentState?.removeCurrentSnackBar();
+    _SnackBarscaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            color: const Color(0xFFFFFFFF),
+            fontSize: 12.0,
+            fontFamily: GlobalFlag.FontCode),
+      ),
+      backgroundColor: GlobalAppColor.BLackColorCode,
+    ));
+  }
+//---------------------------_CheckBoxvalidate---
+//----------------------validateDetails------------------------------------//
+  String validateDetails(String value) {
+    String patttern = r'';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return GlobalFlag.DetailsisRequired.toString();
+    } else if (!regExp.hasMatch(value)) {
+      return GlobalFlag.DetailsmustbeNeed.toString();
+    }
+    return null;
+  }
+//-------------------------------SendDataService------------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> SendDataService() async {
+    _checkInternetConnectivity();
+    setState(() {
+      // ignore: unnecessary_statements
+      SelectDate;
+      // ignore: unnecessary_statements
+      SelectTime;
+      // ignore: unnecessary_statements
+      _selectedService.name;
+      // ignore: unnecessary_statements
+      _selectedConsultant.name;
+    });
+    pr.show();
+    try {
+      http.post(BookingUrl_ServiceUrl, body: {
+        "user_token": GlobalFlag.ServiceToken.toString(),
+        "date":SelectDate.toString(),
+        "time":SelectTime.toString(),
+        "service":_selectedConsultant.name.toString(),
+        "patient":_selectedService.name.toString(),
+        "details":DetailsController.text.toString(),
+        "type":"appointment".toString(),
+      }).then((resultAddBatch) {
+        setStatus(resultAddBatch.statusCode == 200
+            ? resultAddBatch.body
+            : errMessage);
+//-------------------------Print-Section--------------------------------------//
+        /*print(GlobalFlag.Printjsonresp.toString() +
+            "${resultAddBatch.body.toString()}");*/
+//------------------------END-Print-Section-----------------------------------//
+        // ignore: non_constant_identifier_names
+        var ReciveJsonData = json.decode(resultAddBatch.body);
+        // ignore: non_constant_identifier_names
+        var ReciveJsonSTATUS = ReciveJsonData[GlobalFlag.Jsonstatus];
+        ReciveJsonSTATUSMSG = ReciveJsonData[GlobalFlag.Jsonmsg];
+        if (ReciveJsonSTATUS == 200) {
+          setState(() {
+            pr.hide();
+            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+            BookAddedSnackBar(ReciveJsonSTATUSMSG);
+            _SendHomeScreen();
+          });
+        } else {
+          setState(() {
+            pr.hide();
+            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+            BookAddedFailedSnackBar(ReciveJsonSTATUSMSG);
+          });
+        }
+//----------------------------------------------------------------------------//
+      }).catchError((error) {
+        setStatus(error);
+      });
+    } catch (e) {
+      pr.hide();
+      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+    }
+  }
+//-----------------------------_SendHomeScreen--------------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> _SendHomeScreen() async {
+    await Future.delayed(Duration(seconds:2));
+    var route = new MaterialPageRoute(
+      builder: (BuildContext context) => new HomeScreen(),
+    );
+    Navigator.of(context).push(route);
+  }
+//----------------------------BatchAddedSnackBar-------------------------------//
+// ignore: non_constant_identifier_names
+  void BookAddedSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _SnackBarscaffoldKey.currentState?.removeCurrentSnackBar();
+    _SnackBarscaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            color: const Color(0xFFFFFFFF),
+            fontSize: 12.0,
+            fontFamily: GlobalFlag.FontCode),
+      ),
+      backgroundColor: GlobalAppColor.BLackColorCode,
+    ));
+  }
+//----------------------------BatchAddedFailedSnackBar-------------------------//
+// ignore: non_constant_identifier_names
+  void BookAddedFailedSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _SnackBarscaffoldKey.currentState?.removeCurrentSnackBar();
+    _SnackBarscaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            color: const Color(0xFFFFFFFF),
+            fontSize: 12.0,
+            fontFamily: GlobalFlag.FontCode),
+      ),
+      backgroundColor: GlobalAppColor.BLackColorCode,
+    ));
   }
 }
 //---------------------------------------END----------------------------------//
