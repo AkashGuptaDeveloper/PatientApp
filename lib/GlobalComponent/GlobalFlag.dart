@@ -99,6 +99,8 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String Jsonmsg = "msg";
   // ignore: non_constant_identifier_names
+  static String appointmentID = "appointmentID";
+  // ignore: non_constant_identifier_names
   static String Areyousure = 'Are you sure?';
   // ignore: non_constant_identifier_names
   static String exitanApp = 'Do you want to exit an App?';
@@ -112,4 +114,63 @@ class GlobalFlag {
   static String AppointmentID = 'Appointment ID';
   // ignore: non_constant_identifier_names
   static String BookingTime = 'Booking Time';
+  // ignore: non_constant_identifier_names
+  static String Done = 'Done';
+  // ignore: non_constant_identifier_names
+  static String ConfirmationMessage = 'Confirmation Message';
+  // ignore: non_constant_identifier_names
+  static String DAnujPall = 'Dr.Anuj Pall';
+  // ignore: non_constant_identifier_names
+  static String Facebook = 'Facebook';
+  // ignore: non_constant_identifier_names
+  static String Instagrams = 'Instagram';
+  // ignore: non_constant_identifier_names
+  static String Blogs = 'Blogs';
+  // ignore: non_constant_identifier_names
+  static String LaSkinnovitas = 'LaSkinnovita';
+  // ignore: non_constant_identifier_names
+  static String Services = 'Services';
+  // ignore: non_constant_identifier_names
+  static String SlotnotavailableinthisDate = 'Slot not Available in this Date';
+  // ignore: non_constant_identifier_names
+  static String SlotavailableinthisDate = 'Slot Available in this Date';
+  // ignore: non_constant_identifier_names
+  static String SlotavailableinthisTime = 'Slot Available in this Time';
+  // ignore: non_constant_identifier_names
+  static String SlotavailableinthisNotTime = 'Slot Not Available in this Time';
+  // ignore: non_constant_identifier_names
+  static String CameraString = "Make a Choice!";
+  // ignore: non_constant_identifier_names
+  static String UseCamera = "Use Camera";
+  // ignore: non_constant_identifier_names
+  static String UseGallery = "Use Gallery";
+  // ignore: non_constant_identifier_names
+  static String PleaseUploadPicture = "Please Upload Picture";
+//------------------WebView-URL-----------------------------------------------//
+  // ignore: non_constant_identifier_names
+  static String DrAnujPalWebView = 'https://youtu.be/1BdPOfoFZG8';
+  // ignore: non_constant_identifier_names
+  static String LaSkinnovitasWebView = 'https://youtu.be/P_D8v0JXtLc';
+  // ignore: non_constant_identifier_names
+  static String ServicesWebView = 'https://youtu.be/_gOJRJ-UJto';
+  // ignore: non_constant_identifier_names
+  static String TestimonialsWebView = 'https://youtu.be/ExWUUS6ZXsQ';
+  // ignore: non_constant_identifier_names
+  static String DeliveryWebView = 'https://youtu.be/ExWUUS6ZXsQ';
+  // ignore: non_constant_identifier_names
+  static String PayCustomerWebView = 'https://youtu.be/xlkILjNVfhY';
+  // ignore: non_constant_identifier_names
+  static String ContactUsWebView = 'https://youtu.be/6LdIBcAMEwg';
+  // ignore: non_constant_identifier_names
+  static String ResourceWebView = 'https://youtu.be/mN61LlbouDo';
+  // ignore: non_constant_identifier_names
+  static String FeedbackWebView = 'https://www.google.com/';
+  // ignore: non_constant_identifier_names
+  static String BlogsWebView = 'https://en.wikipedia.org/wiki/Blog';
+  // ignore: non_constant_identifier_names
+  static String FacebookWebView = 'https://www.facebook.com/';
+  // ignore: non_constant_identifier_names
+  static String InstagramWebView = 'https://www.instagram.com/?hl=en';
+  // ignore: non_constant_identifier_names
+  static String YoutubeWebView = 'https://www.youtube.com/';
 }

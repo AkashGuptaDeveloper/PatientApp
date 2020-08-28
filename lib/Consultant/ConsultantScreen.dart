@@ -10,21 +10,30 @@ import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 //------------------------------------START-----------------------------------//
 class ConsultantScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagConsultantScreen.toString();
   @override
   ConsultantScreenState createState() => new ConsultantScreenState();
 }
+
 //-----------------------------------SplashScreenState------------------------//
 class ConsultantScreenState extends State<ConsultantScreen> {
   // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
-  GlobalKey<ScaffoldState>();
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+      GlobalKey<ScaffoldState>();
+  // ignore: non_constant_identifier_names
   Razorpay _razorpay;
+  // ignore: non_constant_identifier_names
   String errMessage = GlobalFlag.ErrorSendData;
   String status = '';
+  // ignore: non_constant_identifier_names
+  var GetPaymentID;
+  // ignore: non_constant_identifier_names
+  var GetPaymentsignature;
+  // ignore: non_constant_identifier_names
+  var GetPaymentorderId;
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -35,12 +44,14 @@ class ConsultantScreenState extends State<ConsultantScreen> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
+
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
     _razorpay.clear();
   }
+
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
@@ -49,9 +60,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
       key: _SnackBarscaffoldKey,
       appBar: new AppBar(
         backgroundColor: GlobalAppColor.AppBarColorCode,
-        iconTheme: IconThemeData(
-            color: Colors.white
-        ),
+        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           GlobalFlag.Consultant.toString(),
           textAlign: TextAlign.center,
@@ -64,45 +73,56 @@ class ConsultantScreenState extends State<ConsultantScreen> {
         ),
         centerTitle: true,
       ),
-      body:new Center(
-        child: ListView(
-          children: [
-           SizedBox(height: 20,),
-           new Container(
-             padding: EdgeInsets.only(left: 20,right: 20),
-             height: 200,
-             width: 300,
-             color: Colors.grey[200],
-             child: Image.asset(
-                 GlobalImageAssets.splash,
-                 fit:BoxFit.contain
-             ),
-           ),
-          SizedBox(height: 20,),
+      body: new Center(
+          child: ListView(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
           new Container(
-            padding: EdgeInsets.only(left: 20,right: 20),
+            padding: EdgeInsets.only(left: 20, right: 20),
+            height: 200,
+            width: 300,
+            color: Colors.grey[200],
+            child: Image.asset(GlobalImageAssets.splash, fit: BoxFit.contain),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          new Container(
+            padding: EdgeInsets.only(left: 20, right: 20),
             color: GlobalAppColor.AppBarColorCode,
             child: Container(
-              height:50,
+              height: 50,
               width: 300,
               child: FlatButton.icon(
                 onPressed: () {
                   setState(() {});
                   openCheckout();
-                 /* Navigator.of(context).push(new MaterialPageRoute(
+                  /* Navigator.of(context).push(new MaterialPageRoute(
                       builder: (_) => new ConsultantScreen2()));*/
                 },
-                icon: Icon(FontAwesomeIcons.save,color: Colors.white,size: 15.0,), //`Icon` to display
-                label: Text(GlobalFlag.Continue.toString().toUpperCase(),style: TextStyle(fontFamily: GlobalFlag.FontCode.toString(),fontSize: 15.0, color: Colors.white,fontWeight: FontWeight.bold,)),
+                icon: Icon(
+                  FontAwesomeIcons.save,
+                  color: Colors.white,
+                  size: 15.0,
+                ), //`Icon` to display
+                label: Text(GlobalFlag.Continue.toString().toUpperCase(),
+                    style: TextStyle(
+                      fontFamily: GlobalFlag.FontCode.toString(),
+                      fontSize: 15.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    )),
               ),
             ),
           ),
-          ],
-        )
-      ),
+        ],
+      )),
       backgroundColor: Colors.white,
     );
   }
+
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -110,6 +130,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
+
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
@@ -126,14 +147,12 @@ class ConsultantScreenState extends State<ConsultantScreen> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
+
 //-----------------------------------------openCheckout()-----------------------------------------------------//
   void openCheckout() async {
-    var PckageAmount = 100;
-    var TotalAmount = 100.0;
-    // print(TotalAmount);
     var options = {
       'key': GlobalServiceURL.RazorPayAPIKey.toString(),
-      'amount': TotalAmount * 100,
+      'amount': 1000,
       'name': "Akash".toString(),
       'description': "Buy".toString(),
       'prefill': {
@@ -147,18 +166,23 @@ class ConsultantScreenState extends State<ConsultantScreen> {
     try {
       _razorpay.open(options);
     } catch (e) {
-      debugPrint(e);
+      /*  debugPrint(e);*/
     }
   }
+
 //-----------------------------------------_handlePaymentSuccess()-----------------------------------------------------//
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId, timeInSecForIos: 4);
-   /* GetPaymentID = response.paymentId;
-    OnPayMentSuccessSendToServer();
-    _PayMentSuccessAlert();*/
+    GetPaymentID = response.paymentId;
+    GetPaymentsignature = response.signature;
+    GetPaymentorderId = response.orderId;
     Navigator.of(context).push(new MaterialPageRoute(
-        builder: (_) => new ConsultantScreen2()));
+        builder: (_) => new ConsultantScreen2(
+              SendGetPaymentID: GetPaymentID,
+              SenGetPaymentsignature: GetPaymentsignature,
+              SenGetPaymentorderId: GetPaymentorderId,
+            )));
   }
 
 //-----------------------------------------_handlePaymentError()-----------------------------------------------------//
@@ -166,9 +190,6 @@ class ConsultantScreenState extends State<ConsultantScreen> {
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " - " + response.message,
         timeInSecForIos: 4);
-   /* GetPaymentErrorCode = response.message;
-    OnPayMentFailedSendToServer();
-    _PayMentFailedAlert();*/
   }
 
 //-----------------------------------------_handleExternalWallet()--------------------------------------------------//

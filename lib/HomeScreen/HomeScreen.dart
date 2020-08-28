@@ -10,12 +10,27 @@ import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
+import 'package:laskinnovita/WevView/Blogs/Blogs.dart';
+import 'package:laskinnovita/WevView/ContactUs/ContactUs.dart';
+import 'package:laskinnovita/WevView/Delivery/Delivery.dart';
+import 'package:laskinnovita/WevView/DrAnujPall/DrAnujPall.dart';
+import 'package:laskinnovita/WevView/Facebook/Facebook.dart';
+import 'package:laskinnovita/WevView/Feedback/Feedbacks.dart';
+import 'package:laskinnovita/WevView/Instagram/Instagram.dart';
+import 'package:laskinnovita/WevView/LaSkinnovita/LaSkinnovita.dart';
+import 'package:laskinnovita/WevView/PayCustomer/PayCustomer.dart';
+import 'package:laskinnovita/WevView/Resource/Resource.dart';
+import 'package:laskinnovita/WevView/Services/Services.dart';
+import 'package:laskinnovita/WevView/Testimonials/Testimonials.dart';
+import 'package:laskinnovita/WevView/Youtube/Youtube.dart';
+
 //------------------------------------START-----------------------------------//
 class HomeScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagHomeScreen.toString();
   @override
   HomeScreenState createState() => new HomeScreenState();
 }
+
 //-----------------------------------SplashScreenState------------------------//
 class HomeScreenState extends State<HomeScreen> {
   // ignore: non_constant_identifier_names
@@ -27,54 +42,57 @@ class HomeScreenState extends State<HomeScreen> {
     super.initState();
     _checkInternetConnectivity();
   }
+
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
   }
+
   //-------------------------------------------------_onBackPressed------------//
   // ignore: non_constant_identifier_names
   Future<bool> _BackPressed(BuildContext context) {
     return showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text(
-          GlobalFlag.Areyousure,
-          style: TextStyle(
-            fontSize: 13.0,
-            color: GlobalAppColor.BLackColorCode,
-            fontWeight: FontWeight.bold,
-            fontFamily: GlobalFlag.FontCode.toString(),
-          ),
-        ),
-        content: new Text(
-          GlobalFlag.exitanApp,
-          style: TextStyle(
-            fontSize: 13.0,
-            color: GlobalAppColor.BLackColorCode,
-            fontWeight: FontWeight.bold,
-            fontFamily: GlobalFlag.FontCode.toString(),
-          ),
-        ),
-        actions: <Widget>[
-          new GestureDetector(
-            onTap: () => Navigator.of(context).pop(false),
-            child: roundedButton(
-              GlobalFlag.No,
-              const Color(0xFF63C0Cf),
-              const Color(0xFFFFFFFF),
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text(
+              GlobalFlag.Areyousure,
+              style: TextStyle(
+                fontSize: 13.0,
+                color: GlobalAppColor.BLackColorCode,
+                fontWeight: FontWeight.bold,
+                fontFamily: GlobalFlag.FontCode.toString(),
+              ),
             ),
+            content: new Text(
+              GlobalFlag.exitanApp,
+              style: TextStyle(
+                fontSize: 13.0,
+                color: GlobalAppColor.BLackColorCode,
+                fontWeight: FontWeight.bold,
+                fontFamily: GlobalFlag.FontCode.toString(),
+              ),
+            ),
+            actions: <Widget>[
+              new GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: roundedButton(
+                  GlobalFlag.No,
+                  const Color(0xFF63C0Cf),
+                  const Color(0xFFFFFFFF),
+                ),
+              ),
+              new GestureDetector(
+                onTap: () => exit(0),
+                child: roundedButton(GlobalFlag.Yes, const Color(0xFF63C0Cf),
+                    const Color(0xFFFFFFFF)),
+              ),
+            ],
           ),
-          new GestureDetector(
-            onTap: () => exit(0),
-            child: roundedButton(GlobalFlag.Yes, const Color(0xFF63C0Cf),
-                const Color(0xFFFFFFFF)),
-          ),
-        ],
-      ),
-    ) ??
+        ) ??
         false;
   }
+
 //---------------------------------------roundedButton------------------------//
   // ignore: non_constant_identifier_names
   Widget roundedButton(String buttonLabel, Color bgColor, Color textColor) {
@@ -100,143 +118,146 @@ class HomeScreenState extends State<HomeScreen> {
     );
     return loginBtn;
   }
+
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () => _BackPressed(context),
-    child: Scaffold(
-      key: _SnackBarscaffoldKey,
-      appBar: new AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: GlobalAppColor.AppBarColorCode,
-        title: Text(
-          GlobalFlag.Welcome.toString(),
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18.0,
-            color: GlobalAppColor.WhiteColorCode,
-            fontFamily: GlobalFlag.FontCode,
-            fontWeight: FontWeight.w600,
+      onWillPop: () => _BackPressed(context),
+      child: Scaffold(
+        key: _SnackBarscaffoldKey,
+        appBar: new AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: GlobalAppColor.AppBarColorCode,
+          title: Text(
+            GlobalFlag.Welcome.toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18.0,
+              color: GlobalAppColor.WhiteColorCode,
+              fontFamily: GlobalFlag.FontCode,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: new Container(
+          child: new Form(
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
+                  child: Text(
+                    GlobalFlag.QuickAction,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: GlobalFlag.FontCode,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: QuickAction(),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Divider(
+                    color: GlobalAppColor.AppBarColorCode,
+                    thickness: 0.5,
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, top: 5.0, right: 16.0),
+                  child: Text(
+                    GlobalFlag.AboutUs,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: GlobalFlag.FontCode,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
+                  child: AboutUs(),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Divider(
+                    color: Colors.grey[600],
+                    thickness: 0.5,
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 5.0,
+                  ),
+                  child: Text(
+                    GlobalFlag.Support,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: GlobalFlag.FontCode,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
+                  child: Support(),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Divider(
+                    color: Colors.grey[600],
+                    thickness: 0.5,
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 5.0,
+                  ),
+                  child: Text(
+                    GlobalFlag.WhatsNews,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: GlobalFlag.FontCode,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
+                  child: WhatsNews(),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Divider(
+                    color: Colors.grey[600],
+                    thickness: 0.5,
+                  ),
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+              ],
+            ),
           ),
         ),
-        centerTitle: true,
+        backgroundColor: Colors.white,
       ),
-      body: new Container(
-        child: new Form(
-          child: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-                child: Text(
-                  GlobalFlag.QuickAction,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: QuickAction(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: GlobalAppColor.AppBarColorCode,
-                  thickness: 0.5,
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, top: 5.0, right: 16.0),
-                child: Text(
-                  GlobalFlag.AboutUs,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
-                child: AboutUs(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: Colors.grey[600],
-                  thickness: 0.5,
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: 5.0,
-                ),
-                child: Text(
-                  GlobalFlag.Support,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
-                child: Support(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: Colors.grey[600],
-                  thickness: 0.5,
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: 5.0,
-                ),
-                child: Text(
-                  GlobalFlag.WhatsNews,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontFamily: GlobalFlag.FontCode,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
-                child: WhatsNews(),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Divider(
-                  color: Colors.grey[600],
-                  thickness: 0.5,
-                ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-            ],
-          ),
-        ),
-      ),
-      backgroundColor: Colors.white,
-    ),);
+    );
   }
+
 //------------------------------QuickAction-----------------------------------//
   // ignore: non_constant_identifier_names
   Widget QuickAction() {
@@ -413,6 +434,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 //------------------------------AboutUs---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget AboutUs() {
@@ -421,205 +443,210 @@ class HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new DrAnujPall()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.plus,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.plus,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.AnujPall,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.AnujPall,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new LaSkinnovita()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.clinicMedical,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.clinicMedical,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.LaSkinnovita,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.LaSkinnovita,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Services()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.commentMedical,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.commentMedical,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.serious,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.serious,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Testimonials()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.fileMedical,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.fileMedical,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Testimonials,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Testimonials,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
         ],
       ),
     );
   }
+
 //------------------------------Support---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget Support() {
@@ -628,255 +655,261 @@ class HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Delivery()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .topLeft, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.shippingFast,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .topLeft, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.shippingFast,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.RequestMedicalDelivery,
+                        softWrap: true,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 9,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.RequestMedicalDelivery,
-                          softWrap: true,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 9,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new PayCustomer()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.rupeeSign,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.rupeeSign,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.PayCustomer,
+                        softWrap: true,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 9,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.PayCustomer,
-                          softWrap: true,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 9,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new ContactUs()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.mobileAlt,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.mobileAlt,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.ContactUs,
+                        softWrap: true,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 9,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.ContactUs,
-                          softWrap: true,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 9,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Resource()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.peopleArrows,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.peopleArrows,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Resource,
+                        softWrap: true,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 9,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Resource,
-                          softWrap: true,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 9,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Feedbacks()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.comment,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.comment,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Feedback,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Feedback,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
         ],
       ),
     );
   }
+
 //------------------------------WhatsNews---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget WhatsNews() {
@@ -885,205 +918,210 @@ class HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(new MaterialPageRoute(builder: (_) => new Blogs()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.blog,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.blog,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Blog,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Blog,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Facebook()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.facebook,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.facebook,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Facebok,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Facebok,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                    new MaterialPageRoute(builder: (_) => new Instagram()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.instagram,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.instagram,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Instagram,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Instagram,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
           Expanded(
-            child: new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              child: GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(new MaterialPageRoute(builder: (_) => new Youtube()));
+              },
+              child: Container(
+                color: GlobalAppColor.WhiteColorCode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Icon(
+                        FontAwesomeIcons.youtube,
+                        size: 30,
+                        color: GlobalAppColor.AppBarColorCode,
                       ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.youtube,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .center, // Align however you like (i.e .centerRight, centerLeft)
+                      child: Text(
+                        GlobalFlag.Youtube,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontFamily: GlobalFlag.FontCode,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Youtube,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
                 ),
               ),
-              //Put your child widget here.
             ),
           ),
         ],
       ),
     );
   }
+
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -1091,6 +1129,7 @@ class HomeScreenState extends State<HomeScreen> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
+
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
