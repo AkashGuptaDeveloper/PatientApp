@@ -21,6 +21,8 @@ class GlobalServiceURL {
   // ignore: non_constant_identifier_names
   static String ConsultantBookingUrl =
       BaseURL.toString() + "/appointment/booking.php";
+  // ignore: non_constant_identifier_names
+  static String ViewPDF ="https://laskinnovita.com/app/api/v2/print-pdf-prescription.php";
 //----------------------------------------------------------------------------//
 //---------------------------------------RazorPayAPIKey-----------------------//
   // ignore: non_constant_identifier_names

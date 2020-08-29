@@ -6,6 +6,7 @@ import 'package:laskinnovita/BookAppointment/BookAppointment.dart';
 import 'package:laskinnovita/BookAppointment/BookAppointmentDone.dart';
 import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
 import 'package:laskinnovita/Consultant/ConsultantScreen2.dart';
+import 'package:laskinnovita/Consultant/ViewPDF.dart';
 import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
 import 'package:laskinnovita/SplashScreen/SplashScreen.dart';
 import 'package:laskinnovita/WevView/Blogs/Blogs.dart';
@@ -45,5 +46,6 @@ final routes = {
   Facebook.tag: (context) => Facebook(),
   Instagram.tag: (context) => Instagram(),
   Youtube.tag: (context) => Youtube(),
+  ViewPDF.tag: (context) => ViewPDF(),
 };
 //-------------------------------END------------------------------------------//

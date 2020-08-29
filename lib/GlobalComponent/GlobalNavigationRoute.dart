@@ -35,6 +35,8 @@ class GlobalNavigationRoute {
   // ignore: non_constant_identifier_names
   static String TagBlogs = "Blogs";
   // ignore: non_constant_identifier_names
+  static String TagViewPDF = "ViewPDF";
+  // ignore: non_constant_identifier_names
   static String TagFacebook = "Facebook";
   // ignore: non_constant_identifier_names
   static String TagInstagram = "Instagram";

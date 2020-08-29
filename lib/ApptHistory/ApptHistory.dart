@@ -1,6 +1,8 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:laskinnovita/Consultant/ViewPDF.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
@@ -310,6 +312,43 @@ class ApptHistoryState extends State<ApptHistory> {
                                             ),
                                           ),
                                         ]),
+                                  ),
+//----------------------------------------------------------------------------//
+                                  Divider(
+                                      height: 12,
+                                      thickness: 0.1,
+                                      color: Colors.grey[900]),
+                                  new Padding(
+                                    padding:
+                                    EdgeInsets.only(left: 10.0, right: 10),
+                                    child:Container(
+                                      color: GlobalAppColor.AppBarColorCode,
+                                      height: 30,
+                                      child: FlatButton.icon(
+                                        onPressed: () {
+                                          setState(() {
+                                            // ignore: unnecessary_statements
+                                            _History[index].appointment.appointmentId;
+                                          });
+                                           Navigator.of(context).push(new MaterialPageRoute(
+                                          builder: (_) => new ViewPDF(
+                                            SendappointmentId:_History[index].appointment.appointmentId,
+                                          )));
+                                        },
+                                        icon: Icon(
+                                          FontAwesomeIcons.arrowAltCircleRight,
+                                          color: Colors.white,
+                                          size: 15.0,
+                                        ), //`Icon` to display
+                                        label: Text(GlobalFlag.View.toString().toUpperCase(),
+                                            style: TextStyle(
+                                              fontFamily: GlobalFlag.FontCode.toString(),
+                                              fontSize: 15.0,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ),
+                                    ),
                                   ),
 //----------------------------------------------------------------------------//
                                   SizedBox(height: 8.0),

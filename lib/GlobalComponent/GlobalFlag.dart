@@ -77,6 +77,8 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String Continue = "Continue";
   // ignore: non_constant_identifier_names
+  static String View = "View";
+  // ignore: non_constant_identifier_names
   static String Prescription = "Prescription";
   // ignore: non_constant_identifier_names
   static String ErrorSendData = "Error Send Data";
@@ -126,6 +128,8 @@ class GlobalFlag {
   static String Instagrams = 'Instagram';
   // ignore: non_constant_identifier_names
   static String Blogs = 'Blogs';
+  // ignore: non_constant_identifier_names
+  static String PDFView = 'PDF View';
   // ignore: non_constant_identifier_names
   static String LaSkinnovitas = 'LaSkinnovita';
   // ignore: non_constant_identifier_names
