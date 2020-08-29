@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +5,6 @@ import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:simple_pdf_viewer/simple_pdf_viewer.dart';
 //------------------------------------START-----------------------------------//
 class ViewPDF extends StatefulWidget {
@@ -28,8 +24,6 @@ class ViewPDFState extends State<ViewPDF> {
   // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
   GlobalKey<ScaffoldState>();
-  // ignore: non_constant_identifier_names
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
   // ignore: non_constant_identifier_names
   String errMessage = GlobalFlag.ErrorSendData.toString();
   var status;
@@ -86,9 +80,9 @@ class ViewPDFState extends State<ViewPDF> {
       ),
       body:SimplePdfViewerWidget(
         completeCallback: (bool result){
-          print("completeCallback,result:${result}");
+          print("completeCallback,result:$result");
         },
-        initialUrl: PDFViewUrl_ServiceUrl+"?"+"appointment_id"+"=""1",
+        initialUrl: PDFViewUrl_ServiceUrl+"?"+"appointment_id"+"="+widget.SendappointmentId,
       ),
       backgroundColor: Colors.white,
     );
