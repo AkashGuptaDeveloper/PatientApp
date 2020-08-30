@@ -22,9 +22,19 @@ class GlobalServiceURL {
   static String ConsultantBookingUrl =
       BaseURL.toString() + "/appointment/booking.php";
   // ignore: non_constant_identifier_names
+  static String LoginApiUrl =
+      BaseURL.toString() + "/authentication.php";
+  // ignore: non_constant_identifier_names
+  static String OTPUrl =
+      BaseURL.toString() + "/verify-sms-otp.php";
+  // ignore: non_constant_identifier_names
+  static String SignupUrl =
+      BaseURL.toString() + "/signup.php";
+  // ignore: non_constant_identifier_names
   static String ViewPDF ="https://laskinnovita.com/app/api/v2/print-pdf-prescription.php";
 //----------------------------------------------------------------------------//
 //---------------------------------------RazorPayAPIKey-----------------------//
   // ignore: non_constant_identifier_names
   static String RazorPayAPIKey = "rzp_test_KHUERXgtVngdtf";
 }
+

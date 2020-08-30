@@ -10,6 +10,7 @@ import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
+import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:laskinnovita/WevView/Blogs/Blogs.dart';
 import 'package:laskinnovita/WevView/ContactUs/ContactUs.dart';
 import 'package:laskinnovita/WevView/Delivery/Delivery.dart';
@@ -23,6 +24,7 @@ import 'package:laskinnovita/WevView/Resource/Resource.dart';
 import 'package:laskinnovita/WevView/Services/Services.dart';
 import 'package:laskinnovita/WevView/Testimonials/Testimonials.dart';
 import 'package:laskinnovita/WevView/Youtube/Youtube.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //------------------------------------START-----------------------------------//
 class HomeScreen extends StatefulWidget {
@@ -36,6 +38,7 @@ class HomeScreenState extends State<HomeScreen> {
   // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
       GlobalKey<ScaffoldState>();
+  var LoginUserToken;
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -1127,6 +1130,11 @@ class HomeScreenState extends State<HomeScreen> {
     var result = await Connectivity().checkConnectivity();
     if (result == ConnectivityResult.none) {
       _showDialog(GlobalFlag.InternetNotConnected);
+    }
+    else{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
+      print(LoginUserToken);
     }
   }
 

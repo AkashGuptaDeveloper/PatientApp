@@ -8,6 +8,7 @@ import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
+import 'package:laskinnovita/LoginView/LoginView.dart';
 
 //------------------------------------START-----------------------------------//
 class SplashScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class SplashScreenState extends State<SplashScreen> {
 //-----------------------------------handleTimeout----------------------------//
   void handleTimeout() async {
     Navigator.of(context)
-        .push(new MaterialPageRoute(builder: (_) => new HomeScreen()));
+        .push(new MaterialPageRoute(builder: (_) => new LoginView()));
   }
 
 //-----------------------------------startTimeout-----------------------------//

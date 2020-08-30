@@ -35,7 +35,6 @@ class ViewPDFState extends State<ViewPDF> {
   void initState() {
     super.initState();
     _checkInternetConnectivity();
-    print(widget.SendappointmentId);
   }
 //-----------------------------------------dispose()--------------------------//
   @override
@@ -80,7 +79,7 @@ class ViewPDFState extends State<ViewPDF> {
       ),
       body:SimplePdfViewerWidget(
         completeCallback: (bool result){
-          print("completeCallback,result:$result");
+         /* print("completeCallback,result:$result");*/
         },
         initialUrl: PDFViewUrl_ServiceUrl+"?"+"appointment_id"+"="+widget.SendappointmentId,
       ),

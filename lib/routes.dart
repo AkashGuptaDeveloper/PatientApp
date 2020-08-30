@@ -8,6 +8,9 @@ import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
 import 'package:laskinnovita/Consultant/ConsultantScreen2.dart';
 import 'package:laskinnovita/Consultant/ViewPDF.dart';
 import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
+import 'package:laskinnovita/LoginView/LoginView.dart';
+import 'package:laskinnovita/LoginView/MobileOtp.dart';
+import 'package:laskinnovita/Signup/Signup.dart';
 import 'package:laskinnovita/SplashScreen/SplashScreen.dart';
 import 'package:laskinnovita/WevView/Blogs/Blogs.dart';
 import 'package:laskinnovita/WevView/ContactUs/ContactUs.dart';
@@ -47,5 +50,8 @@ final routes = {
   Instagram.tag: (context) => Instagram(),
   Youtube.tag: (context) => Youtube(),
   ViewPDF.tag: (context) => ViewPDF(),
+  LoginView.tag: (context) => LoginView(),
+  MobileOtp.tag: (context) => MobileOtp(),
+  Signup.tag: (context) => Signup(),
 };
 //-------------------------------END------------------------------------------//

@@ -69,8 +69,6 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String SelectDate = "Select Date";
   // ignore: non_constant_identifier_names
-  static String SelectTime = "Select Time";
-  // ignore: non_constant_identifier_names
   static String EnterService = "Enter Service";
   // ignore: non_constant_identifier_names
   static String Submit = "Submit";
@@ -101,7 +99,16 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String Jsonmsg = "msg";
   // ignore: non_constant_identifier_names
+  static String Jsonlogin = "login";
+  // ignore: non_constant_identifier_names
+  static String Jsonsignup = "signup";
+  // ignore: non_constant_identifier_names
+  static String Jsonuser_token = "user_token";
+  // ignore: non_constant_identifier_names
   static String appointmentID = "appointmentID";
+  // ignore: non_constant_identifier_names
+  static String transaction_id = "transaction_id";
+  static String mobile = "mobile";
   // ignore: non_constant_identifier_names
   static String Areyousure = 'Are you sure?';
   // ignore: non_constant_identifier_names
@@ -150,6 +157,37 @@ class GlobalFlag {
   static String UseGallery = "Use Gallery";
   // ignore: non_constant_identifier_names
   static String PleaseUploadPicture = "Please Upload Picture";
+  // ignore: non_constant_identifier_names
+  static String EnterMobileNumber = "Enter Mobile Number";
+  // ignore: non_constant_identifier_names
+  static String EnterName = "Enter Name";
+  // ignore: non_constant_identifier_names
+  static String EnterEmail = "Enter Email";
+  // ignore: non_constant_identifier_names
+  static String PattternNumber = r'(^[0-9]*$)';
+  // ignore: non_constant_identifier_names
+  static String MobileisRequired = "Mobile is Required";
+  // ignore: non_constant_identifier_names
+  static String Mobilenumbermust10digits = "Mobile number must 10 digits";
+  // ignore: non_constant_identifier_names
+  static String MobileNumbermustbedigits = "Mobile Number must be digits";
+  // ignore: non_constant_identifier_names
+  static String Login = "Send OTP";
+  // ignore: non_constant_identifier_names
+  static String PleaseEnterPin = "Please Enter the Pin";
+  // ignore: non_constant_identifier_names
+  static String NameisRequired = "Name is Required";
+  // ignore: non_constant_identifier_names
+  static String NamemustbeNeed = "Name must be Need";
+  // ignore: non_constant_identifier_names
+  static String NameSubmit = "Submit";
+  // ignore: non_constant_identifier_names
+  static String PattternEmail =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  // ignore: non_constant_identifier_names
+  static String EmailRequired = "Email is Required";
+  // ignore: non_constant_identifier_names
+  static String InvalidEmail = "Invalid Email";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://youtu.be/1BdPOfoFZG8';

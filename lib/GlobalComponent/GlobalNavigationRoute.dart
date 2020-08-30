@@ -42,5 +42,11 @@ class GlobalNavigationRoute {
   static String TagInstagram = "Instagram";
   // ignore: non_constant_identifier_names
   static String TagYoutube = "Youtube";
+  // ignore: non_constant_identifier_names
+  static String TagLoginView = "LoginView";
+  // ignore: non_constant_identifier_names
+  static String TagMobileOtp = "MobileOtp";
+  // ignore: non_constant_identifier_names
+  static String TagSignup = "Signup";
 }
 //------------------------------END-------------------------------------------//
