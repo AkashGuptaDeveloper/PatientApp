@@ -1,7 +1,6 @@
 //--------------------------Import-Library------------------------------------//
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:laskinnovita/LoginView/LoginView.dart';
-import 'package:laskinnovita/LoginView/MobileOtp.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
@@ -549,7 +547,7 @@ class SignupState extends State<Signup> {
       ),
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
-   /* _SendHomeScreen();*/
+    _SendHomeScreen();
   }
 //----------------------------LoginTrueSnackBar-------------------------------//
   // ignore: non_constant_identifier_names
@@ -578,8 +576,8 @@ class SignupState extends State<Signup> {
     _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
     // ignore: non_constant_identifier_names
     LoginNameController.clear();
+    LoginEmailController.clear();
   }
-
 }
 //---------------------------------------END----------------------------------//
 //--------------------Service-------------------------------------------------//

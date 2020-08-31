@@ -6,14 +6,17 @@ class Preferences {
   static var KEY_USER_status = "status";
   // ignore: non_constant_identifier_names
   static var KEY_USER_login = "login";
+  // ignore: non_constant_identifier_names
   static var KEY_USER_signup = "signup";
+  // ignore: non_constant_identifier_names
   static var KEY_USER_token = "user_token";
+  // ignore: non_constant_identifier_names
   static var KEY_USER_msg = "msg";
 
   storeDataAtLogin(data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(KEY_USER_status, data["status"].toString());
-    prefs.setString(KEY_USER_login, data["login"].toString());
+    prefs.setBool(KEY_USER_login, data["login"]);
     prefs.setString(KEY_USER_signup, data["signup"].toString());
     prefs.setString(KEY_USER_token, data["user_token"].toString());
     prefs.setString(KEY_USER_msg, data["msg"].toString());

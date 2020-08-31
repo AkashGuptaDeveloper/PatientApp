@@ -9,6 +9,8 @@ import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
 import 'package:laskinnovita/LoginView/LoginView.dart';
+import 'package:laskinnovita/Preferences/Preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //------------------------------------START-----------------------------------//
 class SplashScreen extends StatefulWidget {
@@ -25,8 +27,21 @@ class SplashScreenState extends State<SplashScreen> {
       GlobalKey<ScaffoldState>();
 //-----------------------------------handleTimeout----------------------------//
   void handleTimeout() async {
-    Navigator.of(context)
-        .push(new MaterialPageRoute(builder: (_) => new LoginView()));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(Preferences.KEY_USER_login) != null) {
+      if (prefs.getBool(Preferences.KEY_USER_login) == true) {
+        Navigator.of(context)
+            .push(new MaterialPageRoute(builder: (_) => new HomeScreen()));
+      } else{
+        Navigator.of(context)
+            .push(new MaterialPageRoute(builder: (_) => new LoginView()));
+      }
+    }
+//-----------------------------------LoginScreen------------------------------//
+    else {
+      Navigator.of(context)
+          .push(new MaterialPageRoute(builder: (_) => new LoginView()));
+    }
   }
 
 //-----------------------------------startTimeout-----------------------------//

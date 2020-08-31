@@ -16,7 +16,8 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:laskinnovita/BookAppointment/BookAppointmentDone.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:laskinnovita/Preferences/Preferences.dart';
 //------------------------------------START-----------------------------------//
 class ConsultantScreen2 extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagConsultantScreen2.toString();
@@ -70,6 +71,8 @@ class ConsultantScreen2State extends State<ConsultantScreen2> {
   // ignore: non_constant_identifier_names
   String BookingConsultantUrl_ServiceUrl =
       GlobalServiceURL.ConsultantBookingUrl.toString();
+  // ignore: non_constant_identifier_names
+  var LoginUserToken;
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -520,6 +523,8 @@ class ConsultantScreen2State extends State<ConsultantScreen2> {
   //----------------------------WaitSnackBar------------------------------------//
   // ignore: non_constant_identifier_names
   BookCounsltantService(File _image, BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
     _checkInternetConnectivity(context);
     setState(() {
       // ignore: unnecessary_statements
@@ -537,7 +542,7 @@ class ConsultantScreen2State extends State<ConsultantScreen2> {
     var uri = Uri.parse(BookingConsultantUrl_ServiceUrl);
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
-    request.fields['user_token'] = GlobalFlag.ServiceToken.toString();
+    request.fields['user_token'] =LoginUserToken.toString();
     request.fields['question'] = DetailsController.text.toString();
     request.fields['type'] = "consultation".toString();
     request.fields['patient'] = _selectedConsultant.name.toString();

@@ -15,7 +15,6 @@ import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:sms_autofill/sms_autofill.dart';
 //------------------------------------START-----------------------------------//
 class MobileOtp extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagMobileOtp.toString();
@@ -166,6 +165,7 @@ class MobileOtpState extends State<MobileOtp> {
       _showDialog(GlobalFlag.InternetNotConnected);
     } else {
       setState(() {
+        // ignore: unnecessary_statements
         RecivedConfirmPin;
         if(RecivedConfirmPin == null){
           _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
@@ -342,7 +342,6 @@ class MobileOtpState extends State<MobileOtp> {
           .push(new MaterialPageRoute(builder: (_) => new HomeScreen()));
     }
     else{
-      print("signup");
       await Future.delayed(Duration(seconds: 2));
       Navigator.of(context)
           .push(new MaterialPageRoute(builder: (_) => new Signup()));

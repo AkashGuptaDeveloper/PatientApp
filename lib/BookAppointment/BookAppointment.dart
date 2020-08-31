@@ -13,7 +13,8 @@ import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:laskinnovita/Model/CheckAvilityModel.dart';
 import 'package:laskinnovita/Model/TimeAvilityModel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-
+import 'package:laskinnovita/Preferences/Preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //------------------------------------START-----------------------------------//
 class BookAppointment extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagBookAppointment.toString();
@@ -90,6 +91,8 @@ class BookAppointmentState extends State<BookAppointment> {
   var Message;
   // ignore: non_constant_identifier_names
   var TimeModel;
+  // ignore: non_constant_identifier_names
+  var LoginUserToken;
 //------------------------------------API-------------------------------------//
   // ignore: non_constant_identifier_names
   String AvailabilityUrl_ServiceUrl =
@@ -827,6 +830,8 @@ class BookAppointmentState extends State<BookAppointment> {
 //-------------------------------SendDataService------------------------------//
   // ignore: non_constant_identifier_names
   Future<void> SendDataService() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
     _checkInternetConnectivity();
     setState(() {
       // ignore: unnecessary_statements
@@ -841,7 +846,7 @@ class BookAppointmentState extends State<BookAppointment> {
     pr.show();
     try {
       http.post(BookingUrl_ServiceUrl, body: {
-        "user_token": GlobalFlag.ServiceToken.toString(),
+        "user_token":LoginUserToken.toString(),
         "date": SelectDate.toString(),
         "time": SelectTime.toString(),
         "service": _selectedConsultant.name.toString(),

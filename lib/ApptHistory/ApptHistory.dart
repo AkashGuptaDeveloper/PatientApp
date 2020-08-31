@@ -10,7 +10,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:laskinnovita/Model/ApptHistoryModel.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:laskinnovita/Preferences/Preferences.dart';
 //------------------------------------START-----------------------------------//
 class ApptHistory extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagApptHistory.toString();
@@ -28,6 +29,8 @@ class ApptHistoryState extends State<ApptHistory> {
   var status;
   // ignore: non_constant_identifier_names
   List<History> _History = [];
+  // ignore: non_constant_identifier_names
+  var LoginUserToken;
 //------------------------------------API-------------------------------------//
   // ignore: non_constant_identifier_names
   String ListOfApptHistoryUrl_ServiceUrl =
@@ -398,9 +401,11 @@ class ApptHistoryState extends State<ApptHistory> {
 //------------------------------FetchDateFromServer--------------------------//
   // ignore: non_constant_identifier_names
   Future<void> FetchDateFromServer() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
     try {
       http.post(ListOfApptHistoryUrl_ServiceUrl.toString(), body: {
-        "user_token": GlobalFlag.ServiceToken,
+        "user_token": LoginUserToken,
         "type": "appointment",
         // ignore: non_constant_identifier_names
       }).then((result) {
