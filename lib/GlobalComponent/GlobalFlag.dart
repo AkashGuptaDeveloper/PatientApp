@@ -1,8 +1,5 @@
 class GlobalFlag {
   // ignore: non_constant_identifier_names
-  static String ServiceToken =
-      "ce5474559235ddddb918e87dff02ed01f234387d577d96fa0ee37fbac30cb660";
-  // ignore: non_constant_identifier_names
   static String FontCode = "Raleway";
   // ignore: non_constant_identifier_names
   static String InternetNotConnected = "You're not connected to a network";
@@ -23,13 +20,13 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String LaSkinnovita = "LaSkinnovita";
   // ignore: non_constant_identifier_names
-  static String serious = "Serious";
+  static String serious = "Services";
   // ignore: non_constant_identifier_names
   static String Testimonials = "Testimonials";
 // ignore: non_constant_identifier_names
   static String Support = "Support";
   // ignore: non_constant_identifier_names
-  static String RequestMedicalDelivery = "Request Medical Delivery";
+  static String RequestMedicalDelivery = "Request Medicine";
   // ignore: non_constant_identifier_names
   static String PayCustomer = "Pay Customer";
   // ignore: non_constant_identifier_names
@@ -190,29 +187,32 @@ class GlobalFlag {
   static String InvalidEmail = "Invalid Email";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
-  static String DrAnujPalWebView = 'https://youtu.be/1BdPOfoFZG8';
+  static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';
   // ignore: non_constant_identifier_names
-  static String LaSkinnovitasWebView = 'https://youtu.be/P_D8v0JXtLc';
+  static String LaSkinnovitasWebView = 'https://laskinnovita.com/';
   // ignore: non_constant_identifier_names
   static String ServicesWebView = 'https://youtu.be/_gOJRJ-UJto';
   // ignore: non_constant_identifier_names
-  static String TestimonialsWebView = 'https://youtu.be/ExWUUS6ZXsQ';
+  static String TestimonialsWebView =
+      'https://www.google.com/search?q=la+skinnovita&rlz=1C5CHFA_enIN912IN912&oq=la+skinnovita&aqs=chrome..69i57j69i60l2j69i65.3703j0j1&sourceid=chrome&ie=UTF-8#lrd=0x390d184624e99cbf:0xaa7d70dfa8aadab2,1,,,';
   // ignore: non_constant_identifier_names
   static String DeliveryWebView = 'https://youtu.be/ExWUUS6ZXsQ';
   // ignore: non_constant_identifier_names
   static String PayCustomerWebView = 'https://youtu.be/xlkILjNVfhY';
   // ignore: non_constant_identifier_names
-  static String ContactUsWebView = 'https://youtu.be/6LdIBcAMEwg';
+  static String ContactUsWebView = 'https://laskinnovita.com/contact-us/';
   // ignore: non_constant_identifier_names
   static String ResourceWebView = 'https://youtu.be/mN61LlbouDo';
   // ignore: non_constant_identifier_names
   static String FeedbackWebView = 'https://www.google.com/';
   // ignore: non_constant_identifier_names
-  static String BlogsWebView = 'https://en.wikipedia.org/wiki/Blog';
+  static String BlogsWebView = 'https://laskinnovita.com/blogs/';
   // ignore: non_constant_identifier_names
-  static String FacebookWebView = 'https://www.facebook.com/';
+  static String FacebookWebView =
+      'https://www.facebook.com/laskinnovitagurgaon';
   // ignore: non_constant_identifier_names
-  static String InstagramWebView = 'https://www.instagram.com/?hl=en';
+  static String InstagramWebView = 'https://www.instagram.com/laskinnovita/';
   // ignore: non_constant_identifier_names
-  static String YoutubeWebView = 'https://www.youtube.com/';
+  static String YoutubeWebView =
+      'https://www.youtube.com/channel/UCk2jCfUyqH3ZU7LmJGOHecw';
 }
