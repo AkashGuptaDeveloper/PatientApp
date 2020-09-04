@@ -10,6 +10,7 @@ import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
+import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
 import 'package:laskinnovita/LoginView/LoginView.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -19,6 +20,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 //------------------------------------START-----------------------------------//
 class Signup extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagSignup.toString();
+  // ignore: non_constant_identifier_names
+  final String RecivedToken;
+  Signup({
+    Key key,
+    // ignore: unnecessary_statements, non_constant_identifier_names
+    this.RecivedToken,
+  }) : super(key: key);
   @override
   SignupState createState() => new SignupState();
 }
@@ -71,6 +79,7 @@ class SignupState extends State<Signup> {
   @override
   void initState() {
     super.initState();
+    print(widget.RecivedToken);
 //-------------------------------------Gender--------------------------------//
     _dropdownMenuItemsGender = buildDropdownMenuItemsGender(_Gender);
     _selectedGender = _dropdownMenuItemsGender[0].value;
@@ -426,8 +435,6 @@ class SignupState extends State<Signup> {
   removeData(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(Preferences.KEY_USER_status);
-    prefs.remove(Preferences.KEY_USER_login);
-    prefs.remove(Preferences.KEY_USER_signup);
     prefs.remove(Preferences.KEY_USER_token);
     prefs.remove(Preferences.KEY_USER_msg);
     Navigator.of(context).pushNamed(LoginView.tag);
@@ -440,6 +447,7 @@ class SignupState extends State<Signup> {
     }
     else{
       UserSignupService();
+      WaitSnackBar(GlobalFlag.PleaseWait);
     }
   }
 //----------------------------showInSnackBar----------------------------------//
@@ -485,8 +493,6 @@ class SignupState extends State<Signup> {
 //---------------------------------UserLoginService---------------------------//
   // ignore: non_constant_identifier_names
   Future<void> UserSignupService() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
    // WaitSnackBar(GlobalFlag.PleaseWait);
     setState(() {
       // ignore: unnecessary_statements
@@ -496,7 +502,7 @@ class SignupState extends State<Signup> {
     });
     try {
       http.post(SignuUrl_ServiceUrl, body: {
-        "user_token":LoginUserToken.toString(),
+        "user_token":widget.RecivedToken.toString(),
         "name":LoginNameController.text.toString(),
         "email":LoginEmailController.text.toString(),
         "gender":_selectedGender.name.toString(),
@@ -504,24 +510,21 @@ class SignupState extends State<Signup> {
       }).then((result) {
         setStatus(
             result.statusCode == 200 ? result.body : errMessage);
-     /* print(GlobalFlag.Printjsonresp.toString()+"${result.body.toString()}");*/
+        print(GlobalFlag.Printjsonresp.toString()+"${result.body.toString()}");
+        print("user_token"+widget.RecivedToken.toString(),);
         // ignore: non_constant_identifier_names
         var SignupReciveJsonData = json.decode(result.body);
-        print(SignupReciveJsonData);
         // ignore: non_constant_identifier_names
         var SignupReciveJsonSTATUS = SignupReciveJsonData[GlobalFlag.Jsonstatus];
-        SignupReciveJsonSTATUSMSG = SignupReciveJsonData[GlobalFlag.Jsonmsg];
-        print(SignupReciveJsonSTATUSMSG);
-        print(SignupReciveJsonSTATUS);
+        SignupReciveJsonSTATUSMSG = SignupReciveJsonData["msg"];
+        new Preferences().storeDataAtLogin(SignupReciveJsonData);
 //----------------------------------------------------------------------------//
         if(SignupReciveJsonSTATUS ==200){
-          print("a");
           _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-          LoginMessageSnackBar(LoginReciveJsonSTATUSMSG.toString());
+          LoginMessageSnackBar(SignupReciveJsonSTATUSMSG);
         }else{
-          print("b");
           _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-          MessageSnackBar(LoginReciveJsonSTATUSMSG..toString());
+          MessageSnackBar(SignupReciveJsonSTATUSMSG);
         }
 //----------------------------------------------------------------------------//
       }).catchError((error) {
@@ -565,13 +568,12 @@ class SignupState extends State<Signup> {
       ),
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
-   /* _SendHomeScreen();*/
   }
 //-----------------------------_SendHomeScreen--------------------------------//
   // ignore: non_constant_identifier_names
   Future<void> _SendHomeScreen() async {
     await Future.delayed(Duration(seconds: 2));
-    Navigator.of(context).push(new MaterialPageRoute(builder: (_) => new LoginView(
+    Navigator.of(context).push(new MaterialPageRoute(builder: (_) => new HomeScreen(
     )));
     _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
     // ignore: non_constant_identifier_names

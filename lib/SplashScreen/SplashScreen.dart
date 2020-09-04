@@ -28,8 +28,9 @@ class SplashScreenState extends State<SplashScreen> {
 //-----------------------------------handleTimeout----------------------------//
   void handleTimeout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool(Preferences.KEY_USER_login) != null) {
-      if (prefs.getBool(Preferences.KEY_USER_login) == true) {
+    if (prefs.getString(Preferences.KEY_USER_token) != null) {
+      print(prefs.getString(Preferences.KEY_USER_token));
+      if (prefs.getString(Preferences.KEY_USER_token) == prefs.getString(Preferences.KEY_USER_token)) {
         Navigator.of(context)
             .push(new MaterialPageRoute(builder: (_) => new HomeScreen()));
       } else{

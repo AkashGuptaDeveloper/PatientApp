@@ -21,10 +21,10 @@ class Preferences {
     prefs.setString(KEY_USER_token, data["user_token"].toString());
     prefs.setString(KEY_USER_msg, data["msg"].toString());
 
-    /*print("KEY_USER_status" + data["status"].toString());
+    print("KEY_USER_status" + data["status"].toString());
     print("KEY_USER_login" + data["login"].toString());
     print("KEY_USER_signup" + data["signup"].toString());
     print("KEY_USER_user_token" + data["user_token"].toString());
-    print("KEY_USER_msg" + data["msg"].toString());*/
+    print("KEY_USER_msg" + data["msg"].toString());
   }
 }

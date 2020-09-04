@@ -46,6 +46,8 @@ class MobileOtpState extends State<MobileOtp> {
   // ignore: non_constant_identifier_names
   var RecivedMessage;
   // ignore: non_constant_identifier_names
+  var RecivedToken;
+  // ignore: non_constant_identifier_names
   ProgressDialog pr;
   var status;
   // ignore: non_constant_identifier_names
@@ -217,13 +219,15 @@ class MobileOtpState extends State<MobileOtp> {
         });
     // ignore: non_constant_identifier_names
     var LoginReciveJsonData = json.decode(response.body);
+    print(LoginReciveJsonData);
     // ignore: non_constant_identifier_names
     var LoginReciveJsonSTATUS = LoginReciveJsonData[GlobalFlag.Jsonstatus];
     // ignore: non_constant_identifier_names
      LoginTrueFalse = LoginReciveJsonData[GlobalFlag.Jsonlogin];
     // ignore: non_constant_identifier_names
-    RecivedMessage = LoginReciveJsonData[GlobalFlag.Jsonmsg];
-    new Preferences().storeDataAtLogin(LoginReciveJsonData);
+     RecivedMessage = LoginReciveJsonData[GlobalFlag.Jsonmsg];
+     RecivedToken = LoginReciveJsonData[GlobalFlag.Jsonuser_token];
+     new Preferences().storeDataAtLogin(LoginReciveJsonData);
 //----------------------------------------------------------------------------//
     if(LoginReciveJsonSTATUS ==200){
       _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
@@ -344,7 +348,9 @@ class MobileOtpState extends State<MobileOtp> {
     else{
       await Future.delayed(Duration(seconds: 2));
       Navigator.of(context)
-          .push(new MaterialPageRoute(builder: (_) => new Signup()));
+          .push(new MaterialPageRoute(builder: (_) => new Signup(
+          RecivedToken:RecivedToken,
+      )));
     }
   }
 //------------------------------------------setStatus-------------------------//

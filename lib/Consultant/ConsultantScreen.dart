@@ -10,14 +10,16 @@ import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:laskinnovita/Preferences/Preferences.dart';
 //------------------------------------START-----------------------------------//
 class ConsultantScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagConsultantScreen.toString();
   @override
   ConsultantScreenState createState() => new ConsultantScreenState();
 }
-
 //-----------------------------------SplashScreenState------------------------//
 class ConsultantScreenState extends State<ConsultantScreen> {
   // ignore: non_constant_identifier_names
@@ -34,6 +36,15 @@ class ConsultantScreenState extends State<ConsultantScreen> {
   var GetPaymentsignature;
   // ignore: non_constant_identifier_names
   var GetPaymentorderId;
+  // ignore: non_constant_identifier_names
+  var LoginUserToken;
+  var name;
+  var contact;
+  var email;
+//------------------------------------API-------------------------------------//
+  // ignore: non_constant_identifier_names
+  String UserViewProfile_ServiceUrl =
+  GlobalServiceURL.ProfileView.toString();
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -44,14 +55,12 @@ class ConsultantScreenState extends State<ConsultantScreen> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
-
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
     _razorpay.clear();
   }
-
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
@@ -122,15 +131,16 @@ class ConsultantScreenState extends State<ConsultantScreen> {
       backgroundColor: Colors.white,
     );
   }
-
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
     if (result == ConnectivityResult.none) {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
+    else{
+      FetchProfileFromServer();
+    }
   }
-
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
@@ -147,17 +157,24 @@ class ConsultantScreenState extends State<ConsultantScreen> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
-//-----------------------------------------openCheckout()-----------------------------------------------------//
+//-----------------------------------------openCheckout()---------------------//
   void openCheckout() async {
+    setState(() {
+      // ignore: unnecessary_statements
+      name;
+      // ignore: unnecessary_statements
+      email;
+      // ignore: unnecessary_statements
+      contact;
+    });
     var options = {
       'key': GlobalServiceURL.RazorPayAPIKey.toString(),
       'amount': 1000,
-      'name': "Akash".toString(),
+      'name': name.toString(),
       'description': "Buy".toString(),
       'prefill': {
-        'contact': "7987574875".toString(),
-        'email': "gupta.akash555@gmail.com".toString()
+        'contact': contact.toString(),
+        'email': email.toString()
       },
       'external': {
         'wallets': ['paytm']
@@ -169,8 +186,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
       /*  debugPrint(e);*/
     }
   }
-
-//-----------------------------------------_handlePaymentSuccess()-----------------------------------------------------//
+//-----------------------------------------_handlePaymentSuccess()------------//
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId, timeInSecForIos: 4);
@@ -184,18 +200,71 @@ class ConsultantScreenState extends State<ConsultantScreen> {
               SenGetPaymentorderId: GetPaymentorderId,
             )));
   }
-
-//-----------------------------------------_handlePaymentError()-----------------------------------------------------//
+//-----------------------------------------_handlePaymentError()--------------//
   void _handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " - " + response.message,
         timeInSecForIos: 4);
   }
-
-//-----------------------------------------_handleExternalWallet()--------------------------------------------------//
+//-----------------------------------------_handleExternalWallet()------------//
   void _handleExternalWallet(ExternalWalletResponse response) {
     Fluttertoast.showToast(
         msg: "EXTERNAL_WALLET: " + response.walletName, timeInSecForIos: 4);
+  }
+//------------------------------FetchProfileFromServer-------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> FetchProfileFromServer() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
+    print(LoginUserToken);
+    try {
+      http.post(UserViewProfile_ServiceUrl.toString(), body: {
+        "user_token": LoginUserToken,
+        // ignore: non_constant_identifier_names
+      }).then((result) {
+        setStatus(result.statusCode == 200 ? result.body : errMessage);
+        // ignore: non_constant_identifier_names
+      /*  print(GlobalFlag.Printjsonresp.toString() +
+            "${result.body.toString()}");*/
+        // ignore: non_constant_identifier_names
+        var ReciveData = json.decode(result.body);
+        // ignore: non_constant_identifier_names
+        var Status = ReciveData[GlobalFlag.Jsonstatus];
+        setState(() {
+         if(Status == 200){
+           // ignore: non_constant_identifier_names
+           var RecivedData = ReciveData["data"];
+           // ignore: non_constant_identifier_names
+           name = RecivedData["name"];
+           // ignore: non_constant_identifier_names
+           email = RecivedData["email"];
+           // ignore: non_constant_identifier_names
+           contact = RecivedData["mobile"];
+           setState(() {
+             // ignore: unnecessary_statements
+             name;
+             // ignore: unnecessary_statements
+             email;
+             // ignore: unnecessary_statements
+             contact;
+           });
+         }else{
+           _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+         }
+        });
+        // ignore: non_constant_identifier_names
+      }).catchError((error) {
+        setStatus(error);
+      });
+    } catch (e) {
+      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+    }
+  }
+//------------------------------------------setStatus-------------------------//
+  setStatus(String message) {
+    setState(() {
+      status = message;
+    });
   }
 }
 //---------------------------------------END----------------------------------//

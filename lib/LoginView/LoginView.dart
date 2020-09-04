@@ -49,6 +49,8 @@ class LoginViewState extends State<LoginView> {
   var LoginReciveTransactionId;
   // ignore: non_constant_identifier_names
   var LoginRecivemobile;
+  // ignore: non_constant_identifier_names
+  var LoginReciveToken;
 //-----------------------------------------API--------------------------------//
   // ignore: non_constant_identifier_names
   String LoginUrl_ServiceUrl =
@@ -384,7 +386,7 @@ class LoginViewState extends State<LoginView> {
       }).then((resultLogin) {
         setStatus(
             resultLogin.statusCode == 200 ? resultLogin.body : errMessage);
-       //print(GlobalFlag.Printjsonresp.toString()+"${resultLogin.body.toString()}");
+       print(GlobalFlag.Printjsonresp.toString()+"${resultLogin.body.toString()}");
         // ignore: non_constant_identifier_names
         var LoginReciveJsonData = json.decode(resultLogin.body);
         // ignore: non_constant_identifier_names
@@ -392,6 +394,7 @@ class LoginViewState extends State<LoginView> {
         LoginReciveJsonSTATUSMSG = LoginReciveJsonData[GlobalFlag.Jsonmsg];
         LoginReciveTransactionId = LoginReciveJsonData[GlobalFlag.transaction_id];
         LoginRecivemobile = LoginReciveJsonData[GlobalFlag.mobile];
+
 //----------------------------------------------------------------------------//
         if(LoginReciveJsonSTATUS ==200){
           _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();

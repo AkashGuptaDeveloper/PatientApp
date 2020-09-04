@@ -32,9 +32,12 @@ class GlobalServiceURL {
       BaseURL.toString() + "/signup.php";
   // ignore: non_constant_identifier_names
   static String ViewPDF ="https://laskinnovita.com/app/api/v2/print-pdf-prescription.php";
+  // ignore: non_constant_identifier_names
+  static String ProfileView ="https://laskinnovita.com/app/api/v2/profile.php";
 //----------------------------------------------------------------------------//
 //---------------------------------------RazorPayAPIKey-----------------------//
   // ignore: non_constant_identifier_names
   static String RazorPayAPIKey = "rzp_test_KHUERXgtVngdtf";
 }
+
 

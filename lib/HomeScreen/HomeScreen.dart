@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/ApptHistory/ApptHistory.dart';
 import 'package:laskinnovita/BookAppointment/BookAppointment.dart';
 import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
+import 'package:laskinnovita/GlobalComponent/GlobalImageAssets.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
@@ -774,11 +775,7 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.mobileAlt,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
-                      ),
+                      child:Image.asset(GlobalImageAssets.Contact, fit: BoxFit.contain)
                     ),
                     SizedBox(
                       height: 10,
