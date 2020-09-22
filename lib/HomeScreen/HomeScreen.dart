@@ -252,6 +252,22 @@ class HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 new Container(
+                  padding: EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 5.0,
+                  ),
+                  child: Text(
+                    GlobalFlag.OurPrimium,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: GlobalFlag.FontCode,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                new Container(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
                   child: OurPrimium(),
                 ),

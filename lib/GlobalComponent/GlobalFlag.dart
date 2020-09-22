@@ -193,6 +193,7 @@ class GlobalFlag {
   static String Sec6 = "Sec6";
   static String Sec7 = "Sec7";
   static String Sec8 = "Sec8";
+  static String OurPrimium = "Our Primium";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';
