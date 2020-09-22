@@ -11,14 +11,12 @@ import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
 import 'package:laskinnovita/LoginView/LoginView.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 //------------------------------------START-----------------------------------//
 class SplashScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagSplashScreen.toString();
   @override
   SplashScreenState createState() => new SplashScreenState();
 }
-
 //-----------------------------------SplashScreenState------------------------//
 class SplashScreenState extends State<SplashScreen> {
   Timer timer;
@@ -44,13 +42,11 @@ class SplashScreenState extends State<SplashScreen> {
           .push(new MaterialPageRoute(builder: (_) => new LoginView()));
     }
   }
-
 //-----------------------------------startTimeout-----------------------------//
   startTimeout() async {
     var duration = const Duration(seconds: 1);
     return new Timer(duration, handleTimeout);
   }
-
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -59,7 +55,6 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
     startTimeout();
   }
-
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -67,7 +62,6 @@ class SplashScreenState extends State<SplashScreen> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
-
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
@@ -84,14 +78,12 @@ class SplashScreenState extends State<SplashScreen> {
       duration: Duration(minutes: 10),
     ));
   }
-
 //-----------------------------------------dispose()---------------------------//
   @override
   void dispose() {
     super.dispose();
     startTimeout();
   }
-
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {

@@ -21,6 +21,14 @@ import 'package:laskinnovita/WevView/Instagram/Instagram.dart';
 import 'package:laskinnovita/WevView/LaSkinnovita/LaSkinnovita.dart';
 import 'package:laskinnovita/WevView/PayCustomer/PayCustomer.dart';
 import 'package:laskinnovita/WevView/Resource/Resource.dart';
+import 'package:laskinnovita/WevView/Sec1/Sec1.dart';
+import 'package:laskinnovita/WevView/Sec2/Sec2.dart';
+import 'package:laskinnovita/WevView/Sec3/Sec3.dart';
+import 'package:laskinnovita/WevView/Sec4/Sec4.dart';
+import 'package:laskinnovita/WevView/Sec5/Sec5.dart';
+import 'package:laskinnovita/WevView/Sec6/Sec6.dart';
+import 'package:laskinnovita/WevView/Sec7/Sec7.dart';
+import 'package:laskinnovita/WevView/Sec8/Sec8.dart';
 import 'package:laskinnovita/WevView/Services/Services.dart';
 import 'package:laskinnovita/WevView/Testimonials/Testimonials.dart';
 import 'package:laskinnovita/WevView/Feedback/Feedbacks.dart';
@@ -53,5 +61,13 @@ final routes = {
   LoginView.tag: (context) => LoginView(),
   MobileOtp.tag: (context) => MobileOtp(),
   Signup.tag: (context) => Signup(),
+  Sec1.tag: (context) => Sec1(),
+  Sec2.tag: (context) => Sec2(),
+  Sec3.tag: (context) => Sec3(),
+  Sec4.tag: (context) => Sec4(),
+  Sec5.tag: (context) => Sec5(),
+  Sec6.tag: (context) => Sec6(),
+  Sec7.tag: (context) => Sec7(),
+  Sec8.tag: (context) => Sec8(),
 };
 //-------------------------------END------------------------------------------//

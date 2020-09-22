@@ -185,6 +185,14 @@ class GlobalFlag {
   static String EmailRequired = "Email is Required";
   // ignore: non_constant_identifier_names
   static String InvalidEmail = "Invalid Email";
+  static String Sec1 = "Sec1";
+  static String Sec2 = "Sec2";
+  static String Sec3 = "Sec3";
+  static String Sec4 = "Sec4";
+  static String Sec5 = "Sec5";
+  static String Sec6 = "Sec6";
+  static String Sec7 = "Sec7";
+  static String Sec8 = "Sec8";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';

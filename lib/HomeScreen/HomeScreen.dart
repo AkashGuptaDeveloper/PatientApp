@@ -21,6 +21,14 @@ import 'package:laskinnovita/WevView/Instagram/Instagram.dart';
 import 'package:laskinnovita/WevView/LaSkinnovita/LaSkinnovita.dart';
 import 'package:laskinnovita/WevView/PayCustomer/PayCustomer.dart';
 import 'package:laskinnovita/WevView/Resource/Resource.dart';
+import 'package:laskinnovita/WevView/Sec1/Sec1.dart';
+import 'package:laskinnovita/WevView/Sec2/Sec2.dart';
+import 'package:laskinnovita/WevView/Sec3/Sec3.dart';
+import 'package:laskinnovita/WevView/Sec4/Sec4.dart';
+import 'package:laskinnovita/WevView/Sec5/Sec5.dart';
+import 'package:laskinnovita/WevView/Sec6/Sec6.dart';
+import 'package:laskinnovita/WevView/Sec7/Sec7.dart';
+import 'package:laskinnovita/WevView/Sec8/Sec8.dart';
 import 'package:laskinnovita/WevView/Services/Services.dart';
 import 'package:laskinnovita/WevView/Testimonials/Testimonials.dart';
 import 'package:laskinnovita/WevView/Youtube/Youtube.dart';
@@ -30,7 +38,6 @@ class HomeScreen extends StatefulWidget {
   @override
   HomeScreenState createState() => new HomeScreenState();
 }
-
 //-----------------------------------SplashScreenState------------------------//
 class HomeScreenState extends State<HomeScreen> {
   // ignore: non_constant_identifier_names
@@ -44,13 +51,11 @@ class HomeScreenState extends State<HomeScreen> {
     super.initState();
     _checkInternetConnectivity();
   }
-
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
   }
-
   //-------------------------------------------------_onBackPressed------------//
   // ignore: non_constant_identifier_names
   Future<bool> _BackPressed(BuildContext context) {
@@ -94,7 +99,6 @@ class HomeScreenState extends State<HomeScreen> {
         ) ??
         false;
   }
-
 //---------------------------------------roundedButton------------------------//
   // ignore: non_constant_identifier_names
   Widget roundedButton(String buttonLabel, Color bgColor, Color textColor) {
@@ -120,7 +124,6 @@ class HomeScreenState extends State<HomeScreen> {
     );
     return loginBtn;
   }
-
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
@@ -248,6 +251,17 @@ class HomeScreenState extends State<HomeScreen> {
                     thickness: 0.5,
                   ),
                 ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
+                  child: OurPrimium(),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Divider(
+                    color: Colors.grey[600],
+                    thickness: 0.5,
+                  ),
+                ),
                 SizedBox(
                   height: 15.0,
                 ),
@@ -259,7 +273,6 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 //------------------------------QuickAction-----------------------------------//
   // ignore: non_constant_identifier_names
   Widget QuickAction() {
@@ -436,7 +449,6 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 //------------------------------AboutUs---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget AboutUs() {
@@ -648,7 +660,6 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 //------------------------------Support---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget Support() {
@@ -907,7 +918,6 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 //------------------------------WhatsNews---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget WhatsNews() {
@@ -1119,7 +1129,424 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
+//------------------------------OurPrimium-------------------------------------//
+  // ignore: non_constant_identifier_names
+  Widget OurPrimium() {
+    return new Column(
+      children: [
+        new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (_) => new Sec1()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.blog,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec1,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (_) => new Sec2()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.facebook,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec2,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (_) => new Sec3()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.instagram,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec3,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (_) => new Sec4()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.youtube,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec4,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (_) => new Sec5()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.blog,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec5,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (_) => new Sec6()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.facebook,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec6,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (_) => new Sec7()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.instagram,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec7,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (_) => new Sec8()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Icon(
+                          FontAwesomeIcons.youtube,
+                          size: 30,
+                          color: GlobalAppColor.AppBarColorCode,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec8,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -1127,7 +1554,6 @@ class HomeScreenState extends State<HomeScreen> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
-
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
