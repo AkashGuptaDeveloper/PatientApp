@@ -216,7 +216,6 @@ class ConsultantScreenState extends State<ConsultantScreen> {
   Future<void> FetchProfileFromServer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
-    print(LoginUserToken);
     try {
       http.post(UserViewProfile_ServiceUrl.toString(), body: {
         "user_token": LoginUserToken,

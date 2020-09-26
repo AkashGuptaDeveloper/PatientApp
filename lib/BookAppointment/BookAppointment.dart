@@ -15,6 +15,8 @@ import 'package:laskinnovita/Model/TimeAvilityModel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 //------------------------------------START-----------------------------------//
 class BookAppointment extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagBookAppointment.toString();
@@ -106,6 +108,15 @@ class BookAppointmentState extends State<BookAppointment> {
   var LoginUserToken;
   // ignore: non_constant_identifier_names
   bool Others = false;
+  // ignore: non_constant_identifier_names
+  Razorpay _razorpay;
+  // ignore: non_constant_identifier_names
+  var GetPaymentID;
+  // ignore: non_constant_identifier_names
+  var GetPaymentsignature;
+  // ignore: non_constant_identifier_names
+  var GetPaymentorderId;
+  var contact;
 //------------------------------------API-------------------------------------//
   // ignore: non_constant_identifier_names
   String AvailabilityUrl_ServiceUrl =
@@ -115,9 +126,16 @@ class BookAppointmentState extends State<BookAppointment> {
       GlobalServiceURL.TimeAvailabilityUrl.toString();
   // ignore: non_constant_identifier_names
   String BookingUrl_ServiceUrl = GlobalServiceURL.BookingUrl.toString();
+  // ignore: non_constant_identifier_names
+  String UserViewProfile_ServiceUrl =
+  GlobalServiceURL.ProfileView.toString();
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     super.initState();
     _checkInternetConnectivity();
     FetchDateFromServer();
@@ -726,32 +744,73 @@ class BookAppointmentState extends State<BookAppointment> {
                 ),
               ),
             ),
+            SizedBox(
+              height:25.0,
+            ),
           ],
         ),
       ),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
         color: GlobalAppColor.AppBarColorCode,
-        child: Container(
-          height: 50,
-          child: FlatButton.icon(
-            onPressed: () {
-              setState(() {});
-              _sendToServer();
-            },
-            icon: Icon(
-              FontAwesomeIcons.paperPlane,
-              color: Colors.white,
-              size: 15.0,
-            ), //`Icon` to display
-            label: Text(GlobalFlag.Submit.toString(),
-                style: TextStyle(
-                  fontFamily: GlobalFlag.FontCode.toString(),
-                  fontSize: 15.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            new Expanded(
+              child: Container(
+                  height: 40,
+                  child: RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _PayNowToServer();
+                      });
+                    },
+                    color: GlobalAppColor.AppBarColorCode,
+                    textColor: Colors.white,
+                    child: Text(
+                      GlobalFlag.PayNow.toString(),
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: GlobalAppColor.WhiteColorCode,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: GlobalFlag.FontCode.toString()),
+                    ),
+                  )),
+              flex: 1,
+            ),
+//-------------------------------------------------------------------//
+            new Container(
+              color: GlobalAppColor.WhiteColorCode,
+              height: 40.0,
+              width: 1.5,
+            ),
+//-------------------------------------------------------------------//
+            new Expanded(
+              child: Container(
+                  height: 40,
+                  child: RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _PayLaterToServer();
+                      });
+                    },
+                    color: GlobalAppColor.AppBarColorCode,
+                    textColor: Colors.white,
+                    child: Text(
+                      GlobalFlag.PayLater.toString(),
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: GlobalAppColor.WhiteColorCode,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: GlobalFlag.FontCode.toString()),
+                    ),
+                  )),
+              flex: 1,
+            ),
+//-----------------------------------------------------------------------------//
+          ],
         ),
       ),
     );
@@ -761,6 +820,9 @@ class BookAppointmentState extends State<BookAppointment> {
     var result = await Connectivity().checkConnectivity();
     if (result == ConnectivityResult.none) {
       _showDialog(GlobalFlag.InternetNotConnected);
+    }
+    else{
+      FetchProfileFromServer();
     }
   }
 //----------------------------showInSnackBar----------------------------------//
@@ -886,9 +948,9 @@ class BookAppointmentState extends State<BookAppointment> {
       status = message;
     });
   }
-//----------------------------------------_sendToServer-----------------------//
+//----------------------------------------_PayLaterToServer-------------------//
   // ignore: non_constant_identifier_names
-  _sendToServer() async {
+  Future<void> _PayLaterToServer() async {
     if (_Formkey.currentState.validate()) {
       _Formkey.currentState.save();
       setState(() {
@@ -903,7 +965,7 @@ class BookAppointmentState extends State<BookAppointment> {
               Model;
               if (Model == "1") {
                 _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-                SendDataService();
+                SendDataPayLaterService();
               } else {
                 TimeNotAvilableSnackBar(GlobalFlag.SlotavailableinthisNotTime);
               }
@@ -992,7 +1054,7 @@ class BookAppointmentState extends State<BookAppointment> {
   }
 //-------------------------------SendDataService------------------------------//
   // ignore: non_constant_identifier_names
-  Future<void> SendDataService() async {
+  Future<void> SendDataPayLaterService() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
     _checkInternetConnectivity();
@@ -1167,6 +1229,246 @@ class BookAppointmentState extends State<BookAppointment> {
       // ignore: unnecessary_statements
       Model;
     });
+  }
+//----------------------------------------_PayNowToServer---------------------//
+  // ignore: non_constant_identifier_names
+  _PayNowToServer() async {
+    if (_Formkey.currentState.validate()) {
+      _Formkey.currentState.save();
+      setState(() {
+        if (SelectDate == null) {
+          SelectDateSnackBar(GlobalFlag.PleaseSelectDate);
+        } else {
+          if (SelectTime == null) {
+            SelectTimeSnackBar(GlobalFlag.PleaseSelectTime);
+          } else {
+            setState(() {
+              // ignore: unnecessary_statements
+              Model;
+              if (Model == "1") {
+                _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+                SendDataPayNowService();
+              } else {
+                TimeNotAvilableSnackBar(GlobalFlag.SlotavailableinthisNotTime);
+              }
+            });
+          }
+        }
+      });
+    } else {
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
+//-------------------------------SendDataService------------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> SendDataPayNowService() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
+    _checkInternetConnectivity();
+    setState(() {
+      // ignore: unnecessary_statements
+      SelectDate;
+      // ignore: unnecessary_statements
+      SelectTime;
+      // ignore: unnecessary_statements
+      _selectedService.name;
+      // ignore: unnecessary_statements
+      _selectedConsultant.name;
+      // ignore: unnecessary_statements
+      NameController.text;
+      // ignore: unnecessary_statements
+      mobileController.text;
+      // ignore: unnecessary_statements
+      emailController.text;
+    });
+    pr.show();
+    openCheckout();
+  }
+//-----------------------------------------openCheckout()---------------------//
+  void openCheckout() async {
+    setState(() {
+      // ignore: unnecessary_statements
+      SelectDate;
+      // ignore: unnecessary_statements
+      SelectTime;
+      // ignore: unnecessary_statements
+      _selectedService.name;
+      // ignore: unnecessary_statements
+      _selectedConsultant.name;
+      // ignore: unnecessary_statements
+      NameController.text;
+      // ignore: unnecessary_statements
+      mobileController.text;
+      // ignore: unnecessary_statements
+      emailController.text;
+      // ignore: unnecessary_statements
+      name;
+      // ignore: unnecessary_statements
+      email;
+      // ignore: unnecessary_statements
+      contact;
+    });
+    var options = {
+      'key': GlobalServiceURL.RazorPayAPIKey.toString(),
+      'amount': 1000,
+      'name': name.toString(),
+      'description': "Buy".toString(),
+      'prefill': {
+        'contact':contact.toString(),
+        'email':email.toString()
+      },
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      /*  debugPrint(e);*/
+    }
+  }
+//-----------------------------------------_handlePaymentSuccess()------------//
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId, timeInSecForIos: 4);
+    GetPaymentID = response.paymentId;
+    GetPaymentsignature = response.signature;
+    GetPaymentorderId = response.orderId;
+    SendDataPayNowFromService();
+  }
+//-----------------------------------------_handlePaymentError()--------------//
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "ERROR: " + response.code.toString() + " - " + response.message,
+        timeInSecForIos: 4);
+    pr.hide();
+  }
+//-----------------------------------------_handleExternalWallet()------------//
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName, timeInSecForIos: 4);
+    pr.hide();
+  }
+//-------------------------------SendDataPayNowFromService--------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> SendDataPayNowFromService() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
+    _checkInternetConnectivity();
+    setState(() {
+      // ignore: unnecessary_statements
+      SelectDate;
+      // ignore: unnecessary_statements
+      SelectTime;
+      // ignore: unnecessary_statements
+      _selectedService.name;
+      // ignore: unnecessary_statements
+      _selectedConsultant.name;
+      // ignore: unnecessary_statements
+      NameController.text;
+      // ignore: unnecessary_statements
+      mobileController.text;
+      // ignore: unnecessary_statements
+      emailController.text;
+    });
+    pr.show();
+    try {
+      http.post(BookingUrl_ServiceUrl, body: {
+        "user_token":LoginUserToken.toString(),
+        "date": SelectDate.toString(),
+        "time": SelectTime.toString(),
+        "service": _selectedConsultant.name.toString(),
+        "patient": _selectedService.name.toString(),
+        "details": DetailsController.text.toString(),
+        "type": "appointment".toString(),
+        " OtherName": NameController.text.toString(),
+        " OtherEmail": mobileController.text.toString(),
+        " OtherMobile":emailController.text.toString(),
+      }).then((resultAddBatch) {
+        setStatus(resultAddBatch.statusCode == 200
+            ? resultAddBatch.body
+            : errMessage);
+//-------------------------Print-Section--------------------------------------//
+        /*  print(GlobalFlag.Printjsonresp.toString() +
+            "${resultAddBatch.body.toString()}");*/
+//------------------------END-Print-Section-----------------------------------//
+        // ignore: non_constant_identifier_names
+        var ReciveJsonData = json.decode(resultAddBatch.body);
+        // ignore: non_constant_identifier_names
+        var ReciveJsonSTATUS = ReciveJsonData[GlobalFlag.Jsonstatus];
+        ReciveJsonSTATUSMSG = ReciveJsonData[GlobalFlag.Jsonmsg];
+        ReciveJsonBookingID = ReciveJsonData[GlobalFlag.appointmentID];
+        if (ReciveJsonSTATUS == 200) {
+          setState(() {
+            pr.hide();
+            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+            _SendBookAppointmentDone();
+          });
+        } else {
+          setState(() {
+            pr.hide();
+            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+            BookAddedFailedSnackBar(ReciveJsonSTATUSMSG);
+          });
+        }
+//----------------------------------------------------------------------------//
+      }).catchError((error) {
+        setStatus(error);
+      });
+    } catch (e) {
+      pr.hide();
+      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+    }
+  }
+//------------------------------FetchProfileFromServer-------------------------//
+  // ignore: non_constant_identifier_names
+  Future<void> FetchProfileFromServer() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
+    try {
+      http.post(UserViewProfile_ServiceUrl.toString(), body: {
+        "user_token": LoginUserToken,
+        // ignore: non_constant_identifier_names
+      }).then((result) {
+        setStatus(result.statusCode == 200 ? result.body : errMessage);
+        // ignore: non_constant_identifier_names
+        /*  print(GlobalFlag.Printjsonresp.toString() +
+            "${result.body.toString()}");*/
+        // ignore: non_constant_identifier_names
+        var ReciveData = json.decode(result.body);
+        // ignore: non_constant_identifier_names
+        var Status = ReciveData[GlobalFlag.Jsonstatus];
+        setState(() {
+          if(Status == 200){
+            // ignore: non_constant_identifier_names
+            var RecivedData = ReciveData["data"];
+            // ignore: non_constant_identifier_names
+            name = RecivedData["name"];
+            // ignore: non_constant_identifier_names
+            email = RecivedData["email"];
+            // ignore: non_constant_identifier_names
+            contact = RecivedData["mobile"];
+            setState(() {
+              // ignore: unnecessary_statements
+              name;
+              // ignore: unnecessary_statements
+              email;
+              // ignore: unnecessary_statements
+              contact;
+            });
+          }else{
+            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+          }
+        });
+        // ignore: non_constant_identifier_names
+      }).catchError((error) {
+        setStatus(error);
+      });
+    } catch (e) {
+      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
+    }
   }
 }
 //---------------------------------------END----------------------------------//

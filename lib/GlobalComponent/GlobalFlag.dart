@@ -215,6 +215,10 @@ class GlobalFlag {
   static String NameRequired = "Name is Required";
   // ignore: non_constant_identifier_names
   static String NamebeNeed = "Name must be Need";
+  // ignore: non_constant_identifier_names
+  static String PayNow = "Pay Now";
+  // ignore: non_constant_identifier_names
+  static String PayLater = "Pay Later";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';
