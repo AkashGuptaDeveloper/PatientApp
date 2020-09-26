@@ -78,6 +78,7 @@ class LoginViewState extends State<LoginView> {
         key: _SnackBarscaffoldKey,
         body: Form(
           key: _LoginFormkey,
+          // ignore: deprecated_member_use
           autovalidate: _validate,
           child: Stack(
             fit: StackFit.expand,

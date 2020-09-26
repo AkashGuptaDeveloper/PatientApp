@@ -133,6 +133,7 @@ class SignupState extends State<Signup> {
         key: _SnackBarscaffoldKey,
         body: Form(
           key: _LoginFormkey,
+          // ignore: deprecated_member_use
           autovalidate: _validate,
           child: new ListView(
             shrinkWrap: true,

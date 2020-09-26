@@ -185,15 +185,36 @@ class GlobalFlag {
   static String EmailRequired = "Email is Required";
   // ignore: non_constant_identifier_names
   static String InvalidEmail = "Invalid Email";
+  // ignore: non_constant_identifier_names
   static String Sec1 = "Sec1";
+  // ignore: non_constant_identifier_names
   static String Sec2 = "Sec2";
+  // ignore: non_constant_identifier_names
   static String Sec3 = "Sec3";
+  // ignore: non_constant_identifier_names
   static String Sec4 = "Sec4";
+  // ignore: non_constant_identifier_names
   static String Sec5 = "Sec5";
+  // ignore: non_constant_identifier_names
   static String Sec6 = "Sec6";
+  // ignore: non_constant_identifier_names
   static String Sec7 = "Sec7";
+  // ignore: non_constant_identifier_names
   static String Sec8 = "Sec8";
+  // ignore: non_constant_identifier_names
   static String OurPrimium = "Our Primium";
+  // ignore: non_constant_identifier_names
+  static String bookingfor = "booking for";
+  // ignore: non_constant_identifier_names
+  static String Name = "Enter Name";
+  // ignore: non_constant_identifier_names
+  static String Mobile = "Enter Mobile";
+  // ignore: non_constant_identifier_names
+  static String Email = "Enter Email";
+  // ignore: non_constant_identifier_names
+  static String NameRequired = "Name is Required";
+  // ignore: non_constant_identifier_names
+  static String NamebeNeed = "Name must be Need";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';

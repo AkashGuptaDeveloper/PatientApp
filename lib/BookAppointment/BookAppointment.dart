@@ -21,7 +21,6 @@ class BookAppointment extends StatefulWidget {
   @override
   BookAppointmentState createState() => new BookAppointmentState();
 }
-
 //-----------------------------------SplashScreenState------------------------//
 class BookAppointmentState extends State<BookAppointment> {
   // ignore: non_constant_identifier_names
@@ -54,9 +53,21 @@ class BookAppointmentState extends State<BookAppointment> {
   // ignore: non_constant_identifier_names
   TextEditingController DetailsController = new TextEditingController();
   // ignore: non_constant_identifier_names
+  TextEditingController NameController = new TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController mobileController = new TextEditingController();
+  // ignore: non_constant_identifier_names
+  TextEditingController emailController = new TextEditingController();
+  // ignore: non_constant_identifier_names
   final FocusNode myFocusNodeDetails = FocusNode();
   // ignore: non_constant_identifier_names
-  var Details;
+  final FocusNode myFocusNodeName = FocusNode();
+  // ignore: non_constant_identifier_names
+  final FocusNode myFocusNodemobile = FocusNode();
+  // ignore: non_constant_identifier_names
+  final FocusNode myFocusNodeemail = FocusNode();
+  // ignore: non_constant_identifier_names
+  var Details,name,email,mobile;
   // ignore: non_constant_identifier_names
   List<Availability> _Availability = [];
   // ignore: non_constant_identifier_names
@@ -93,6 +104,8 @@ class BookAppointmentState extends State<BookAppointment> {
   var TimeModel;
   // ignore: non_constant_identifier_names
   var LoginUserToken;
+  // ignore: non_constant_identifier_names
+  bool Others = false;
 //------------------------------------API-------------------------------------//
   // ignore: non_constant_identifier_names
   String AvailabilityUrl_ServiceUrl =
@@ -116,7 +129,6 @@ class BookAppointmentState extends State<BookAppointment> {
         buildDropdownMenuItemsConsultant(_Consultant);
     _selectedConsultant = _dropdownMenuItemsConsultant[0].value;
   }
-
 //---------------------------------buildDropdownMenuItemsService--------------//
   List<DropdownMenuItem<Service>> buildDropdownMenuItemsService(List service) {
     List<DropdownMenuItem<Service>> items = List();
@@ -141,7 +153,6 @@ class BookAppointmentState extends State<BookAppointment> {
     }
     return items;
   }
-
 //---------------------------------buildDropdownMenuItemsService--------------//
   List<DropdownMenuItem<Consultant>> buildDropdownMenuItemsConsultant(
       List consultant) {
@@ -167,13 +178,17 @@ class BookAppointmentState extends State<BookAppointment> {
     }
     return items;
   }
-
 //-----------------------------------onChangeDropdownItemService--------------//
   onChangeDropdownItemService(Service selectedService) {
     setState(() {
       _selectedService = selectedService;
       // ignore: unnecessary_statements
       _selectedService.name;
+      if(_selectedService.id == 1){
+        Others = false;
+      }else if(_selectedService.id == 2){
+        Others = true;
+      }
     });
   }
 
@@ -185,23 +200,19 @@ class BookAppointmentState extends State<BookAppointment> {
       _selectedConsultant.name;
     });
   }
-
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
   }
-
 //------------------------------_onSelected-Date------------------------------//
   _onSelectedDate(int index) {
     setState(() => _selectedDateIndex = index);
   }
-
 //------------------------------_onSelected-Time------------------------------//
   _onSelectedTime(int index) {
     setState(() => _selectedTimeIndex = index);
   }
-
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
@@ -400,6 +411,7 @@ class BookAppointmentState extends State<BookAppointment> {
       ),
       body: new Form(
         key: _Formkey,
+        // ignore: deprecated_member_use
         autovalidate: _validate,
         child: new ListView(
           children: <Widget>[
@@ -421,7 +433,7 @@ class BookAppointmentState extends State<BookAppointment> {
             ),
 //--------------------------------DateList------------------------------------//
             DateList,
-//----------------------------AppointmentTIme--------------------------------//
+//----------------------------AppointmentTIme---------------------------------//
             Visibility(
               visible: TimeShow,
               child: Container(
@@ -440,13 +452,13 @@ class BookAppointmentState extends State<BookAppointment> {
             SizedBox(
               height: 10.0,
             ),
-//--------------------------------TimeList------------------------------------//
+//--------------------------------Others--------------------------------------//
             TimeList,
-//----------------------------Service-----------------------------------------//
+//----------------------------bookingfor--------------------------------------//
             Container(
               padding: EdgeInsets.only(left: 10, right: 10, top: 10),
               child: Text(
-                GlobalFlag.Service.toString(),
+                GlobalFlag.bookingfor.toString(),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -470,6 +482,158 @@ class BookAppointmentState extends State<BookAppointment> {
                   ),
                 ),
               ),
+            ),
+//-----------------------------Name-Email-Mobile------------------------------//
+            Visibility(
+              visible: Others,
+              child:Container(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: new TextFormField(
+                  style: TextStyle(color: GlobalAppColor.AppBarColorCode),
+                  focusNode: myFocusNodeName,
+                  controller: NameController,
+                  validator: validateName,
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.text,
+                  onSaved: (String val) {
+                    name = val;
+                  },
+                  decoration: new InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.red),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                          width: 1, color: GlobalAppColor.AppBarColorCode),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(
+                          width: 1,
+                        )),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.black)),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.grey)),
+                    errorStyle: TextStyle(fontSize: 10.0, color: Colors.black),
+                    hintText: GlobalFlag.Name.toString(),
+                    hintStyle: TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: GlobalFlag.FontCode.toString(),
+                      color: GlobalAppColor.BLackColorCode,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height:5.0,
+            ),
+            Visibility(
+              visible: Others,
+              child:Container(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: new TextFormField(
+                  style: TextStyle(color: GlobalAppColor.AppBarColorCode),
+                  focusNode: myFocusNodemobile,
+                  controller: mobileController,
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.phone,
+                  decoration: new InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.red),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                          width: 1, color: GlobalAppColor.AppBarColorCode),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(
+                          width: 1,
+                        )),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.black)),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.grey)),
+                    errorStyle: TextStyle(fontSize: 10.0, color: Colors.black),
+                    hintText: GlobalFlag.Mobile.toString(),
+                    hintStyle: TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: GlobalFlag.FontCode.toString(),
+                      color: GlobalAppColor.BLackColorCode,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height:5.0,
+            ),
+            Visibility(
+              visible: Others,
+              child:Container(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: new TextFormField(
+                  style: TextStyle(color: GlobalAppColor.AppBarColorCode),
+                  focusNode: myFocusNodeemail,
+                  controller: emailController,
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: new InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.red),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(width: 1, color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                          width: 1, color: GlobalAppColor.AppBarColorCode),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(
+                          width: 1,
+                        )),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.black)),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.grey)),
+                    errorStyle: TextStyle(fontSize: 10.0, color: Colors.black),
+                    hintText: GlobalFlag.Email.toString(),
+                    hintStyle: TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: GlobalFlag.FontCode.toString(),
+                      color: GlobalAppColor.BLackColorCode,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height:5.0,
             ),
 //----------------------------Consultant--------------------------------------//
             Container(
@@ -516,7 +680,7 @@ class BookAppointmentState extends State<BookAppointment> {
                 ),
               ),
             ),
-            new Container(
+            Container(
               padding: EdgeInsets.only(left: 10, right: 10, top: 10),
               child: new TextFormField(
                 style: TextStyle(color: GlobalAppColor.AppBarColorCode),
@@ -592,7 +756,6 @@ class BookAppointmentState extends State<BookAppointment> {
       ),
     );
   }
-
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -600,7 +763,6 @@ class BookAppointmentState extends State<BookAppointment> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
-
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());
@@ -617,7 +779,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------------------------AddForm-----------------------------//
   // ignore: non_constant_identifier_names
   Widget AddForm() {
@@ -662,7 +823,6 @@ class BookAppointmentState extends State<BookAppointment> {
       ],
     );
   }
-
 //------------------------------FetchDateFromServer--------------------------//
   // ignore: non_constant_identifier_names
   Future<void> FetchDateFromServer() async {
@@ -694,7 +854,6 @@ class BookAppointmentState extends State<BookAppointment> {
       /*JsonReciveStatusFalseAlert();*/
     }
   }
-
 //------------------------------FetchTimeFromServer--------------------------//
   // ignore: non_constant_identifier_names, missing_return
   Future<String> FetchTimeFromServer() async {
@@ -721,14 +880,12 @@ class BookAppointmentState extends State<BookAppointment> {
       }
     });
   }
-
 //------------------------------------------setStatus-------------------------//
   setStatus(String message) {
     setState(() {
       status = message;
     });
   }
-
 //----------------------------------------_sendToServer-----------------------//
   // ignore: non_constant_identifier_names
   _sendToServer() async {
@@ -760,7 +917,6 @@ class BookAppointmentState extends State<BookAppointment> {
       });
     }
   }
-
 //----------------------------SelectDaysSnackBar------------------------------//
   // ignore: non_constant_identifier_names
   void SelectDateSnackBar(String value) {
@@ -778,7 +934,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------------SelectDaysSnackBar------------------------------//
   // ignore: non_constant_identifier_names
   void SelectTimeSnackBar(String value) {
@@ -796,7 +951,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------------SelectDaysSnackBar------------------------------//
   // ignore: non_constant_identifier_names
   void selecteServiceSnackBar(String value) {
@@ -814,7 +968,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------validateDetails------------------------------------//
   String validateDetails(String value) {
     String patttern = r'';
@@ -826,7 +979,17 @@ class BookAppointmentState extends State<BookAppointment> {
     }
     return null;
   }
-
+//----------------------validateDetails------------------------------------//
+  String validateName(String value) {
+    String patttern = r'';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return GlobalFlag.NameRequired.toString();
+    } else if (!regExp.hasMatch(value)) {
+      return GlobalFlag.NamebeNeed.toString();
+    }
+    return null;
+  }
 //-------------------------------SendDataService------------------------------//
   // ignore: non_constant_identifier_names
   Future<void> SendDataService() async {
@@ -842,6 +1005,12 @@ class BookAppointmentState extends State<BookAppointment> {
       _selectedService.name;
       // ignore: unnecessary_statements
       _selectedConsultant.name;
+      // ignore: unnecessary_statements
+      NameController.text;
+      // ignore: unnecessary_statements
+      mobileController.text;
+      // ignore: unnecessary_statements
+      emailController.text;
     });
     pr.show();
     try {
@@ -853,6 +1022,9 @@ class BookAppointmentState extends State<BookAppointment> {
         "patient": _selectedService.name.toString(),
         "details": DetailsController.text.toString(),
         "type": "appointment".toString(),
+        " OtherName": NameController.text.toString(),
+        " OtherEmail": mobileController.text.toString(),
+        " OtherMobile":emailController.text.toString(),
       }).then((resultAddBatch) {
         setStatus(resultAddBatch.statusCode == 200
             ? resultAddBatch.body
@@ -889,7 +1061,6 @@ class BookAppointmentState extends State<BookAppointment> {
       _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
     }
   }
-
 //-----------------------------BookAppointmentDone----------------------------//
   // ignore: non_constant_identifier_names
   Future<void> _SendBookAppointmentDone() async {
@@ -902,7 +1073,6 @@ class BookAppointmentState extends State<BookAppointment> {
     );
     Navigator.of(context).push(route);
   }
-
 //----------------------------BatchAddedFailedSnackBar------------------------//
 // ignore: non_constant_identifier_names
   void BookAddedFailedSnackBar(String value) {
@@ -920,7 +1090,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------------BatchAddedFailedSnackBar------------------------//
 // ignore: non_constant_identifier_names
   void DateNotAvilableSnackBar(String value) {
@@ -938,7 +1107,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------------DateAvilableSnackBar----------------------------//
 // ignore: non_constant_identifier_names
   void DateAvilableSnackBar(String value) {
@@ -960,7 +1128,6 @@ class BookAppointmentState extends State<BookAppointment> {
       FetchTimeFromServer();
     });
   }
-
 //----------------------------DateAvilableSnackBar----------------------------//
 // ignore: non_constant_identifier_names
   void TimeNotAvilableSnackBar(String value) {
@@ -978,7 +1145,6 @@ class BookAppointmentState extends State<BookAppointment> {
       backgroundColor: GlobalAppColor.BLackColorCode,
     ));
   }
-
 //----------------------------DateAvilableSnackBar----------------------------//
 // ignore: non_constant_identifier_names
   void TimeAvilableSnackBar(String value) {
@@ -1003,7 +1169,6 @@ class BookAppointmentState extends State<BookAppointment> {
     });
   }
 }
-
 //---------------------------------------END----------------------------------//
 //--------------------Service-------------------------------------------------//
 class Service {
@@ -1013,12 +1178,10 @@ class Service {
   static List<Service> getCompanies() {
     return <Service>[
       Service(1, 'Self'),
-      Service(2, 'Family'),
-      Service(3, 'Friends'),
+      Service(2, 'Other'),
     ];
   }
 }
-
 //--------------------Consultant----------------------------------------------//
 class Consultant {
   int id;
@@ -1039,3 +1202,4 @@ class Consultant {
     ];
   }
 }
+//----------------------------------------------------------------------------//

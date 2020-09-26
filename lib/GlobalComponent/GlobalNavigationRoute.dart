@@ -48,13 +48,21 @@ class GlobalNavigationRoute {
   static String TagMobileOtp = "MobileOtp";
   // ignore: non_constant_identifier_names
   static String TagSignup = "Signup";
+  // ignore: non_constant_identifier_names
   static String TagSec1 = "Sec1";
+  // ignore: non_constant_identifier_names
   static String TagSec2 = "Sec2";
+  // ignore: non_constant_identifier_names
   static String TagSec3 = "Sec3";
+  // ignore: non_constant_identifier_names
   static String TagSec4 = "Sec4";
+  // ignore: non_constant_identifier_names
   static String TagSec5 = "Sec5";
+  // ignore: non_constant_identifier_names
   static String TagSec6 = "Sec6";
+  // ignore: non_constant_identifier_names
   static String TagSec7 = "Sec7";
+  // ignore: non_constant_identifier_names
   static String TagSec8 = "Sec8";
 }
 //------------------------------END-------------------------------------------//

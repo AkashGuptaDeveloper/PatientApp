@@ -148,6 +148,7 @@ class ConsultantScreen2State extends State<ConsultantScreen2> {
       ),
       body: new Form(
         key: _Formkey,
+        // ignore: deprecated_member_use
         autovalidate: _validate,
         child: new ListView(
           children: <Widget>[
