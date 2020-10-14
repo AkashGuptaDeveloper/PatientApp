@@ -106,6 +106,7 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String transaction_id = "transaction_id";
   static String mobile = "mobile";
+  static String sms_key = "sms_key";
   // ignore: non_constant_identifier_names
   static String Areyousure = 'Are you sure?';
   // ignore: non_constant_identifier_names

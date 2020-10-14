@@ -223,11 +223,11 @@ class MobileOtpState extends State<MobileOtp> {
     // ignore: non_constant_identifier_names
     var LoginReciveJsonSTATUS = LoginReciveJsonData[GlobalFlag.Jsonstatus];
     // ignore: non_constant_identifier_names
-     LoginTrueFalse = LoginReciveJsonData[GlobalFlag.Jsonlogin];
+    LoginTrueFalse = LoginReciveJsonData[GlobalFlag.Jsonlogin];
     // ignore: non_constant_identifier_names
-     RecivedMessage = LoginReciveJsonData[GlobalFlag.Jsonmsg];
-     RecivedToken = LoginReciveJsonData[GlobalFlag.Jsonuser_token];
-     new Preferences().storeDataAtLogin(LoginReciveJsonData);
+    RecivedMessage = LoginReciveJsonData[GlobalFlag.Jsonmsg];
+    RecivedToken = LoginReciveJsonData[GlobalFlag.Jsonuser_token];
+    new Preferences().storeDataAtLogin(LoginReciveJsonData);
 //----------------------------------------------------------------------------//
     if(LoginReciveJsonSTATUS ==200){
       _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
@@ -280,11 +280,11 @@ class MobileOtpState extends State<MobileOtp> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
                 side: BorderSide(color: GlobalAppColor.AppBarColorCode)),
-              onPressed: () {
+            onPressed: () {
               setState(() {
                 _checkInternetConnectivity();
               });
-              },
+            },
             color: GlobalAppColor.AppBarColorCode,
             textColor: Colors.white,
             child: Text(
@@ -349,7 +349,7 @@ class MobileOtpState extends State<MobileOtp> {
       await Future.delayed(Duration(seconds: 2));
       Navigator.of(context)
           .push(new MaterialPageRoute(builder: (_) => new Signup(
-          RecivedToken:RecivedToken,
+        RecivedToken:RecivedToken,
       )));
     }
   }

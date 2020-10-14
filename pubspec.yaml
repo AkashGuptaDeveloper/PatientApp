@@ -48,6 +48,7 @@ dependencies:
   sms_autofill: ^1.2.4
   shared_preferences: ^0.5.7+2
   connectivity: any
+  sms_otp_auto_verify: ^1.2.2
 
 dev_dependencies:
   flutter_test:

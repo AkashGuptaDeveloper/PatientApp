@@ -14,6 +14,7 @@ import 'package:laskinnovita/LoginView/MobileOtp.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 //------------------------------------START-----------------------------------//
 class LoginView extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagLoginView.toString();
@@ -51,6 +52,9 @@ class LoginViewState extends State<LoginView> {
   var LoginRecivemobile;
   // ignore: non_constant_identifier_names
   var LoginReciveToken;
+  // ignore: non_constant_identifier_names
+  var GetSmsKey;
+  var GetSms;
 //-----------------------------------------API--------------------------------//
   // ignore: non_constant_identifier_names
   String LoginUrl_ServiceUrl =
@@ -59,6 +63,14 @@ class LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
+    GetSMSCode();
+  }
+//------------------------------------GetSMSCode------------------------------//
+  // ignore: non_constant_identifier_names
+  void GetSMSCode()async{
+    final signcode = await SmsAutoFill().getAppSignature;
+    GetSmsKey = signcode;
+    print(GetSmsKey);
   }
 //-----------------------------------------dispose()---------------------------//
   @override
@@ -379,15 +391,19 @@ class LoginViewState extends State<LoginView> {
     setState(() {
       // ignore: unnecessary_statements
       GetMobile;
+      // ignore: unnecessary_statements
+      GetSmsKey;
     });
     try {
       http.post(LoginUrl_ServiceUrl, body: {
         "mobile": GetMobile.toString(),
         "type": "patient".toString(),
+        "SMSKEY": GetSmsKey.toString(),
       }).then((resultLogin) {
         setStatus(
             resultLogin.statusCode == 200 ? resultLogin.body : errMessage);
        print(GlobalFlag.Printjsonresp.toString()+"${resultLogin.body.toString()}");
+       print("SMSKEY===="+GetSmsKey.toString(),);
         // ignore: non_constant_identifier_names
         var LoginReciveJsonData = json.decode(resultLogin.body);
         // ignore: non_constant_identifier_names
@@ -395,6 +411,8 @@ class LoginViewState extends State<LoginView> {
         LoginReciveJsonSTATUSMSG = LoginReciveJsonData[GlobalFlag.Jsonmsg];
         LoginReciveTransactionId = LoginReciveJsonData[GlobalFlag.transaction_id];
         LoginRecivemobile = LoginReciveJsonData[GlobalFlag.mobile];
+        GetSms = LoginReciveJsonData[GlobalFlag.sms_key];
+        print(GetSms);
 
 //----------------------------------------------------------------------------//
         if(LoginReciveJsonSTATUS ==200){

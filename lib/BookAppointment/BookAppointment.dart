@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/BookAppointment/BookAppointmentDone.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
@@ -15,8 +14,6 @@ import 'package:laskinnovita/Model/TimeAvilityModel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 //------------------------------------START-----------------------------------//
 class BookAppointment extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagBookAppointment.toString();
@@ -109,8 +106,6 @@ class BookAppointmentState extends State<BookAppointment> {
   // ignore: non_constant_identifier_names
   bool Others = false;
   // ignore: non_constant_identifier_names
-  Razorpay _razorpay;
-  // ignore: non_constant_identifier_names
   var GetPaymentID;
   // ignore: non_constant_identifier_names
   var GetPaymentsignature;
@@ -132,10 +127,6 @@ class BookAppointmentState extends State<BookAppointment> {
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
-    _razorpay = Razorpay();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     super.initState();
     _checkInternetConnectivity();
     FetchDateFromServer();
@@ -758,34 +749,6 @@ class BookAppointmentState extends State<BookAppointment> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Expanded(
-              child: Container(
-                  height: 40,
-                  child: RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        _PayNowToServer();
-                      });
-                    },
-                    color: GlobalAppColor.AppBarColorCode,
-                    textColor: Colors.white,
-                    child: Text(
-                      GlobalFlag.PayNow.toString(),
-                      style: TextStyle(
-                          fontSize: 15.0,
-                          color: GlobalAppColor.WhiteColorCode,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: GlobalFlag.FontCode.toString()),
-                    ),
-                  )),
-              flex: 1,
-            ),
-//-------------------------------------------------------------------//
-            new Container(
-              color: GlobalAppColor.WhiteColorCode,
-              height: 40.0,
-              width: 1.5,
-            ),
 //-------------------------------------------------------------------//
             new Expanded(
               child: Container(
@@ -799,7 +762,7 @@ class BookAppointmentState extends State<BookAppointment> {
                     color: GlobalAppColor.AppBarColorCode,
                     textColor: Colors.white,
                     child: Text(
-                      GlobalFlag.PayLater.toString(),
+                      GlobalFlag.Submit.toString(),
                       style: TextStyle(
                           fontSize: 15.0,
                           color: GlobalAppColor.WhiteColorCode,
@@ -1092,8 +1055,8 @@ class BookAppointmentState extends State<BookAppointment> {
             ? resultAddBatch.body
             : errMessage);
 //-------------------------Print-Section--------------------------------------//
-        /*  print(GlobalFlag.Printjsonresp.toString() +
-            "${resultAddBatch.body.toString()}");*/
+         print(GlobalFlag.Printjsonresp.toString() +
+            "${resultAddBatch.body.toString()}");
 //------------------------END-Print-Section-----------------------------------//
         // ignore: non_constant_identifier_names
         var ReciveJsonData = json.decode(resultAddBatch.body);
@@ -1229,127 +1192,6 @@ class BookAppointmentState extends State<BookAppointment> {
       // ignore: unnecessary_statements
       Model;
     });
-  }
-//----------------------------------------_PayNowToServer---------------------//
-  // ignore: non_constant_identifier_names
-  _PayNowToServer() async {
-    if (_Formkey.currentState.validate()) {
-      _Formkey.currentState.save();
-      setState(() {
-        if (SelectDate == null) {
-          SelectDateSnackBar(GlobalFlag.PleaseSelectDate);
-        } else {
-          if (SelectTime == null) {
-            SelectTimeSnackBar(GlobalFlag.PleaseSelectTime);
-          } else {
-            setState(() {
-              // ignore: unnecessary_statements
-              Model;
-              if (Model == "1") {
-                _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-                SendDataPayNowService();
-              } else {
-                TimeNotAvilableSnackBar(GlobalFlag.SlotavailableinthisNotTime);
-              }
-            });
-          }
-        }
-      });
-    } else {
-      setState(() {
-        _validate = true;
-      });
-    }
-  }
-//-------------------------------SendDataService------------------------------//
-  // ignore: non_constant_identifier_names
-  Future<void> SendDataPayNowService() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
-    _checkInternetConnectivity();
-    setState(() {
-      // ignore: unnecessary_statements
-      SelectDate;
-      // ignore: unnecessary_statements
-      SelectTime;
-      // ignore: unnecessary_statements
-      _selectedService.name;
-      // ignore: unnecessary_statements
-      _selectedConsultant.name;
-      // ignore: unnecessary_statements
-      NameController.text;
-      // ignore: unnecessary_statements
-      mobileController.text;
-      // ignore: unnecessary_statements
-      emailController.text;
-    });
-    pr.show();
-    openCheckout();
-  }
-//-----------------------------------------openCheckout()---------------------//
-  void openCheckout() async {
-    setState(() {
-      // ignore: unnecessary_statements
-      SelectDate;
-      // ignore: unnecessary_statements
-      SelectTime;
-      // ignore: unnecessary_statements
-      _selectedService.name;
-      // ignore: unnecessary_statements
-      _selectedConsultant.name;
-      // ignore: unnecessary_statements
-      NameController.text;
-      // ignore: unnecessary_statements
-      mobileController.text;
-      // ignore: unnecessary_statements
-      emailController.text;
-      // ignore: unnecessary_statements
-      name;
-      // ignore: unnecessary_statements
-      email;
-      // ignore: unnecessary_statements
-      contact;
-    });
-    var options = {
-      'key': GlobalServiceURL.RazorPayAPIKey.toString(),
-      'amount': 1000,
-      'name': name.toString(),
-      'description': "Buy".toString(),
-      'prefill': {
-        'contact':contact.toString(),
-        'email':email.toString()
-      },
-      'external': {
-        'wallets': ['paytm']
-      }
-    };
-    try {
-      _razorpay.open(options);
-    } catch (e) {
-      /*  debugPrint(e);*/
-    }
-  }
-//-----------------------------------------_handlePaymentSuccess()------------//
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    Fluttertoast.showToast(
-        msg: "SUCCESS: " + response.paymentId, timeInSecForIos: 4);
-    GetPaymentID = response.paymentId;
-    GetPaymentsignature = response.signature;
-    GetPaymentorderId = response.orderId;
-    SendDataPayNowFromService();
-  }
-//-----------------------------------------_handlePaymentError()--------------//
-  void _handlePaymentError(PaymentFailureResponse response) {
-    Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message,
-        timeInSecForIos: 4);
-    pr.hide();
-  }
-//-----------------------------------------_handleExternalWallet()------------//
-  void _handleExternalWallet(ExternalWalletResponse response) {
-    Fluttertoast.showToast(
-        msg: "EXTERNAL_WALLET: " + response.walletName, timeInSecForIos: 4);
-    pr.hide();
   }
 //-------------------------------SendDataPayNowFromService--------------------//
   // ignore: non_constant_identifier_names
