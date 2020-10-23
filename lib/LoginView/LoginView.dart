@@ -25,10 +25,11 @@ class LoginView extends StatefulWidget {
 class LoginViewState extends State<LoginView> {
   // ignore: non_constant_identifier_names
   TextEditingController LoginMobileController = new TextEditingController();
+  TextEditingController LoginNameController = new TextEditingController();
   // ignore: non_constant_identifier_names
   var GetMobile;
   // ignore: non_constant_identifier_names
-  String Mobile;
+  String Mobile,Name;
   // ignore: non_constant_identifier_names
   String status = '';
   // ignore: non_constant_identifier_names
@@ -39,6 +40,7 @@ class LoginViewState extends State<LoginView> {
   bool _validate = false;
   // ignore: non_constant_identifier_names
   final FocusNode myFocusNodeMobile = FocusNode();
+  final FocusNode myFocusNodeName = FocusNode();
   // ignore: non_constant_identifier_names
   final GlobalKey<ScaffoldState> _SnackBarscaffoldKey =
   GlobalKey<ScaffoldState>();
@@ -145,6 +147,58 @@ class LoginViewState extends State<LoginView> {
               mainAxisSize: MainAxisSize.min,
               verticalDirection: VerticalDirection.down,
               children: <Widget>[
+//-------------------------------------------------Name-----------------------//
+                new Container(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: new TextFormField(
+                    style: TextStyle(color: GlobalAppColor.AppBarColorCode),
+                    focusNode: myFocusNodeName,
+                    controller: LoginNameController,
+                    validator: validateUserName,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                    onSaved: (String val) {
+                      Mobile = val;
+                    },
+                    decoration: new InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: GlobalAppColor.AppBarColorCode),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1, color: Colors.orange),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(
+                            width: 1, color: GlobalAppColor.AppBarColorCode),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(
+                            width: 1,
+                          )),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                          BorderSide(width: 1, color: Colors.black)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.black)),
+                      errorStyle: TextStyle(fontSize: 10.0, color: Colors.black),
+                      hintText:GlobalFlag.EnterName.toString(),
+                      hintStyle: TextStyle(
+                        fontSize: 12.0,
+                        fontFamily: GlobalFlag.FontCode.toString(),
+                        color: GlobalAppColor.BLackColorCode,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height:5,
+                ),
 //-------------------------------------------------Email----------------------//
                 new Container(
                   padding: EdgeInsets.only(left: 20, right: 20),
@@ -215,6 +269,17 @@ class LoginViewState extends State<LoginView> {
       return GlobalFlag.Mobilenumbermust10digits.toString();
     } else if (!regExp.hasMatch(value)) {
       return GlobalFlag.MobileNumbermustbedigits.toString();
+    }
+    return null;
+  }
+//--------------------------validateUserName----------------------------------//
+  String validateUserName(String value) {
+    String patttern = r'';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return GlobalFlag.NameisRequired.toString();
+    } else if (!regExp.hasMatch(value)) {
+      return GlobalFlag.NamemustbeNeed.toString();
     }
     return null;
   }

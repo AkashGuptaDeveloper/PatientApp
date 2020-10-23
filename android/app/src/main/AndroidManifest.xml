@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="LaSkinnovita"
+        android:label="Patient"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
