@@ -25,9 +25,11 @@ class LoginView extends StatefulWidget {
 class LoginViewState extends State<LoginView> {
   // ignore: non_constant_identifier_names
   TextEditingController LoginMobileController = new TextEditingController();
+  // ignore: non_constant_identifier_names
   TextEditingController LoginNameController = new TextEditingController();
   // ignore: non_constant_identifier_names
   var GetMobile;
+  // ignore: non_constant_identifier_names
   var GeName;
   // ignore: non_constant_identifier_names
   String Mobile,Name;
@@ -57,6 +59,7 @@ class LoginViewState extends State<LoginView> {
   var LoginReciveToken;
   // ignore: non_constant_identifier_names
   var GetSmsKey;
+  // ignore: non_constant_identifier_names
   var GetSms;
 //-----------------------------------------API--------------------------------//
   // ignore: non_constant_identifier_names
@@ -529,6 +532,7 @@ class LoginViewState extends State<LoginView> {
     _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
     // ignore: non_constant_identifier_names
     LoginMobileController.clear();
+    LoginNameController.clear();
   }
 }
 //---------------------------------------END----------------------------------//
