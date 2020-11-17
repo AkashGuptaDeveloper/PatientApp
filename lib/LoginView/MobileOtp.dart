@@ -22,12 +22,16 @@ class MobileOtp extends StatefulWidget {
   final String LoginTransactionId;
   // ignore: unnecessary_statements, non_constant_identifier_names
   final String LoginMobile;
+  // ignore: non_constant_identifier_names
+  final String LoginSendName;
   MobileOtp({
     Key key,
     // ignore: unnecessary_statements, non_constant_identifier_names
     this.LoginTransactionId,
     // ignore: unnecessary_statements, non_constant_identifier_names
     this.LoginMobile,
+    // ignore: non_constant_identifier_names
+    this.LoginSendName,
   }) : super(key: key);
   @override
   MobileOtpState createState() => new MobileOtpState();
@@ -350,6 +354,7 @@ class MobileOtpState extends State<MobileOtp> {
       Navigator.of(context)
           .push(new MaterialPageRoute(builder: (_) => new Signup(
         RecivedToken:RecivedToken,
+        LoginSendName:widget.LoginSendName,
       )));
     }
   }

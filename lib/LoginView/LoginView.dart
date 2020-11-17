@@ -28,6 +28,7 @@ class LoginViewState extends State<LoginView> {
   TextEditingController LoginNameController = new TextEditingController();
   // ignore: non_constant_identifier_names
   var GetMobile;
+  var GeName;
   // ignore: non_constant_identifier_names
   String Mobile,Name;
   // ignore: non_constant_identifier_names
@@ -322,6 +323,7 @@ class LoginViewState extends State<LoginView> {
       setState(() {
         // ignore: non_constant_identifier_names
         GetMobile = LoginMobileController.text.toString();
+        GeName = LoginNameController.text.toString();
         _checkInternetConnectivity();
       });
     }
@@ -406,7 +408,7 @@ class LoginViewState extends State<LoginView> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
     else{
-      UserLoginService(GetMobile);
+      UserLoginService(GetMobile,GeName);
     }
   }
 //----------------------------showInSnackBar----------------------------------//
@@ -451,24 +453,26 @@ class LoginViewState extends State<LoginView> {
   }
 //---------------------------------UserLoginService---------------------------//
   // ignore: non_constant_identifier_names
-  Future<void> UserLoginService(GetMobile) async {
+  Future<void> UserLoginService(GetMobile,GeName) async {
     WaitSnackBar(GlobalFlag.PleaseWait);
     setState(() {
       // ignore: unnecessary_statements
       GetMobile;
       // ignore: unnecessary_statements
       GetSmsKey;
+      // ignore: unnecessary_statements
+      GeName;
     });
     try {
       http.post(LoginUrl_ServiceUrl, body: {
         "mobile": GetMobile.toString(),
         "type": "patient".toString(),
         "SMSKEY": GetSmsKey.toString(),
+        "name":GeName.toString(),
       }).then((resultLogin) {
         setStatus(
             resultLogin.statusCode == 200 ? resultLogin.body : errMessage);
        print(GlobalFlag.Printjsonresp.toString()+"${resultLogin.body.toString()}");
-       print("SMSKEY===="+GetSmsKey.toString(),);
         // ignore: non_constant_identifier_names
         var LoginReciveJsonData = json.decode(resultLogin.body);
         // ignore: non_constant_identifier_names
@@ -520,6 +524,7 @@ class LoginViewState extends State<LoginView> {
      Navigator.of(context).push(new MaterialPageRoute(builder: (_) => new MobileOtp(
          LoginTransactionId:LoginReciveTransactionId,
          LoginMobile:LoginRecivemobile,
+         LoginSendName:GeName,
      )));
     _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
     // ignore: non_constant_identifier_names

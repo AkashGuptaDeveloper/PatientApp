@@ -22,10 +22,14 @@ class Signup extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagSignup.toString();
   // ignore: non_constant_identifier_names
   final String RecivedToken;
+  // ignore: non_constant_identifier_names
+  final String LoginSendName;
   Signup({
     Key key,
     // ignore: unnecessary_statements, non_constant_identifier_names
     this.RecivedToken,
+    // ignore: non_constant_identifier_names
+    this.LoginSendName,
   }) : super(key: key);
   @override
   SignupState createState() => new SignupState();
@@ -80,6 +84,7 @@ class SignupState extends State<Signup> {
   void initState() {
     super.initState();
     print(widget.RecivedToken);
+    LoginNameController.text = widget.LoginSendName;
 //-------------------------------------Gender--------------------------------//
     _dropdownMenuItemsGender = buildDropdownMenuItemsGender(_Gender);
     _selectedGender = _dropdownMenuItemsGender[0].value;
