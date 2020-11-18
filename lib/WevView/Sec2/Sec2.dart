@@ -67,7 +67,7 @@ class Sec2State extends State<Sec2> {
         centerTitle: true,
       ),
       body:WebView(
-        initialUrl: GlobalFlag.BlogsWebView,
+        initialUrl: GlobalFlag.wosyetVitalLink,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController){
           _controller.complete(webViewController);

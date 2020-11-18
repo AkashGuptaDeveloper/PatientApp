@@ -67,7 +67,7 @@ class Sec6State extends State<Sec6> {
         centerTitle: true,
       ),
       body:WebView(
-        initialUrl: GlobalFlag.BlogsWebView,
+        initialUrl: GlobalFlag.bodySihouetteLink,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController){
           _controller.complete(webViewController);

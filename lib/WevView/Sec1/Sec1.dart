@@ -67,7 +67,7 @@ class Sec1State extends State<Sec1> {
         centerTitle: true,
       ),
       body:WebView(
-        initialUrl: GlobalFlag.BlogsWebView,
+        initialUrl: GlobalFlag.nepthysRejuveLink,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController){
           _controller.complete(webViewController);

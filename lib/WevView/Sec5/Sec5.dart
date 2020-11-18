@@ -67,7 +67,7 @@ class Sec5State extends State<Sec5> {
         centerTitle: true,
       ),
       body:WebView(
-        initialUrl: GlobalFlag.BlogsWebView,
+        initialUrl: GlobalFlag.athenaGenenisLink,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController){
           _controller.complete(webViewController);

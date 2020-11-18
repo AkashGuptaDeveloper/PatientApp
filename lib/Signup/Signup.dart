@@ -597,6 +597,7 @@ class Gender {
     return <Gender>[
       Gender(1, 'Male'),
       Gender(2, 'Female'),
+      Gender(3, 'Other'),
     ];
   }
 }

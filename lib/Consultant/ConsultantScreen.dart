@@ -71,7 +71,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
         backgroundColor: GlobalAppColor.AppBarColorCode,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          GlobalFlag.Consultant.toString(),
+          GlobalFlag.ConsultantScreenTitle.toString(),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18.0,
@@ -90,10 +90,14 @@ class ConsultantScreenState extends State<ConsultantScreen> {
           ),
           new Container(
             padding: EdgeInsets.only(left: 20, right: 20),
-            height: 200,
-            width: 300,
-            color: Colors.grey[200],
-            child: Image.asset(GlobalImageAssets.splash, fit: BoxFit.contain),
+            height: 400,
+            // color: Colors.grey[200],
+            child: Image.asset(
+                GlobalImageAssets.consultationBanner,
+                fit: BoxFit.contain,
+                height: double.infinity,
+                width: double.infinity,
+            ),
           ),
           SizedBox(
             height: 20,
@@ -112,7 +116,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
                       builder: (_) => new ConsultantScreen2()));*/
                 },
                 icon: Icon(
-                  FontAwesomeIcons.save,
+                  FontAwesomeIcons.paperPlane,
                   color: Colors.white,
                   size: 15.0,
                 ), //`Icon` to display
@@ -169,7 +173,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
     });
     var options = {
       'key': GlobalServiceURL.RazorPayAPIKey.toString(),
-      'amount': 1000,
+      'amount': 150000,
       'name': name.toString(),
       'description': "Buy".toString(),
       'prefill': {
@@ -216,6 +220,7 @@ class ConsultantScreenState extends State<ConsultantScreen> {
   Future<void> FetchProfileFromServer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
+    print(LoginUserToken);
     try {
       http.post(UserViewProfile_ServiceUrl.toString(), body: {
         "user_token": LoginUserToken,

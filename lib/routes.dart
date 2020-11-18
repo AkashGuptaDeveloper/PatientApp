@@ -27,8 +27,6 @@ import 'package:laskinnovita/WevView/Sec3/Sec3.dart';
 import 'package:laskinnovita/WevView/Sec4/Sec4.dart';
 import 'package:laskinnovita/WevView/Sec5/Sec5.dart';
 import 'package:laskinnovita/WevView/Sec6/Sec6.dart';
-import 'package:laskinnovita/WevView/Sec7/Sec7.dart';
-import 'package:laskinnovita/WevView/Sec8/Sec8.dart';
 import 'package:laskinnovita/WevView/Services/Services.dart';
 import 'package:laskinnovita/WevView/Testimonials/Testimonials.dart';
 import 'package:laskinnovita/WevView/Feedback/Feedbacks.dart';
@@ -67,7 +65,5 @@ final routes = {
   Sec4.tag: (context) => Sec4(),
   Sec5.tag: (context) => Sec5(),
   Sec6.tag: (context) => Sec6(),
-  Sec7.tag: (context) => Sec7(),
-  Sec8.tag: (context) => Sec8(),
 };
 //-------------------------------END------------------------------------------//

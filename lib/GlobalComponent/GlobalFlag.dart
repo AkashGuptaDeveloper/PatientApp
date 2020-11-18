@@ -4,23 +4,23 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String InternetNotConnected = "You're not connected to a network";
   // ignore: non_constant_identifier_names
-  static String Welcome = "Welcome";
+  static String Welcome = "Welcome to La Skinnovita";
   // ignore: non_constant_identifier_names
   static String QuickAction = "Quick Action";
   // ignore: non_constant_identifier_names
-  static String BookAppt = "Book Appt";
+  static String BookAppt = "Book Appointment";
   // ignore: non_constant_identifier_names
-  static String OnlineConsultant = "Consultant";
+  static String OnlineConsultant = "Consult Online";
   // ignore: non_constant_identifier_names
-  static String ApptHistory = "Appt History";
+  static String ApptHistory = "History";
   // ignore: non_constant_identifier_names
   static String AboutUs = "About Us";
   // ignore: non_constant_identifier_names
-  static String AnujPall = "Dr.AnujPall";
+  static String AnujPall = "Dr. Anuj Pall";
   // ignore: non_constant_identifier_names
-  static String LaSkinnovita = "LaSkinnovita";
+  static String LaSkinnovita = "La Skinnovita";
   // ignore: non_constant_identifier_names
-  static String serious = "Services";
+  static String serious = "Our Services";
   // ignore: non_constant_identifier_names
   static String Testimonials = "Testimonials";
 // ignore: non_constant_identifier_names
@@ -28,51 +28,53 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String RequestMedicalDelivery = "Request Medicine";
   // ignore: non_constant_identifier_names
-  static String PayCustomer = "Pay Customer";
+  static String PayCustomer = "Pay";
   // ignore: non_constant_identifier_names
-  static String ContactUs = "ContactUs";
+  static String ContactUs = "Contact Us";
   // ignore: non_constant_identifier_names
-  static String Resource = "Resource";
+  static String Resource = "Resources";
   // ignore: non_constant_identifier_names
   static String Feedback = "Feedback";
   // ignore: non_constant_identifier_names
-  static String WhatsNews = "Whats New";
+  static String WhatsNews = "What's New";
   // ignore: non_constant_identifier_names
   static String Blog = "Blog";
   // ignore: non_constant_identifier_names
-  static String Facebok = "Facebok";
+  static String Facebok = "Facebook";
   // ignore: non_constant_identifier_names
   static String Instagram = "Instagram";
   // ignore: non_constant_identifier_names
-  static String Youtube = "Youtube";
+  static String Youtube = "YouTube";
   // ignore: non_constant_identifier_names
   static String BookAppointment = "Book Appointment";
   // ignore: non_constant_identifier_names
   static String HistoryAppointment = "Appointment History";
   // ignore: non_constant_identifier_names
-  static String AppointmentDate = "Appointment Date";
+  static String AppointmentDate = "Select Appointment Date";
   // ignore: non_constant_identifier_names
-  static String AppointmentTime = "Appointment Time";
+  static String AppointmentTime = "Select Appointment Time";
   // ignore: non_constant_identifier_names
-  static String Consultant = "Consultant";
+
+  static String ConsultantScreenTitle = "Online Consultation";
+
+  static String Consultant = "Ask a question";
   // ignore: non_constant_identifier_names
-  static String Details = "Details";
+  static String Details = "Add on details ( if any )";
   // ignore: non_constant_identifier_names
   static String EnterDetails = "Enter Details";
   // ignore: non_constant_identifier_names
   static String Service = "Service";
+
   // ignore: non_constant_identifier_names
   static String AppointmentService = "Service";
   // ignore: non_constant_identifier_names
-  static String SelectDate = "Select Date";
+  static String SelectDate = "Date of Birth";
   // ignore: non_constant_identifier_names
   static String EnterService = "Enter Service";
   // ignore: non_constant_identifier_names
   static String Submit = "Submit";
   // ignore: non_constant_identifier_names
-  static String Continue = "Continue";
-  // ignore: non_constant_identifier_names
-  static String View = "View";
+  static String Continue = "Pay now";
   // ignore: non_constant_identifier_names
   static String Prescription = "Prescription";
   // ignore: non_constant_identifier_names
@@ -105,10 +107,7 @@ class GlobalFlag {
   static String appointmentID = "appointmentID";
   // ignore: non_constant_identifier_names
   static String transaction_id = "transaction_id";
-  // ignore: non_constant_identifier_names
   static String mobile = "mobile";
-  // ignore: non_constant_identifier_names
-  static String sms_key = "sms_key";
   // ignore: non_constant_identifier_names
   static String Areyousure = 'Are you sure?';
   // ignore: non_constant_identifier_names
@@ -118,8 +117,6 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String Yes = 'Yes';
   // ignore: non_constant_identifier_names
-  static String Bookingfor = 'Booking for';
-  // ignore: non_constant_identifier_names
   static String AppointmentID = 'Appointment ID';
   // ignore: non_constant_identifier_names
   static String BookingTime = 'Booking Time';
@@ -128,7 +125,7 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String ConfirmationMessage = 'Confirmation Message';
   // ignore: non_constant_identifier_names
-  static String DAnujPall = 'Dr.Anuj Pall';
+  static String DAnujPall = 'Dr. Anuj Pall';
   // ignore: non_constant_identifier_names
   static String Facebook = 'Facebook';
   // ignore: non_constant_identifier_names
@@ -158,7 +155,8 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String PleaseUploadPicture = "Please Upload Picture";
   // ignore: non_constant_identifier_names
-  static String EnterMobileNumber = "Enter Mobile Number";
+  static String LoginScreenEnterName = "Enter your name";
+  static String EnterMobileNumber = "Enter mobile number";
   // ignore: non_constant_identifier_names
   static String EnterName = "Enter Name";
   // ignore: non_constant_identifier_names
@@ -172,7 +170,7 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String MobileNumbermustbedigits = "Mobile Number must be digits";
   // ignore: non_constant_identifier_names
-  static String Login = "Send OTP";
+  static String Login = "Submit";
   // ignore: non_constant_identifier_names
   static String PleaseEnterPin = "Please Enter the Pin";
   // ignore: non_constant_identifier_names
@@ -189,25 +187,25 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String InvalidEmail = "Invalid Email";
   // ignore: non_constant_identifier_names
-  static String Sec1 = "Sec1";
+  static String Sec1 = "Nephthys Rejuvé\nFace & Necklift";
   // ignore: non_constant_identifier_names
-  static String Sec2 = "Sec2";
+  static String Sec2 = "Wosyet Vitál\nAcne Scars & Open pores";
   // ignore: non_constant_identifier_names
-  static String Sec3 = "Sec3";
+  static String Sec3 = "Aureate Sphinx\nDouble Chin Treatment";
   // ignore: non_constant_identifier_names
-  static String Sec4 = "Sec4";
+  static String Sec4 = "Juventas\nPeeling Sequential";
   // ignore: non_constant_identifier_names
-  static String Sec5 = "Sec5";
+  static String Sec5 = "Athena Genesis\nBrightening and Collagen Boosting";
   // ignore: non_constant_identifier_names
-  static String Sec6 = "Sec6";
+  static String Sec6 = "Body Silhouette\nBody Contouring ";
   // ignore: non_constant_identifier_names
   static String Sec7 = "Sec7";
   // ignore: non_constant_identifier_names
   static String Sec8 = "Sec8";
   // ignore: non_constant_identifier_names
-  static String OurPrimium = "Our Primium";
+  static String OurPrimium = "Our Premium Services";
   // ignore: non_constant_identifier_names
-  static String bookingfor = "booking for";
+  static String bookingfor = "Booking for";
   // ignore: non_constant_identifier_names
   static String Name = "Enter Name";
   // ignore: non_constant_identifier_names
@@ -218,38 +216,56 @@ class GlobalFlag {
   static String NameRequired = "Name is Required";
   // ignore: non_constant_identifier_names
   static String NamebeNeed = "Name must be Need";
-  // ignore: non_constant_identifier_names
-  static String PayNow = "Pay Now";
-  // ignore: non_constant_identifier_names
-  static String PayLater = "Pay Later";
+
+  static String sms_key = "sms_key";
+
+  // Appointment History Screen
+
+  static String bookingFor = 'Booking for';
+  static String bookingID = 'Appointment ID';
+  static String bookingDate = 'Visit date';
+  static String bookingVisitTime = 'Visit time';
+  static String bookingView = "View prescription";
+
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';
   // ignore: non_constant_identifier_names
   static String LaSkinnovitasWebView = 'https://laskinnovita.com/';
   // ignore: non_constant_identifier_names
-  static String ServicesWebView = 'https://youtu.be/_gOJRJ-UJto';
+  static String ServicesWebView = 'https://laskinnovita.com/#services';
   // ignore: non_constant_identifier_names
-  static String TestimonialsWebView =
-      'https://www.google.com/search?q=la+skinnovita&rlz=1C5CHFA_enIN912IN912&oq=la+skinnovita&aqs=chrome..69i57j69i60l2j69i65.3703j0j1&sourceid=chrome&ie=UTF-8#lrd=0x390d184624e99cbf:0xaa7d70dfa8aadab2,1,,,';
+  static String TestimonialsWebView = 'https://laskinnovita.com/testimonials/';
   // ignore: non_constant_identifier_names
-  static String DeliveryWebView = 'https://youtu.be/ExWUUS6ZXsQ';
+  static String DeliveryWebView = 'https://laskinnovita.com/request-medicine/';
   // ignore: non_constant_identifier_names
-  static String PayCustomerWebView = 'https://youtu.be/xlkILjNVfhY';
+  static String PayCustomerWebView = 'https://laskinnovita.com/pay-now/';
   // ignore: non_constant_identifier_names
   static String ContactUsWebView = 'https://laskinnovita.com/contact-us/';
   // ignore: non_constant_identifier_names
-  static String ResourceWebView = 'https://youtu.be/mN61LlbouDo';
+  static String ResourceWebView = 'https://laskinnovita.com/resources/';
   // ignore: non_constant_identifier_names
-  static String FeedbackWebView = 'https://www.google.com/';
+  static String FeedbackWebView = 'https://laskinnovita.com/feedback/';
   // ignore: non_constant_identifier_names
   static String BlogsWebView = 'https://laskinnovita.com/blogs/';
   // ignore: non_constant_identifier_names
   static String FacebookWebView =
       'https://www.facebook.com/laskinnovitagurgaon';
   // ignore: non_constant_identifier_names
-  static String InstagramWebView = 'https://www.instagram.com/laskinnovita/';
+  static String InstagramWebView = 'https://www.instagram.com/dranujpall/';
   // ignore: non_constant_identifier_names
   static String YoutubeWebView =
-      'https://www.youtube.com/channel/UCk2jCfUyqH3ZU7LmJGOHecw';
+      'https://www.youtube.com/channel/UC1XYyK_rfi3dkUtwUM_raKg';
+
+  static String nepthysRejuveLink =
+      "https://laskinnovita.com/nephthy-rejuve-non-surgical-facelift/";
+  static String wosyetVitalLink =
+      "https://laskinnovita.com/wosyet-vital-scar-removal/";
+  static String aureatSphinxLink = "https://laskinnovita.com/aureate-series/";
+  static String juvetasPeelingLink =
+      "https://laskinnovita.com/aesthetic-procedures/";
+  static String athenaGenenisLink =
+      "https://laskinnovita.com/athena-tst-laser-toning/";
+  static String bodySihouetteLink =
+      "https://laskinnovita.com/body-silhouette-program-body-contouring/";
 }

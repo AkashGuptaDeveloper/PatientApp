@@ -67,7 +67,7 @@ class Sec4State extends State<Sec4> {
         centerTitle: true,
       ),
       body:WebView(
-        initialUrl: GlobalFlag.BlogsWebView,
+        initialUrl: GlobalFlag.juvetasPeelingLink,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController){
           _controller.complete(webViewController);

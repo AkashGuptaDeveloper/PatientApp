@@ -292,7 +292,7 @@ class MobileOtpState extends State<MobileOtp> {
             color: GlobalAppColor.AppBarColorCode,
             textColor: Colors.white,
             child: Text(
-              "AllSet".toString(),
+              "Verify OTP".toString(),
               style: TextStyle(
                   fontSize: 20.0,
                   color: GlobalAppColor.WhiteColorCode,

@@ -12,6 +12,7 @@ import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:laskinnovita/Model/ApptHistoryModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
+
 //------------------------------------START-----------------------------------//
 class ApptHistory extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagApptHistory.toString();
@@ -154,7 +155,7 @@ class ApptHistoryState extends State<ApptHistory> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           new Text(
-                                            GlobalFlag.Bookingfor,
+                                            GlobalFlag.bookingFor,
                                             style: TextStyle(
                                               fontSize: 13.0,
                                               color: Colors.black,
@@ -188,8 +189,7 @@ class ApptHistoryState extends State<ApptHistory> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           new Text(
-                                            GlobalFlag.AppointmentID
-                                                .toUpperCase(),
+                                            GlobalFlag.bookingID,
                                             style: TextStyle(
                                               fontSize: 13.0,
                                               color: Colors.black,
@@ -225,7 +225,7 @@ class ApptHistoryState extends State<ApptHistory> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           new Text(
-                                            GlobalFlag.AppointmentDate,
+                                            GlobalFlag.bookingDate,
                                             style: TextStyle(
                                               fontSize: 13.0,
                                               color: Colors.black,
@@ -259,8 +259,7 @@ class ApptHistoryState extends State<ApptHistory> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           new Text(
-                                            GlobalFlag.AppointmentTime
-                                                .toUpperCase(),
+                                            GlobalFlag.bookingVisitTime,
                                             style: TextStyle(
                                               fontSize: 13.0,
                                               color: Colors.black,
@@ -285,37 +284,6 @@ class ApptHistoryState extends State<ApptHistory> {
                                       height: 12,
                                       thickness: 0.1,
                                       color: Colors.grey[900]),
-//----------------------------------------BookingTime-------------------------//
-                                  new Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 10.0, right: 10),
-                                    child: new Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          new Text(
-                                            GlobalFlag.BookingTime
-                                                .toUpperCase(),
-                                            style: TextStyle(
-                                              fontSize: 13.0,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: GlobalFlag.FontCode
-                                                  .toString(),
-                                            ),
-                                          ),
-                                          new Text(
-                                            _History[index].bookingTime,
-                                            style: TextStyle(
-                                              fontSize: 13.0,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.normal,
-                                              fontFamily: GlobalFlag.FontCode
-                                                  .toString(),
-                                            ),
-                                          ),
-                                        ]),
-                                  ),
 //----------------------------------------------------------------------------//
                                   Divider(
                                       height: 12,
@@ -323,29 +291,38 @@ class ApptHistoryState extends State<ApptHistory> {
                                       color: Colors.grey[900]),
                                   new Padding(
                                     padding:
-                                    EdgeInsets.only(left: 10.0, right: 10),
-                                    child:Container(
+                                        EdgeInsets.only(left: 10.0, right: 10),
+                                    child: Container(
                                       color: GlobalAppColor.AppBarColorCode,
                                       height: 30,
                                       child: FlatButton.icon(
                                         onPressed: () {
                                           setState(() {
                                             // ignore: unnecessary_statements
-                                            _History[index].appointment.appointmentId;
+                                            _History[index]
+                                                .appointment
+                                                .appointmentId;
                                           });
-                                           Navigator.of(context).push(new MaterialPageRoute(
-                                          builder: (_) => new ViewPDF(
-                                            SendappointmentId:_History[index].appointment.appointmentId,
-                                          )));
+                                          Navigator.of(context)
+                                              .push(new MaterialPageRoute(
+                                                  builder: (_) => new ViewPDF(
+                                                        SendappointmentId:
+                                                            _History[index]
+                                                                .appointment
+                                                                .appointmentId,
+                                                      )));
                                         },
                                         icon: Icon(
-                                          FontAwesomeIcons.arrowAltCircleRight,
+                                          FontAwesomeIcons.eye,
                                           color: Colors.white,
                                           size: 15.0,
                                         ), //`Icon` to display
-                                        label: Text(GlobalFlag.View.toString().toUpperCase(),
+                                        label: Text(
+                                            GlobalFlag.bookingView.toString()
+                                                .toUpperCase(),
                                             style: TextStyle(
-                                              fontFamily: GlobalFlag.FontCode.toString(),
+                                              fontFamily: GlobalFlag.FontCode
+                                                  .toString(),
                                               fontSize: 15.0,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

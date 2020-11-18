@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/ApptHistory/ApptHistory.dart';
 import 'package:laskinnovita/BookAppointment/BookAppointment.dart';
 import 'package:laskinnovita/Consultant/ConsultantScreen.dart';
@@ -27,17 +27,17 @@ import 'package:laskinnovita/WevView/Sec3/Sec3.dart';
 import 'package:laskinnovita/WevView/Sec4/Sec4.dart';
 import 'package:laskinnovita/WevView/Sec5/Sec5.dart';
 import 'package:laskinnovita/WevView/Sec6/Sec6.dart';
-import 'package:laskinnovita/WevView/Sec7/Sec7.dart';
-import 'package:laskinnovita/WevView/Sec8/Sec8.dart';
 import 'package:laskinnovita/WevView/Services/Services.dart';
 import 'package:laskinnovita/WevView/Testimonials/Testimonials.dart';
 import 'package:laskinnovita/WevView/Youtube/Youtube.dart';
+
 //------------------------------------START-----------------------------------//
 class HomeScreen extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagHomeScreen.toString();
   @override
   HomeScreenState createState() => new HomeScreenState();
 }
+
 //-----------------------------------SplashScreenState------------------------//
 class HomeScreenState extends State<HomeScreen> {
   // ignore: non_constant_identifier_names
@@ -51,11 +51,13 @@ class HomeScreenState extends State<HomeScreen> {
     super.initState();
     _checkInternetConnectivity();
   }
+
 //-----------------------------------------dispose()--------------------------//
   @override
   void dispose() {
     super.dispose();
   }
+
   //-------------------------------------------------_onBackPressed------------//
   // ignore: non_constant_identifier_names
   Future<bool> _BackPressed(BuildContext context) {
@@ -99,15 +101,16 @@ class HomeScreenState extends State<HomeScreen> {
         ) ??
         false;
   }
+
 //---------------------------------------roundedButton------------------------//
   // ignore: non_constant_identifier_names
   Widget roundedButton(String buttonLabel, Color bgColor, Color textColor) {
     var loginBtn = new Container(
-      padding: EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(3.0),
       alignment: FractionalOffset.center,
       decoration: new BoxDecoration(
         color: bgColor,
-        borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
+        borderRadius: new BorderRadius.all(const Radius.circular(4.0)),
         boxShadow: <BoxShadow>[
           BoxShadow(
             color: const Color(0xFFFFFFFF),
@@ -119,11 +122,12 @@ class HomeScreenState extends State<HomeScreen> {
       child: Text(
         buttonLabel,
         style: new TextStyle(
-            color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
+            color: textColor, fontSize: 16.0, fontWeight: FontWeight.bold),
       ),
     );
     return loginBtn;
   }
+
 //------------------------------------Widget build----------------------------//
   @override
   Widget build(BuildContext context) {
@@ -289,6 +293,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 //------------------------------QuickAction-----------------------------------//
   // ignore: non_constant_identifier_names
   Widget QuickAction() {
@@ -305,26 +310,27 @@ class HomeScreenState extends State<HomeScreen> {
                 });
               },
               child: new Container(
-                color: GlobalAppColor.AppBarColorCode,
+                // color: GlobalAppColor.AppBarColorCode,
                 child: Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
+                          // height: 15,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.calendarAlt,
-                          size: 35,
-                          color: GlobalAppColor.WhiteColorCode,
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Image.asset(
+                              GlobalImageAssets.bookAppointmentImg,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          // height: 5,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -334,7 +340,7 @@ class HomeScreenState extends State<HomeScreen> {
                           maxLines: 2,
                           softWrap: false,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w600,
@@ -353,7 +359,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: new Container(
-              color: GlobalAppColor.AppBarColorCode,
+              // color: GlobalAppColor.AppBarColorCode,
               child: GestureDetector(
                 onTap: () {
                   setState(() {
@@ -366,20 +372,21 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
+                          // height: 15,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.handshake,
-                          size: 35,
-                          color: GlobalAppColor.WhiteColorCode,
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Image.asset(
+                              GlobalImageAssets.bookConsultationImg,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          // height: 5,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -389,7 +396,7 @@ class HomeScreenState extends State<HomeScreen> {
                           maxLines: 2,
                           softWrap: false,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w600,
@@ -408,7 +415,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: new Container(
-              color: GlobalAppColor.AppBarColorCode,
+              // color: GlobalAppColor.AppBarColorCode,
               child: GestureDetector(
                 onTap: () {
                   setState(() {
@@ -421,20 +428,21 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
+                          // height: 15,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.history,
-                          color: GlobalAppColor.WhiteColorCode,
-                          size: 35,
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Image.asset(
+                              GlobalImageAssets.appointmentHistoryImg,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          // height: 5,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -444,7 +452,7 @@ class HomeScreenState extends State<HomeScreen> {
                           maxLines: 2,
                           softWrap: false,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w600,
@@ -465,6 +473,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 //------------------------------AboutUs---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget AboutUs() {
@@ -484,20 +493,20 @@ class HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 15,
-                    ),
+                        // height: 15,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.plus,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.drAnujPallImg,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
-                      height: 10,
-                    ),
+                        // height: 10,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -508,7 +517,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -534,20 +543,20 @@ class HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 15,
-                    ),
+                        // height: 15,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.clinicMedical,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.laSkinnovitaImg,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
-                      height: 10,
-                    ),
+                        // height: 10,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -558,7 +567,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -584,20 +593,20 @@ class HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 15,
-                    ),
+                        // height: 15,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.commentMedical,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.ourServices,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
-                      height: 10,
-                    ),
+                        // height: 5,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -608,7 +617,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -634,20 +643,20 @@ class HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 15,
-                    ),
+                        // height: 15,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.fileMedical,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.testimonialImg,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
-                      height: 10,
-                    ),
+                        // height: 10,
+                        ),
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
@@ -658,7 +667,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -676,6 +685,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 //------------------------------Support---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget Support() {
@@ -702,10 +712,8 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .topLeft, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.shippingFast,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Image.asset(
+                        GlobalImageAssets.requestMedicine,
                       ),
                     ),
                     SizedBox(
@@ -717,9 +725,10 @@ class HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         GlobalFlag.RequestMedicalDelivery,
                         softWrap: true,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 9,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -752,10 +761,8 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.rupeeSign,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Image.asset(
+                        GlobalImageAssets.pay,
                       ),
                     ),
                     SizedBox(
@@ -766,10 +773,11 @@ class HomeScreenState extends State<HomeScreen> {
                           .center, // Align however you like (i.e .centerRight, centerLeft)
                       child: Text(
                         GlobalFlag.PayCustomer,
+                        textAlign: TextAlign.center,
                         softWrap: true,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 9,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -800,10 +808,10 @@ class HomeScreenState extends State<HomeScreen> {
                       height: 15,
                     ),
                     Align(
-                      alignment: Alignment
-                          .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child:Image.asset(GlobalImageAssets.Contact, fit: BoxFit.contain)
-                    ),
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Image.asset(GlobalImageAssets.contact,
+                            fit: BoxFit.contain)),
                     SizedBox(
                       height: 10,
                     ),
@@ -815,7 +823,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: true,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 9,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -848,10 +856,8 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.peopleArrows,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Image.asset(
+                        GlobalImageAssets.resourceImg,
                       ),
                     ),
                     SizedBox(
@@ -865,7 +871,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: true,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 9,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -898,10 +904,8 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.comment,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Image.asset(
+                        GlobalImageAssets.feedback,
                       ),
                     ),
                     SizedBox(
@@ -916,7 +920,7 @@ class HomeScreenState extends State<HomeScreen> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -934,6 +938,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 //------------------------------WhatsNews---------------------------------------//
   // ignore: non_constant_identifier_names
   Widget WhatsNews() {
@@ -958,10 +963,10 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.blog,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.blog,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
@@ -977,7 +982,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -1008,10 +1013,10 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.facebook,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.facebook,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
@@ -1027,7 +1032,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -1058,10 +1063,10 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.instagram,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.instagram,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
@@ -1077,7 +1082,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -1108,10 +1113,10 @@ class HomeScreenState extends State<HomeScreen> {
                     Align(
                       alignment: Alignment
                           .center, // Align however you like (i.e .centerRight, centerLeft)
-                      child: Icon(
-                        FontAwesomeIcons.youtube,
-                        size: 30,
-                        color: GlobalAppColor.AppBarColorCode,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset(GlobalImageAssets.youtube,
+                            fit: BoxFit.contain),
                       ),
                     ),
                     SizedBox(
@@ -1127,7 +1132,7 @@ class HomeScreenState extends State<HomeScreen> {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: GlobalFlag.FontCode,
                           fontWeight: FontWeight.w500,
                         ),
@@ -1145,6 +1150,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 //------------------------------OurPrimium-------------------------------------//
   // ignore: non_constant_identifier_names
   Widget OurPrimium() {
@@ -1165,131 +1171,32 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
+                          // height: 15,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.blog,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(GlobalImageAssets.nepthysRejuve,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          // height: 10,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
                         child: Text(
                           GlobalFlag.Sec1,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
                           softWrap: false,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (_) => new Sec2()));
-                },
-                child: Container(
-                  color: GlobalAppColor.WhiteColorCode,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.facebook,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Sec2,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (_) => new Sec3()));
-                },
-                child: Container(
-                  color: GlobalAppColor.WhiteColorCode,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.instagram,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Sec3,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
+                            fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w500,
                           ),
@@ -1307,7 +1214,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (_) => new Sec4()));
+                      .push(new MaterialPageRoute(builder: (_) => new Sec2()));
                 },
                 child: Container(
                   color: GlobalAppColor.WhiteColorCode,
@@ -1315,31 +1222,83 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
+                          // height: 15,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.youtube,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(GlobalImageAssets.wosyetVital,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          // height: 10,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
                         child: Text(
-                          GlobalFlag.Sec4,
+                          GlobalFlag.Sec2,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
                           softWrap: false,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 10,
+                            fontSize: 12,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (_) => new Sec3()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                          // height: 15,
+                          ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(GlobalImageAssets.aureatSphinx,
+                              fit: BoxFit.contain),
+                        ),
+                      ),
+                      SizedBox(
+                          // height: 10,
+                          ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec3,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w500,
                           ),
@@ -1362,7 +1321,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (_) => new Sec5()));
+                      .push(new MaterialPageRoute(builder: (_) => new Sec4()));
                 },
                 child: Container(
                   color: GlobalAppColor.WhiteColorCode,
@@ -1370,131 +1329,32 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.blog,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Sec5,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
+                          // height: 15,
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (_) => new Sec6()));
-                },
-                child: Container(
-                  color: GlobalAppColor.WhiteColorCode,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.facebook,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(GlobalImageAssets.juvetasPeeling,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Text(
-                          GlobalFlag.Sec6,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontFamily: GlobalFlag.FontCode,
-                            fontWeight: FontWeight.w500,
+                          // height: 10,
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (_) => new Sec7()));
-                },
-                child: Container(
-                  color: GlobalAppColor.WhiteColorCode,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Align(
-                        alignment: Alignment
-                            .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.instagram,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
                         child: Text(
-                          GlobalFlag.Sec7,
+                          GlobalFlag.Sec4,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
                           softWrap: false,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 10,
+                            fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w500,
                           ),
@@ -1512,7 +1372,7 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
-                      .push(new MaterialPageRoute(builder: (_) => new Sec8()));
+                      .push(new MaterialPageRoute(builder: (_) => new Sec5()));
                 },
                 child: Container(
                   color: GlobalAppColor.WhiteColorCode,
@@ -1520,31 +1380,84 @@ class HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 15,
-                      ),
+                          // height: 15,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
-                        child: Icon(
-                          FontAwesomeIcons.youtube,
-                          size: 30,
-                          color: GlobalAppColor.AppBarColorCode,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(GlobalImageAssets.athenaGenenis,
+                              fit: BoxFit.contain),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          // height: 10,
+                          ),
                       Align(
                         alignment: Alignment
                             .center, // Align however you like (i.e .centerRight, centerLeft)
                         child: Text(
-                          GlobalFlag.Sec8,
+                          GlobalFlag.Sec5,
+                          // textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
                           softWrap: false,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 10,
+                            fontSize: 12,
+                            fontFamily: GlobalFlag.FontCode,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(new MaterialPageRoute(builder: (_) => new Sec6()));
+                },
+                child: Container(
+                  color: GlobalAppColor.WhiteColorCode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                          // height: 15,
+                          ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Image.asset(GlobalImageAssets.bodySihouette,
+                              fit: BoxFit.contain),
+                        ),
+                      ),
+                      SizedBox(
+                          // height: 10,
+                          ),
+                      Align(
+                        alignment: Alignment
+                            .center, // Align however you like (i.e .centerRight, centerLeft)
+                        child: Text(
+                          GlobalFlag.Sec6,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
                             fontFamily: GlobalFlag.FontCode,
                             fontWeight: FontWeight.w500,
                           ),
@@ -1563,6 +1476,7 @@ class HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
 //-------------------------------------------_checkInternetConnectivity-------//
   void _checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
@@ -1570,6 +1484,7 @@ class HomeScreenState extends State<HomeScreen> {
       _showDialog(GlobalFlag.InternetNotConnected);
     }
   }
+
 //----------------------------showInSnackBar----------------------------------//
   void _showDialog(String value) {
     FocusScope.of(context).requestFocus(new FocusNode());

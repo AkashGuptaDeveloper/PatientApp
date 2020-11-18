@@ -90,14 +90,11 @@ class SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       key: _SnackBarscaffoldKey,
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              GlobalAppColor.WhiteColorCode,
-              GlobalAppColor.WhiteColorCode
-            ])),
+        // decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //         begin: Alignment.topCenter,
+        //         end: Alignment.bottomCenter,
+        //         )),
         child: Center(
           child: new Container(
             child: Image.asset(GlobalImageAssets.splash, fit: BoxFit.contain),

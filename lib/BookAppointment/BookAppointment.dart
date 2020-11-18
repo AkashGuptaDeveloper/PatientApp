@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/BookAppointment/BookAppointmentDone.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
@@ -105,13 +106,6 @@ class BookAppointmentState extends State<BookAppointment> {
   var LoginUserToken;
   // ignore: non_constant_identifier_names
   bool Others = false;
-  // ignore: non_constant_identifier_names
-  var GetPaymentID;
-  // ignore: non_constant_identifier_names
-  var GetPaymentsignature;
-  // ignore: non_constant_identifier_names
-  var GetPaymentorderId;
-  var contact;
 //------------------------------------API-------------------------------------//
   // ignore: non_constant_identifier_names
   String AvailabilityUrl_ServiceUrl =
@@ -121,9 +115,6 @@ class BookAppointmentState extends State<BookAppointment> {
       GlobalServiceURL.TimeAvailabilityUrl.toString();
   // ignore: non_constant_identifier_names
   String BookingUrl_ServiceUrl = GlobalServiceURL.BookingUrl.toString();
-  // ignore: non_constant_identifier_names
-  String UserViewProfile_ServiceUrl =
-  GlobalServiceURL.ProfileView.toString();
 //-----------------------------------initState--------------------------------//
   @override
   void initState() {
@@ -695,7 +686,7 @@ class BookAppointmentState extends State<BookAppointment> {
                 style: TextStyle(color: GlobalAppColor.AppBarColorCode),
                 focusNode: myFocusNodeDetails,
                 controller: DetailsController,
-                validator: validateDetails,
+                // validator: validateDetails,
                 textInputAction: TextInputAction.done,
                 onSaved: (String val) {
                   Details = val;
@@ -735,45 +726,32 @@ class BookAppointmentState extends State<BookAppointment> {
                 ),
               ),
             ),
-            SizedBox(
-              height:25.0,
-            ),
           ],
         ),
       ),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
         color: GlobalAppColor.AppBarColorCode,
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-//-------------------------------------------------------------------//
-            new Expanded(
-              child: Container(
-                  height: 40,
-                  child: RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        _PayLaterToServer();
-                      });
-                    },
-                    color: GlobalAppColor.AppBarColorCode,
-                    textColor: Colors.white,
-                    child: Text(
-                      GlobalFlag.Submit.toString(),
-                      style: TextStyle(
-                          fontSize: 15.0,
-                          color: GlobalAppColor.WhiteColorCode,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: GlobalFlag.FontCode.toString()),
-                    ),
-                  )),
-              flex: 1,
-            ),
-//-----------------------------------------------------------------------------//
-          ],
+        child: Container(
+          height: 50,
+          child: FlatButton.icon(
+            onPressed: () {
+              setState(() {});
+              _sendToServer();
+            },
+            icon: Icon(
+              FontAwesomeIcons.paperPlane,
+              color: Colors.white,
+              size: 15.0,
+            ), //`Icon` to display
+            label: Text(GlobalFlag.Submit.toString(),
+                style: TextStyle(
+                  fontFamily: GlobalFlag.FontCode.toString(),
+                  fontSize: 15.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                )),
+          ),
         ),
       ),
     );
@@ -783,9 +761,6 @@ class BookAppointmentState extends State<BookAppointment> {
     var result = await Connectivity().checkConnectivity();
     if (result == ConnectivityResult.none) {
       _showDialog(GlobalFlag.InternetNotConnected);
-    }
-    else{
-      FetchProfileFromServer();
     }
   }
 //----------------------------showInSnackBar----------------------------------//
@@ -911,9 +886,9 @@ class BookAppointmentState extends State<BookAppointment> {
       status = message;
     });
   }
-//----------------------------------------_PayLaterToServer-------------------//
+//----------------------------------------_sendToServer-----------------------//
   // ignore: non_constant_identifier_names
-  Future<void> _PayLaterToServer() async {
+  _sendToServer() async {
     if (_Formkey.currentState.validate()) {
       _Formkey.currentState.save();
       setState(() {
@@ -928,7 +903,7 @@ class BookAppointmentState extends State<BookAppointment> {
               Model;
               if (Model == "1") {
                 _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-                SendDataPayLaterService();
+                SendDataService();
               } else {
                 TimeNotAvilableSnackBar(GlobalFlag.SlotavailableinthisNotTime);
               }
@@ -1017,7 +992,7 @@ class BookAppointmentState extends State<BookAppointment> {
   }
 //-------------------------------SendDataService------------------------------//
   // ignore: non_constant_identifier_names
-  Future<void> SendDataPayLaterService() async {
+  Future<void> SendDataService() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
     _checkInternetConnectivity();
@@ -1047,16 +1022,16 @@ class BookAppointmentState extends State<BookAppointment> {
         "patient": _selectedService.name.toString(),
         "details": DetailsController.text.toString(),
         "type": "appointment".toString(),
-        " OtherName": NameController.text.toString(),
-        " OtherEmail": mobileController.text.toString(),
-        " OtherMobile":emailController.text.toString(),
+        "otherName": NameController.text.toString(),
+        "otherMobile": mobileController.text.toString(),
+        "otherEmail":emailController.text.toString(),
       }).then((resultAddBatch) {
         setStatus(resultAddBatch.statusCode == 200
             ? resultAddBatch.body
             : errMessage);
 //-------------------------Print-Section--------------------------------------//
-         print(GlobalFlag.Printjsonresp.toString() +
-            "${resultAddBatch.body.toString()}");
+//         print(GlobalFlag.Printjsonresp.toString() +
+//             "${resultAddBatch.body.toString()}");
 //------------------------END-Print-Section-----------------------------------//
         // ignore: non_constant_identifier_names
         var ReciveJsonData = json.decode(resultAddBatch.body);
@@ -1193,125 +1168,6 @@ class BookAppointmentState extends State<BookAppointment> {
       Model;
     });
   }
-//-------------------------------SendDataPayNowFromService--------------------//
-  // ignore: non_constant_identifier_names
-  Future<void> SendDataPayNowFromService() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
-    _checkInternetConnectivity();
-    setState(() {
-      // ignore: unnecessary_statements
-      SelectDate;
-      // ignore: unnecessary_statements
-      SelectTime;
-      // ignore: unnecessary_statements
-      _selectedService.name;
-      // ignore: unnecessary_statements
-      _selectedConsultant.name;
-      // ignore: unnecessary_statements
-      NameController.text;
-      // ignore: unnecessary_statements
-      mobileController.text;
-      // ignore: unnecessary_statements
-      emailController.text;
-    });
-    pr.show();
-    try {
-      http.post(BookingUrl_ServiceUrl, body: {
-        "user_token":LoginUserToken.toString(),
-        "date": SelectDate.toString(),
-        "time": SelectTime.toString(),
-        "service": _selectedConsultant.name.toString(),
-        "patient": _selectedService.name.toString(),
-        "details": DetailsController.text.toString(),
-        "type": "appointment".toString(),
-        " OtherName": NameController.text.toString(),
-        " OtherEmail": mobileController.text.toString(),
-        " OtherMobile":emailController.text.toString(),
-      }).then((resultAddBatch) {
-        setStatus(resultAddBatch.statusCode == 200
-            ? resultAddBatch.body
-            : errMessage);
-//-------------------------Print-Section--------------------------------------//
-        /*  print(GlobalFlag.Printjsonresp.toString() +
-            "${resultAddBatch.body.toString()}");*/
-//------------------------END-Print-Section-----------------------------------//
-        // ignore: non_constant_identifier_names
-        var ReciveJsonData = json.decode(resultAddBatch.body);
-        // ignore: non_constant_identifier_names
-        var ReciveJsonSTATUS = ReciveJsonData[GlobalFlag.Jsonstatus];
-        ReciveJsonSTATUSMSG = ReciveJsonData[GlobalFlag.Jsonmsg];
-        ReciveJsonBookingID = ReciveJsonData[GlobalFlag.appointmentID];
-        if (ReciveJsonSTATUS == 200) {
-          setState(() {
-            pr.hide();
-            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-            _SendBookAppointmentDone();
-          });
-        } else {
-          setState(() {
-            pr.hide();
-            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-            BookAddedFailedSnackBar(ReciveJsonSTATUSMSG);
-          });
-        }
-//----------------------------------------------------------------------------//
-      }).catchError((error) {
-        setStatus(error);
-      });
-    } catch (e) {
-      pr.hide();
-      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-    }
-  }
-//------------------------------FetchProfileFromServer-------------------------//
-  // ignore: non_constant_identifier_names
-  Future<void> FetchProfileFromServer() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    LoginUserToken = prefs.getString(Preferences.KEY_USER_token).toString();
-    try {
-      http.post(UserViewProfile_ServiceUrl.toString(), body: {
-        "user_token": LoginUserToken,
-        // ignore: non_constant_identifier_names
-      }).then((result) {
-        setStatus(result.statusCode == 200 ? result.body : errMessage);
-        // ignore: non_constant_identifier_names
-        /*  print(GlobalFlag.Printjsonresp.toString() +
-            "${result.body.toString()}");*/
-        // ignore: non_constant_identifier_names
-        var ReciveData = json.decode(result.body);
-        // ignore: non_constant_identifier_names
-        var Status = ReciveData[GlobalFlag.Jsonstatus];
-        setState(() {
-          if(Status == 200){
-            // ignore: non_constant_identifier_names
-            var RecivedData = ReciveData["data"];
-            // ignore: non_constant_identifier_names
-            name = RecivedData["name"];
-            // ignore: non_constant_identifier_names
-            email = RecivedData["email"];
-            // ignore: non_constant_identifier_names
-            contact = RecivedData["mobile"];
-            setState(() {
-              // ignore: unnecessary_statements
-              name;
-              // ignore: unnecessary_statements
-              email;
-              // ignore: unnecessary_statements
-              contact;
-            });
-          }else{
-            _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-          }
-        });
-        // ignore: non_constant_identifier_names
-      }).catchError((error) {
-        setStatus(error);
-      });
-    } catch (e) {
-      _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
-    }
-  }
 }
 //---------------------------------------END----------------------------------//
 //--------------------Service-------------------------------------------------//
@@ -1336,12 +1192,12 @@ class Consultant {
       Consultant(1, 'Consultation'),
       Consultant(2, 'Laser Hair Reduction'),
       Consultant(3, 'Chemical Peeling'),
-      Consultant(4, 'Hair Injection'),
-      Consultant(5, 'Botox Cosmetic'),
-      Consultant(6, 'Dermal Filters'),
-      Consultant(7, 'PRP'),
+      Consultant(4, 'PRP for Hair Injection'),
+      Consultant(5, 'Botox'),
+      Consultant(6, 'Dermal Fillers'),
+      Consultant(7, 'PRP for Skin Rejuvenation'),
       Consultant(8, 'MesotherapyHIFU'),
-      Consultant(9, 'Hethena TST Laser Toning'),
+      Consultant(9, 'Athena Genesis Laser'),
       Consultant(10, 'MNRF'),
     ];
   }
