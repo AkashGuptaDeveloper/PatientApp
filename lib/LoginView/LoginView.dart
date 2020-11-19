@@ -484,7 +484,6 @@ class LoginViewState extends State<LoginView> {
         LoginReciveTransactionId = LoginReciveJsonData[GlobalFlag.transaction_id];
         LoginRecivemobile = LoginReciveJsonData[GlobalFlag.mobile];
         GetSms = LoginReciveJsonData[GlobalFlag.sms_key];
-        print(GetSms);
 
 //----------------------------------------------------------------------------//
         if(LoginReciveJsonSTATUS ==200){
@@ -528,6 +527,7 @@ class LoginViewState extends State<LoginView> {
          LoginTransactionId:LoginReciveTransactionId,
          LoginMobile:LoginRecivemobile,
          LoginSendName:GeName,
+         LoginGetSmsKey:GetSms,
      )));
     _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
     // ignore: non_constant_identifier_names

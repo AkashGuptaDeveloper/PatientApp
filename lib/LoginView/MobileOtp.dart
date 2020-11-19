@@ -15,6 +15,8 @@ import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:pin_input_text_field/pin_input_text_field.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 //------------------------------------START-----------------------------------//
 class MobileOtp extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagMobileOtp.toString();
@@ -24,6 +26,7 @@ class MobileOtp extends StatefulWidget {
   final String LoginMobile;
   // ignore: non_constant_identifier_names
   final String LoginSendName;
+  final String LoginGetSmsKey;
   MobileOtp({
     Key key,
     // ignore: unnecessary_statements, non_constant_identifier_names
@@ -32,6 +35,7 @@ class MobileOtp extends StatefulWidget {
     this.LoginMobile,
     // ignore: non_constant_identifier_names
     this.LoginSendName,
+    this.LoginGetSmsKey,
   }) : super(key: key);
   @override
   MobileOtpState createState() => new MobileOtpState();
@@ -58,6 +62,10 @@ class MobileOtpState extends State<MobileOtp> {
   String errMessage = GlobalFlag.ErrorSendData.toString();
   // ignore: non_constant_identifier_names
   var LoginTrueFalse;
+  String _code;
+  String signature = "{{ app signature }}";
+  bool GetOtp = false;
+  bool LoginSubmit = false;
 //-----------------------------------------API--------------------------------//
   // ignore: non_constant_identifier_names
   String OTP_ServiceUrl =
@@ -66,10 +74,14 @@ class MobileOtpState extends State<MobileOtp> {
   @override
   void initState() {
     super.initState();
+    signature =widget.LoginGetSmsKey;
+    GetOtp = true;
+    LoginSubmit = false;
   }
 //-----------------------------------------dispose()---------------------------//
   @override
   void dispose() {
+    SmsAutoFill().unregisterListener();
     super.dispose();
   }
 //------------------------------------Widget build----------------------------//
@@ -87,7 +99,14 @@ class MobileOtpState extends State<MobileOtp> {
               children: <Widget>[
                 FormPinPut(),
                 SizedBox(height:5.0,),
-                FormBtnPinLogin(),
+                Visibility(
+                  visible:LoginSubmit,
+                  child:FormLogin(),
+                ),
+                Visibility(
+                  visible:GetOtp,
+                  child:FormGetOtp(),
+                ),
                 SizedBox(height:15.0,),
               ],
             ),
@@ -128,35 +147,20 @@ class MobileOtpState extends State<MobileOtp> {
       children: <Widget>[
         new Container(
           child: Center(
-            child: PinCodeTextField(
-              autofocus: false,
-              pinBoxHeight: 50,
-              pinBoxWidth: 40,
-              controller: controller,
-              /* hideCharacter: true,
-              highlight: true,*/
-              highlight: true,
-              highlightColor: Colors.grey,
-              defaultBorderColor: Colors.grey,
-              hasTextBorderColor: Colors.grey,
-              maxLength: pinLength,
-              hasError: hasError,
-              onTextChanged: (text) {
-                setState(() {
-                  hasError = false;
-                });
+            child:PinFieldAutoFill(
+              decoration: UnderlineDecoration(
+                textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                colorBuilder: FixedColorBuilder(Colors.black.withOpacity(0.3)),
+              ),
+              currentCode: _code,
+              onCodeSubmitted: (code) {},
+              onCodeChanged: (code) {
+                if (code.length == 6) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  GetOtp = false;
+                  LoginSubmit = true;
+                }
               },
-              onDone: (text) {
-                setState(() {
-                  RecivedConfirmPin = text;
-                });
-              },
-              wrapAlignment: WrapAlignment.start,
-              //pinBoxDecoration: ProvidedPinBoxDecoration.underlinedPinBoxDecoration,
-              pinTextStyle: TextStyle(fontSize: 30.0),
-              pinTextAnimatedSwitcherTransition:
-              ProvidedPinBoxTextAnimation.scalingTransition,
-              pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
             ),
           ),
         ),
@@ -171,7 +175,8 @@ class MobileOtpState extends State<MobileOtp> {
       _showDialog(GlobalFlag.InternetNotConnected);
     } else {
       setState(() {
-        // ignore: unnecessary_statements
+        OTPService(signature);
+        /*// ignore: unnecessary_statements
         RecivedConfirmPin;
         if(RecivedConfirmPin == null){
           _SnackBarscaffoldKey.currentState.hideCurrentSnackBar();
@@ -180,7 +185,7 @@ class MobileOtpState extends State<MobileOtp> {
           setState(() {
             OTPService(RecivedConfirmPin);
           });
-        }
+        }*/
       });
 
     }
@@ -204,19 +209,19 @@ class MobileOtpState extends State<MobileOtp> {
   }
 //------------------------------FetchTimeFromServer--------------------------//
   // ignore: non_constant_identifier_names, missing_return
-  Future<void> OTPService(RecivedConfirmPin) async {
+  Future<void> OTPService(signature) async {
     setState(() {
       // ignore: unnecessary_statements
       widget.LoginMobile;
       // ignore: unnecessary_statements
       widget.LoginTransactionId;
       // ignore: unnecessary_statements
-      RecivedConfirmPin;
+      signature;
     });
     //we have to wait to get the data so we use 'await'
     http.Response response = await http.get(
       //Uri.encodeFull removes all the dashes or extra characters present in our Uri
-        Uri.encodeFull(OTP_ServiceUrl + "?otp="+RecivedConfirmPin+"&mobile="+widget.LoginMobile+"&transaction_id="+widget.LoginTransactionId),
+        Uri.encodeFull(OTP_ServiceUrl + "?otp="+signature+"&mobile="+widget.LoginMobile+"&transaction_id="+widget.LoginTransactionId),
         headers: {
           //if your api require key then pass your key here as well e.g "key": "my-long-key"
           "Accept": "application/json"
@@ -276,7 +281,7 @@ class MobileOtpState extends State<MobileOtp> {
   }
 //------------------------------------FormBtnPinLogin--------------------------//
   // ignore: non_constant_identifier_names
-  Widget FormBtnPinLogin() {
+  Widget FormLogin() {
     return Container(
         padding: EdgeInsets.only(left: 100.0, right: 100.0),
         child: Container(
@@ -286,13 +291,47 @@ class MobileOtpState extends State<MobileOtp> {
                 side: BorderSide(color: GlobalAppColor.AppBarColorCode)),
             onPressed: () {
               setState(() {
-                _checkInternetConnectivity();
+                if (_code.length == 6) {
+                  print("ss");
+                  _checkInternetConnectivity();
+                }else{
+                  print("false");
+                }
+                /*_checkInternetConnectivity();*/
               });
             },
             color: GlobalAppColor.AppBarColorCode,
             textColor: Colors.white,
             child: Text(
               "Verify OTP".toString(),
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: GlobalAppColor.WhiteColorCode,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: GlobalFlag.FontCode.toString()),
+            ),
+          ),
+        ));
+  }
+//------------------------------------FormBtnPinLogin--------------------------//
+  // ignore: non_constant_identifier_names
+  Widget FormGetOtp() {
+    return Container(
+        padding: EdgeInsets.only(left: 100.0, right: 100.0),
+        child: Container(
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                side: BorderSide(color: GlobalAppColor.AppBarColorCode)),
+            onPressed: () {
+              setState(() {
+                _code = signature;
+              });
+            },
+            color: GlobalAppColor.AppBarColorCode,
+            textColor: Colors.white,
+            child: Text(
+              "Get OTP".toString(),
               style: TextStyle(
                   fontSize: 20.0,
                   color: GlobalAppColor.WhiteColorCode,
