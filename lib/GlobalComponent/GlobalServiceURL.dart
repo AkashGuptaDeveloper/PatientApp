@@ -29,7 +29,7 @@ class GlobalServiceURL {
   static String SignupUrl = BaseURL.toString() + "/signup.php";
   // ignore: non_constant_identifier_names
   static String ViewPDF =
-      "https://laskinnovita.com/app/api/v2/print-pdf-prescription.php";
+      "https://laskinnovita.com/app/api/v2/print-html-prescription.php";
   // ignore: non_constant_identifier_names
   static String ProfileView = "https://laskinnovita.com/app/api/v2/profile.php";
 //----------------------------------------------------------------------------//

@@ -54,9 +54,8 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String AppointmentTime = "Select Appointment Time";
   // ignore: non_constant_identifier_names
-
   static String ConsultantScreenTitle = "Online Consultation";
-
+  // ignore: non_constant_identifier_names
   static String Consultant = "Ask a question";
   // ignore: non_constant_identifier_names
   static String Details = "Add on details ( if any )";
@@ -64,7 +63,6 @@ class GlobalFlag {
   static String EnterDetails = "Enter Details";
   // ignore: non_constant_identifier_names
   static String Service = "Service";
-
   // ignore: non_constant_identifier_names
   static String AppointmentService = "Service";
   // ignore: non_constant_identifier_names
@@ -156,6 +154,7 @@ class GlobalFlag {
   static String PleaseUploadPicture = "Please Upload Picture";
   // ignore: non_constant_identifier_names
   static String LoginScreenEnterName = "Enter your name";
+  // ignore: non_constant_identifier_names
   static String EnterMobileNumber = "Enter mobile number";
   // ignore: non_constant_identifier_names
   static String EnterName = "Enter Name";
@@ -216,17 +215,21 @@ class GlobalFlag {
   static String NameRequired = "Name is Required";
   // ignore: non_constant_identifier_names
   static String NamebeNeed = "Name must be Need";
-
+// ignore: non_constant_identifier_names
   static String sms_key = "sms_key";
-
   // Appointment History Screen
-
+// ignore: non_constant_identifier_names
   static String bookingFor = 'Booking for';
+  // ignore: non_constant_identifier_names
   static String bookingID = 'Appointment ID';
+  // ignore: non_constant_identifier_names
   static String bookingDate = 'Visit date';
+  // ignore: non_constant_identifier_names
   static String bookingVisitTime = 'Visit time';
+  // ignore: non_constant_identifier_names
   static String bookingView = "View prescription";
-
+  // ignore: non_constant_identifier_names
+  static String NoHistoryFound = "No History Found";
 //------------------WebView-URL-----------------------------------------------//
   // ignore: non_constant_identifier_names
   static String DrAnujPalWebView = 'https://laskinnovita.com/dr-anuj-pall/';

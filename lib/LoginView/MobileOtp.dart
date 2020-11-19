@@ -11,7 +11,6 @@ import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:laskinnovita/HomeScreen/HomeScreen.dart';
 import 'package:laskinnovita/Preferences/Preferences.dart';
 import 'package:laskinnovita/Signup/Signup.dart';
-import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -26,6 +25,7 @@ class MobileOtp extends StatefulWidget {
   final String LoginMobile;
   // ignore: non_constant_identifier_names
   final String LoginSendName;
+  // ignore: non_constant_identifier_names
   final String LoginGetSmsKey;
   MobileOtp({
     Key key,
@@ -35,6 +35,7 @@ class MobileOtp extends StatefulWidget {
     this.LoginMobile,
     // ignore: non_constant_identifier_names
     this.LoginSendName,
+    // ignore: non_constant_identifier_names
     this.LoginGetSmsKey,
   }) : super(key: key);
   @override
@@ -64,7 +65,9 @@ class MobileOtpState extends State<MobileOtp> {
   var LoginTrueFalse;
   String _code;
   String signature = "{{ app signature }}";
+  // ignore: non_constant_identifier_names
   bool GetOtp = false;
+  // ignore: non_constant_identifier_names
   bool LoginSubmit = false;
 //-----------------------------------------API--------------------------------//
   // ignore: non_constant_identifier_names
@@ -99,10 +102,10 @@ class MobileOtpState extends State<MobileOtp> {
               children: <Widget>[
                 FormPinPut(),
                 SizedBox(height:5.0,),
-                Visibility(
+                /*Visibility(
                   visible:LoginSubmit,
                   child:FormLogin(),
-                ),
+                ),*/
                 Visibility(
                   visible:GetOtp,
                   child:FormGetOtp(),
@@ -326,6 +329,12 @@ class MobileOtpState extends State<MobileOtp> {
             onPressed: () {
               setState(() {
                 _code = signature;
+                if (_code.length == 6) {
+                  print("ss");
+                  _checkInternetConnectivity();
+                }else{
+                  print("false");
+                }
               });
             },
             color: GlobalAppColor.AppBarColorCode,
@@ -384,7 +393,7 @@ class MobileOtpState extends State<MobileOtp> {
     // ignore: unnecessary_statements
     LoginTrueFalse;
     if(LoginTrueFalse ==true){
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 3));
       Navigator.of(context)
           .push(new MaterialPageRoute(builder: (_) => new HomeScreen()));
     }
