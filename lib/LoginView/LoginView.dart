@@ -475,7 +475,7 @@ class LoginViewState extends State<LoginView> {
       }).then((resultLogin) {
         setStatus(
             resultLogin.statusCode == 200 ? resultLogin.body : errMessage);
-       print(GlobalFlag.Printjsonresp.toString()+"${resultLogin.body.toString()}");
+       //print(GlobalFlag.Printjsonresp.toString()+"${resultLogin.body.toString()}");
         // ignore: non_constant_identifier_names
         var LoginReciveJsonData = json.decode(resultLogin.body);
         // ignore: non_constant_identifier_names

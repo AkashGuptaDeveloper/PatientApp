@@ -79,279 +79,281 @@ class ApptHistoryState extends State<ApptHistory> {
             children: <Widget>[
               Visibility(
                 visible:HistoryListShow,
-                child: new ListView.builder(
-                  itemCount: _History == null ? 0 : _History.length,
-                  itemBuilder: (context, index) {
-                    return new Container(
-                      child: Container(
-                        child: new Stack(
-                          children: <Widget>[
-                            new Padding(
-                              padding: new EdgeInsets.only(top: 0.0),
-                              child: new Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 5.0,
-                                  ),
-                                  new Card(
-                                    color: GlobalAppColor.WhiteColorCode,
-                                    margin: new EdgeInsets.only(
-                                        left: 10.0, right: 12.0, top: 8.0, bottom: 3.0),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(0.0)),
-                                    elevation: 5.0,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 0.0, top: 0.0),
-                                      child: new Column(
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        mainAxisSize: MainAxisSize.min,
-                                        verticalDirection: VerticalDirection.down,
-                                        children: <Widget>[
+                child: Expanded(
+                  child: new ListView.builder(
+                    itemCount: _History == null ? 0 : _History.length,
+                    itemBuilder: (context, index) {
+                      return new Container(
+                        child: Container(
+                          child: new Stack(
+                            children: <Widget>[
+                              new Padding(
+                                padding: new EdgeInsets.only(top: 0.0),
+                                child: new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    new Card(
+                                      color: GlobalAppColor.WhiteColorCode,
+                                      margin: new EdgeInsets.only(
+                                          left: 10.0, right: 12.0, top: 8.0, bottom: 3.0),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(0.0)),
+                                      elevation: 5.0,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 0.0, top: 0.0),
+                                        child: new Column(
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                                          mainAxisSize: MainAxisSize.min,
+                                          verticalDirection: VerticalDirection.down,
+                                          children: <Widget>[
 //-----------------------------------------Service-----------------------------//
-                                          Container(
-                                            color: GlobalAppColor.AppBarColorCode,
-                                            child: new Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 10.0,
-                                                  right: 10,
-                                                  top: 10,
-                                                  bottom: 10),
-                                              child: Container(
-                                                child: new Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      new Text(
-                                                        GlobalFlag.Service,
-                                                        style: TextStyle(
-                                                          fontSize: 15.0,
-                                                          color: Colors.white,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontFamily: GlobalFlag
-                                                              .FontCode.toString(),
-                                                        ),
-                                                      ),
-                                                      new Text(
-                                                        _History[index]
-                                                            .appointment
-                                                            .service,
-                                                        style: TextStyle(
-                                                          fontSize: 13.0,
-                                                          color: Colors.white,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontFamily: GlobalFlag
-                                                              .FontCode.toString(),
-                                                        ),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                          ),
-                                          Divider(
-                                              height: 12,
-                                              thickness: 0.1,
-                                              color: Colors.white),
-//----------------------------------------Bookingfor-------------------------//
-                                          new Padding(
-                                            padding:
-                                            EdgeInsets.only(left: 10.0, right: 10),
-                                            child: new Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  new Text(
-                                                    GlobalFlag.bookingFor,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                  new Text(
-                                                    _History[index].patientType,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.normal,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                          Divider(
-                                              height: 12,
-                                              thickness: 0.1,
-                                              color: Colors.grey[900]),
-//----------------------------------------AppointmentID-----------------------//
-                                          new Padding(
-                                            padding:
-                                            EdgeInsets.only(left: 10.0, right: 10),
-                                            child: new Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  new Text(
-                                                    GlobalFlag.bookingID,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                  new Text(
-                                                    _History[index]
-                                                        .appointment
-                                                        .appointmentId,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.normal,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                          Divider(
-                                              height: 12,
-                                              thickness: 0.1,
-                                              color: Colors.grey[900]),
-//----------------------------------------AppointmentDate---------------------//
-                                          new Padding(
-                                            padding:
-                                            EdgeInsets.only(left: 10.0, right: 10),
-                                            child: new Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  new Text(
-                                                    GlobalFlag.bookingDate,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                  new Text(
-                                                    _History[index].appointment.date,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.normal,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                          Divider(
-                                              height: 12,
-                                              thickness: 0.1,
-                                              color: Colors.grey[900]),
-//----------------------------------------AppointmentTime---------------------//
-                                          new Padding(
-                                            padding:
-                                            EdgeInsets.only(left: 10.0, right: 10),
-                                            child: new Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  new Text(
-                                                    GlobalFlag.bookingVisitTime,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                  new Text(
-                                                    _History[index].appointment.time,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.normal,
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                          Divider(
-                                              height: 12,
-                                              thickness: 0.1,
-                                              color: Colors.grey[900]),
-//----------------------------------------------------------------------------//
-                                          Divider(
-                                              height: 12,
-                                              thickness: 0.1,
-                                              color: Colors.grey[900]),
-                                          new Padding(
-                                            padding:
-                                            EdgeInsets.only(left: 10.0, right: 10),
-                                            child: Container(
+                                            Container(
                                               color: GlobalAppColor.AppBarColorCode,
-                                              height: 30,
-                                              child: FlatButton.icon(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    // ignore: unnecessary_statements
-                                                    _History[index]
-                                                        .appointment
-                                                        .appointmentId;
-                                                  });
-                                                  Navigator.of(context)
-                                                      .push(new MaterialPageRoute(
-                                                      builder: (_) => new ViewPDF(
-                                                        SendappointmentId:
-                                                        _History[index]
-                                                            .appointment
-                                                            .appointmentId,
-                                                      )));
-                                                },
-                                                icon: Icon(
-                                                  FontAwesomeIcons.eye,
-                                                  color: Colors.white,
-                                                  size: 15.0,
-                                                ), //`Icon` to display
-                                                label: Text(
-                                                    GlobalFlag.bookingView.toString()
-                                                        .toUpperCase(),
-                                                    style: TextStyle(
-                                                      fontFamily: GlobalFlag.FontCode
-                                                          .toString(),
-                                                      fontSize: 15.0,
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.bold,
-                                                    )),
+                                              child: new Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 10.0,
+                                                    right: 10,
+                                                    top: 10,
+                                                    bottom: 10),
+                                                child: Container(
+                                                  child: new Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        new Text(
+                                                          GlobalFlag.Service,
+                                                          style: TextStyle(
+                                                            fontSize: 15.0,
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontFamily: GlobalFlag
+                                                                .FontCode.toString(),
+                                                          ),
+                                                        ),
+                                                        new Text(
+                                                          _History[index]
+                                                              .appointment
+                                                              .service,
+                                                          style: TextStyle(
+                                                            fontSize: 13.0,
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontFamily: GlobalFlag
+                                                                .FontCode.toString(),
+                                                          ),
+                                                        ),
+                                                      ]),
+                                                ),
                                               ),
                                             ),
-                                          ),
+                                            Divider(
+                                                height: 12,
+                                                thickness: 0.1,
+                                                color: Colors.white),
+//----------------------------------------Bookingfor-------------------------//
+                                            new Padding(
+                                              padding:
+                                              EdgeInsets.only(left: 10.0, right: 10),
+                                              child: new Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    new Text(
+                                                      GlobalFlag.bookingFor,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                    new Text(
+                                                      _History[index].patientType,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.normal,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            Divider(
+                                                height: 12,
+                                                thickness: 0.1,
+                                                color: Colors.grey[900]),
+//----------------------------------------AppointmentID-----------------------//
+                                            new Padding(
+                                              padding:
+                                              EdgeInsets.only(left: 10.0, right: 10),
+                                              child: new Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    new Text(
+                                                      GlobalFlag.bookingID,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                    new Text(
+                                                      _History[index]
+                                                          .appointment
+                                                          .appointmentId,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.normal,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            Divider(
+                                                height: 12,
+                                                thickness: 0.1,
+                                                color: Colors.grey[900]),
+//----------------------------------------AppointmentDate---------------------//
+                                            new Padding(
+                                              padding:
+                                              EdgeInsets.only(left: 10.0, right: 10),
+                                              child: new Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    new Text(
+                                                      GlobalFlag.bookingDate,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                    new Text(
+                                                      _History[index].appointment.date,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.normal,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            Divider(
+                                                height: 12,
+                                                thickness: 0.1,
+                                                color: Colors.grey[900]),
+//----------------------------------------AppointmentTime---------------------//
+                                            new Padding(
+                                              padding:
+                                              EdgeInsets.only(left: 10.0, right: 10),
+                                              child: new Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    new Text(
+                                                      GlobalFlag.bookingVisitTime,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                    new Text(
+                                                      _History[index].appointment.time,
+                                                      style: TextStyle(
+                                                        fontSize: 13.0,
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.normal,
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            Divider(
+                                                height: 12,
+                                                thickness: 0.1,
+                                                color: Colors.grey[900]),
 //----------------------------------------------------------------------------//
-                                          SizedBox(height: 8.0),
-                                        ],
+                                            Divider(
+                                                height: 12,
+                                                thickness: 0.1,
+                                                color: Colors.grey[900]),
+                                            new Padding(
+                                              padding:
+                                              EdgeInsets.only(left: 10.0, right: 10),
+                                              child: Container(
+                                                color: GlobalAppColor.AppBarColorCode,
+                                                height: 30,
+                                                child: FlatButton.icon(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      // ignore: unnecessary_statements
+                                                      _History[index]
+                                                          .appointment
+                                                          .appointmentId;
+                                                    });
+                                                    Navigator.of(context)
+                                                        .push(new MaterialPageRoute(
+                                                        builder: (_) => new ViewPDF(
+                                                          SendappointmentId:
+                                                          _History[index]
+                                                              .appointment
+                                                              .appointmentId,
+                                                        )));
+                                                  },
+                                                  icon: Icon(
+                                                    FontAwesomeIcons.eye,
+                                                    color: Colors.white,
+                                                    size: 15.0,
+                                                  ), //`Icon` to display
+                                                  label: Text(
+                                                      GlobalFlag.bookingView.toString()
+                                                          .toUpperCase(),
+                                                      style: TextStyle(
+                                                        fontFamily: GlobalFlag.FontCode
+                                                            .toString(),
+                                                        fontSize: 15.0,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                      )),
+                                                ),
+                                              ),
+                                            ),
+//----------------------------------------------------------------------------//
+                                            SizedBox(height: 8.0),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               Visibility(
