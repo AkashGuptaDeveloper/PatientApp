@@ -144,9 +144,9 @@ class ViewPDFState extends State<ViewPDF> {
   }
   Future<void> share() async {
     await FlutterShare.share(
-        title: 'Example share',
-        text: 'Example share text',
-        linkUrl: 'https://flutter.dev/',
+        title: 'PDF share',
+        text: 'PDF share text',
+        linkUrl: PDFViewUrl_ServiceUrl+"?"+"appointment_id"+"="+widget.SendappointmentId,
         chooserTitle: 'Example Chooser Title');
   }
 }
