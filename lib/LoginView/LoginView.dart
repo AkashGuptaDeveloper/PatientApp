@@ -281,9 +281,9 @@ class LoginViewState extends State<LoginView> {
     String patttern = r'';
     RegExp regExp = new RegExp(patttern);
     if (value.length == 0) {
-      return GlobalFlag.NameisRequired.toString();
+      return GlobalFlag.AgeRequired.toString();
     } else if (!regExp.hasMatch(value)) {
-      return GlobalFlag.NamemustbeNeed.toString();
+      return GlobalFlag.AgebeNeed.toString();
     }
     return null;
   }

@@ -67,7 +67,7 @@ class BookAppointmentState extends State<BookAppointment> {
   // ignore: non_constant_identifier_names
   final FocusNode myFocusNodeemail = FocusNode();
   // ignore: non_constant_identifier_names
-  var Details,name,email,mobile;
+  var Details,name,email,mobile,Age;
   // ignore: non_constant_identifier_names
   List<Availability> _Availability = [];
   // ignore: non_constant_identifier_names
@@ -547,6 +547,10 @@ class BookAppointmentState extends State<BookAppointment> {
                   controller: mobileController,
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.phone,
+                  validator: validatemobile,
+                  onSaved: (String val) {
+                    mobile = val;
+                  },
                   decoration: new InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -595,7 +599,11 @@ class BookAppointmentState extends State<BookAppointment> {
                   focusNode: myFocusNodeemail,
                   controller: emailController,
                   textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.number,
+                  validator: validateAge,
+                  onSaved: (String val) {
+                    Age = val;
+                  },
                   decoration: new InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -622,7 +630,7 @@ class BookAppointmentState extends State<BookAppointment> {
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                         borderSide: BorderSide(width: 1, color: Colors.grey)),
                     errorStyle: TextStyle(fontSize: 10.0, color: Colors.black),
-                    hintText: GlobalFlag.Email.toString(),
+                    hintText: GlobalFlag.Age.toString(),
                     hintStyle: TextStyle(
                       fontSize: 14.0,
                       fontFamily: GlobalFlag.FontCode.toString(),
@@ -686,7 +694,7 @@ class BookAppointmentState extends State<BookAppointment> {
                 style: TextStyle(color: GlobalAppColor.AppBarColorCode),
                 focusNode: myFocusNodeDetails,
                 controller: DetailsController,
-                // validator: validateDetails,
+                validator: validateDetails,
                 textInputAction: TextInputAction.done,
                 onSaved: (String val) {
                   Details = val;
@@ -987,6 +995,30 @@ class BookAppointmentState extends State<BookAppointment> {
       return GlobalFlag.NameRequired.toString();
     } else if (!regExp.hasMatch(value)) {
       return GlobalFlag.NamebeNeed.toString();
+    }
+    return null;
+  }
+//----------------------validateAge------------------------------------------//
+  String validateAge(String value) {
+    String patttern = r'';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return GlobalFlag.NameRequired.toString();
+    } else if (!regExp.hasMatch(value)) {
+      return GlobalFlag.NamebeNeed.toString();
+    }
+    return null;
+  }
+//----------------------//----------------------validatemobile---------------//
+  String validatemobile(String value) {
+    String patttern = GlobalFlag.PattternNumber.toString();
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return GlobalFlag.MobileisRequired.toString();
+    } else if (value.length != 10) {
+      return GlobalFlag.Mobilenumbermust10digits.toString();
+    } else if (!regExp.hasMatch(value)) {
+      return GlobalFlag.MobileNumbermustbedigits.toString();
     }
     return null;
   }

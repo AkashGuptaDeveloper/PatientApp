@@ -71,6 +71,7 @@ class GlobalFlag {
   static String EnterService = "Enter Service";
   // ignore: non_constant_identifier_names
   static String Submit = "Submit";
+  static String Share = "Share";
   // ignore: non_constant_identifier_names
   static String Continue = "Pay now";
   // ignore: non_constant_identifier_names
@@ -212,9 +213,15 @@ class GlobalFlag {
   // ignore: non_constant_identifier_names
   static String Email = "Enter Email";
   // ignore: non_constant_identifier_names
+  static String Age = "Enter Age";
+  // ignore: non_constant_identifier_names
   static String NameRequired = "Name is Required";
   // ignore: non_constant_identifier_names
   static String NamebeNeed = "Name must be Need";
+  // ignore: non_constant_identifier_names
+  static String AgeRequired = "Age is Required";
+  // ignore: non_constant_identifier_names
+  static String AgebeNeed = "Age must be Need";
 // ignore: non_constant_identifier_names
   static String sms_key = "sms_key";
   // Appointment History Screen

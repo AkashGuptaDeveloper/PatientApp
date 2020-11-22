@@ -1,11 +1,13 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalAppColor.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalFlag.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalNavigationRoute.dart';
 import 'package:laskinnovita/GlobalComponent/GlobalServiceURL.dart';
 import 'package:simple_pdf_viewer/simple_pdf_viewer.dart';
+import 'package:flutter_share/flutter_share.dart';
 //------------------------------------START-----------------------------------//
 class ViewPDF extends StatefulWidget {
   static String tag = GlobalNavigationRoute.TagViewPDF.toString();
@@ -84,6 +86,31 @@ class ViewPDFState extends State<ViewPDF> {
         initialUrl: PDFViewUrl_ServiceUrl+"?"+"appointment_id"+"="+widget.SendappointmentId,
       ),
       backgroundColor: Colors.white,
+      bottomNavigationBar: BottomAppBar(
+        color: GlobalAppColor.AppBarColorCode,
+        child: Container(
+          height: 50,
+          child: FlatButton.icon(
+            onPressed: () {
+              setState(() {
+                share();
+              });
+            },
+            icon: Icon(
+              FontAwesomeIcons.paperPlane,
+              color: Colors.white,
+              size: 15.0,
+            ), //`Icon` to display
+            label: Text(GlobalFlag.Share.toString(),
+                style: TextStyle(
+                  fontFamily: GlobalFlag.FontCode.toString(),
+                  fontSize: 15.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                )),
+          ),
+        ),
+      ),
     );
   }
 //-------------------------------------------_checkInternetConnectivity-------//
@@ -114,6 +141,13 @@ class ViewPDFState extends State<ViewPDF> {
     setState(() {
       status = message;
     });
+  }
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'Example share',
+        text: 'Example share text',
+        linkUrl: 'https://flutter.dev/',
+        chooserTitle: 'Example Chooser Title');
   }
 }
 //---------------------------------------END----------------------------------//
